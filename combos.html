@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tile Combinations — Casa Dos Hermanos</title>
+<style>
+:root{
+  --shoji:#E8E2D5; --paper:#EFEAE0; --ink:#26241F; --ink-soft:#5A564C;
+  --walnut:#5C4633; --oak:#C7B299; --pewter:#5E6259; --shade:#3F4A42;
+  --naval:#2E3A4C; --brass:#A98A4F; --line:rgba(38,36,31,.16);
+  --card:#F4F0E7; --danger:#8A4A3B; --ok:#4C6154;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--shoji);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;padding-bottom:118px}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* ---------- nav ---------- */
+.nav{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--paper)}
+.nav .mark{font-family:var(--serif);font-size:17px;letter-spacing:.04em}
+.nav .links{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+.nav .links a{text-decoration:none;color:var(--ink-soft);padding-bottom:2px;border-bottom:2px solid transparent}
+.nav .links a.on{color:var(--ink);border-bottom-color:var(--brass)}
+
+/* ---------- header ---------- */
+.head{padding:26px 20px 8px;max-width:1180px;margin:0 auto}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(26px,4vw,36px);line-height:1.15;margin:6px 0 10px}
+.provenance{font-size:12.5px;color:var(--ink-soft);max-width:70ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{font-size:11.5px;letter-spacing:.02em;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink-soft)}
+.chip.lock{border-color:var(--pewter);color:var(--shade)}
+.chip.warn{border-color:var(--danger);color:var(--danger)}
+
+/* ---------- global controls ---------- */
+.controls{max-width:1180px;margin:14px auto 0;padding:0 20px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:13px}
+.controls label{display:flex;align-items:center;gap:7px;color:var(--ink-soft)}
+.controls select{font:inherit;padding:3px 6px;border:1px solid var(--line);background:var(--card);border-radius:4px}
+.controls input[type=checkbox]{accent-color:var(--pewter);width:15px;height:15px}
+
+/* ---------- floor strip (global, whole-house) ---------- */
+.floorstrip{max-width:1180px;margin:18px auto 0;padding:16px 20px;border-top:1px solid var(--line)}
+.floorstrip h2, .roomwrap h2{font-family:var(--serif);font-weight:500;font-size:19px;margin-bottom:2px}
+.subnote{font-size:12.5px;color:var(--ink-soft);margin-bottom:12px}
+.optrow{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- option cards ---------- */
+.opt{display:flex;flex-direction:column;gap:6px;width:128px;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--card);text-align:left;transition:border-color .15s}
+.opt:hover{border-color:var(--ink-soft)}
+.opt.sel{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.opt.blocked{opacity:.45;cursor:not-allowed}
+.opt .sw{width:100%;height:64px;border-radius:3px;border:1px solid var(--line);overflow:hidden}
+.opt .sw svg{display:block;width:100%;height:100%}
+.opt .nm{font-size:12px;line-height:1.25;font-weight:600}
+.opt .cd{font-size:10.5px;color:var(--ink-soft);font-family:var(--mono)}
+.opt .pr{font-size:11.5px;font-family:var(--mono)}
+.opt .fit{font-size:10px;letter-spacing:.05em;text-transform:uppercase}
+.fit.anchor{color:var(--brass)} .fit.high{color:var(--ok)} .fit.mid{color:var(--ink-soft)} .fit.low{color:var(--danger)}
+.opt .tagline{font-size:10.5px;color:var(--ink-soft);line-height:1.3}
+.grouphead{width:100%;margin:14px 0 6px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--line);padding-bottom:4px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.grouphead .gp{font-family:var(--mono);letter-spacing:0}
+
+/* ---------- room tabs ---------- */
+.tabs{max-width:1180px;margin:26px auto 0;padding:0 20px;display:flex;gap:0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{padding:10px 16px;font-size:13px;letter-spacing:.05em;color:var(--ink-soft);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.on{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+
+/* ---------- room layout ---------- */
+.roomwrap{max-width:1180px;margin:0 auto;padding:20px}
+.roomgrid{display:grid;grid-template-columns:1fr;gap:26px}
+@media(min-width:960px){.roomgrid{grid-template-columns:minmax(420px,1fr) minmax(380px,1fr)}}
+.mockpanel{position:sticky;top:12px;align-self:start}
+.mockpanel .frame{border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:10px}
+.floorframe{margin-top:12px}
+.mockpanel svg{display:block;width:100%;height:auto}
+.mockcaption{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.45}
+.pickers h3{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 4px}
+.pickers h3:first-child{margin-top:0}
+.extras{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:13px}
+.extras label{display:flex;gap:7px;align-items:center;color:var(--ink-soft)}
+.extras input{accent-color:var(--pewter)}
+.rulebreak{margin-top:8px;font-size:12px;color:var(--danger)}
+.inforow{font-size:12px;color:var(--ink-soft);background:var(--card);border:1px dashed var(--line);border-radius:6px;padding:9px 12px;margin-top:10px;line-height:1.45}
+
+/* ---------- basement card ---------- */
+.basecard{max-width:760px;border:1px solid var(--pewter);border-radius:6px;background:var(--card);padding:18px}
+.basecard h3{font-family:var(--serif);font-weight:500;font-size:18px;margin-bottom:6px}
+.basecard p{font-size:13px;color:var(--ink-soft);margin-bottom:8px;line-height:1.5}
+
+/* ---------- ledger bar ---------- */
+.ledger{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:var(--shoji);padding:10px 20px;z-index:30}
+.ledger .inner{max-width:1180px;margin:0 auto;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.ledger .tot{font-family:var(--mono);font-size:19px}
+.ledger .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.ledger .fnote{font-size:11.5px;opacity:.75;font-family:var(--mono)}
+.ledger .grow{flex:1}
+.ledger button{border:1px solid rgba(232,226,213,.4);border-radius:4px;padding:6px 12px;font-size:12px;color:var(--shoji)}
+.ledger button:hover{border-color:var(--shoji)}
+.ledger .val{font-size:11.5px;color:#E0B4A6}
+.ledger details{font-size:12px}
+.ledger summary{cursor:pointer;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.ledger .items{position:absolute;bottom:100%;right:20px;margin-bottom:8px;background:var(--ink);border:1px solid rgba(232,226,213,.3);border-radius:6px;padding:12px 14px;min-width:300px;max-width:92vw;max-height:50vh;overflow:auto}
+.ledger .items div{display:flex;justify-content:space-between;gap:16px;padding:2px 0;font-family:var(--mono);font-size:11.5px}
+.ledger .items .sec{opacity:.6;text-transform:uppercase;letter-spacing:.1em;font-size:10px;margin-top:6px;font-family:var(--sans)}
+.storagechip{font-size:10.5px;opacity:.6;font-family:var(--mono)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="mark">Casa Dos Hermanos</span>
+  <span class="links">
+    <a href="index.html">Home</a><a href="brief.html">Brief</a><a href="plan.html">Plan</a><a href="studio.html">Studio</a><a href="network.html">Network</a><a href="combos.html" class="on">Combinations</a>
+  </span>
+</nav>
+
+<header class="head">
+  <div class="eyebrow">Design Studio · Wet Areas &amp; Splash</div>
+  <h1>Tile combination room</h1>
+  <p class="provenance">Every option below is transcribed from the Daltile Floor &amp; Wall catalogue (05.06.2026) and priced against the KB Option Selection Worksheet (25.06.2026, plan 2088-224). Swatch colours are indicative renderings, not calibrated samples — judge relationships here, confirm colour on physical boards.</p>
+  <div class="chips" id="dnaChips">
+    <span class="chip lock">Lock · Marble Obsession in wet areas</span>
+    <span class="chip lock">Matte throughout</span>
+    <span class="chip lock">Brass = lighting only</span>
+    <span class="chip">Primary = shower i.l.o. tub (on contract, $2,129)</span>
+    <span class="chip" id="storageStatus">storage: checking…</span>
+  </div>
+</header>
+
+<div class="controls">
+  <label>Grout
+    <select id="groutSel">
+      <option value="#B9B0A1" selected>Warm grey</option>
+      <option value="#DDD8CC">Bone</option>
+      <option value="#6E695F">Charcoal</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="cmpToggle"> Show floor comparators (outside lock)</label>
+  <label><input type="checkbox" id="nonMatte"> Show polished / gloss (breaks matte rule)</label>
+</div>
+
+<section class="floorstrip">
+  <h2>Wet-area floor — whole house</h2>
+  <p class="subnote">One selection across all tiled wet areas. Priced through the flooring contract, not this worksheet — Marble Obsession carries the existing $2,546 quote; every comparator needs a fresh quote.</p>
+  <div class="optrow" id="floorOpts"></div>
+</section>
+
+<div class="tabs" id="roomTabs"></div>
+
+<main class="roomwrap">
+  <div class="roomgrid" id="roomGrid">
+    <div class="mockpanel">
+      <div class="frame" id="mockFrame"></div>
+      <p class="mockcaption" id="mockCaption"></p>
+      <div class="frame floorframe" id="floorFrame" hidden></div>
+      <p class="mockcaption" id="floorCaption" hidden></p>
+    </div>
+    <div class="pickers" id="pickerCol"></div>
+  </div>
+</main>
+
+<footer class="ledger">
+  <div class="inner">
+    <div>
+      <div class="lbl">KB tile adds vs baseline</div>
+      <div class="tot" id="kbTotal">$0</div>
+    </div>
+    <div class="fnote" id="floorNote"></div>
+    <div class="val" id="valMsg"></div>
+    <div class="grow"></div>
+    <details id="itemsWrap"><summary>Line items</summary><div class="items" id="lineItems"></div></details>
+    <button id="copyBtn" type="button">Copy summary</button>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   DATASET — transcribed from source documents. Do not hand-edit
+   prices without diffing against the OSW (25.06.2026).
+   ============================================================ */
+const LADDERS = {
+  // OSW p9 — Shower Tile Surround at Primary Bathroom (governs: shower-i.l.o.-tub on contract)
+  primary: {label:"Primary bath — shower surround", codes:{1:"2009736",2:"2009737",3:"2009738",4:"2009739",5:"2009740"}, price:{1:0,2:379,3:1339,4:1589,5:1749}, cap:5},
+  // OSW p10 — Tub/Shower Tile Surround at Bathroom 2
+  bath2:   {label:"Bath 2 — tub/shower surround",  codes:{1:"2009890",2:"2009891",3:"2009892"}, price:{1:0,2:349,3:1139}, cap:3},
+  // OSW p10 — Shower Tile Surround at Bathroom 3
+  bath3:   {label:"Bath 3 — shower surround",       codes:{1:"2009968",2:"2009969",3:"2009970"}, price:{1:0,2:379,3:1339}, cap:3},
+  // OSW p7 — Kitchen Countertop Tile Backsplash
+  splash:  {label:"Kitchen tile backsplash",         codes:{1:"2005380",2:"2005381",3:"2005382",4:"2005383",5:"2005384",6:"2005385"}, price:{1:449,2:549,3:579,4:649,5:829,6:999}, cap:6}
+};
+const EXTRAS = {
+  panPrimary:{code:"2009873",label:"Tile shower pan — primary (Group 1)",price:239},
+  panBath3:{code:"2009980",label:"Tile shower pan — Bath 3 (Group 1)",price:239},
+  shelf:{code:"2019433",label:"Corner shelf",price:139},
+  blackFrame:{code:"2009621",label:"Enclosure frame — matte black",price:139}
+};
+const FLOOR_QUOTE = 2546; // Marble Obsession wet-area package, existing flooring-contract quote (rate book)
+
+/* Collections. group per surface; pattern keys map to renderers.
+   fit: anchor | high | mid | low  (against Shoji/Natural Tan/Pewter/Shade-Grown/Naval + walnut + brass)
+   vfy:true = colour name read from page image, confirm against printed catalogue */
+const COLLECTIONS = [
+{id:"INC",name:"Included wall tile",type:"6x6 ceramic",surfaces:{surround:{g:1,fmt:"6x6",pat:"g66"}},
+ colours:[{c:"WHT",n:"White",f:"#F2F1EC",fit:"mid",note:"Baseline — reads builder-neutral"}]},
+
+{id:"MB",name:"Marble Obsession",type:"Porcelain, matte & polished",locked:true,
+ surfaces:{floor:{g:4,fmt:"12x24 matte",pat:"b1224"},surround:{g:4,fmt:"12x24 matte",pat:"b1224"},splash:{g:5,fmt:"2x5 picket / 2x2 mosaic",pat:"pick25"}},
+ vein:true,
+ colours:[{c:"MB21",n:"Calacatta Gold",f:"#EFEAE0",v:"#C8A96E",fit:"anchor",note:"Warm white + gold veining — pairs with brass lighting"},
+          {c:"MB22",n:"Grigio",f:"#C9CBC9",v:"#9EA19F",fit:"mid",note:"Cool grey — pulls against walnut warmth"}],
+ polished:[{c:"MB21P",n:"Calacatta Gold — polished",f:"#F2EDE3",v:"#C8A96E",fit:"low",note:"Breaks matte rule"},
+           {c:"MB22P",n:"Grigio — polished",f:"#CDCFCD",v:"#9EA19F",fit:"low",note:"Breaks matte rule"}]},
+
+{id:"FL",name:"Florentine",type:"Glazed porcelain",
+ surfaces:{floor:{g:3,fmt:"12x24",pat:"b1224"},surround:{g:3,fmt:"12x24",pat:"b1224"},splash:{g:3,fmt:"2x4 brick-joint mosaic",pat:"br24"}},
+ vein:true,
+ colours:[{c:"FL06",n:"Carrara",f:"#E9E9E7",v:"#C6C9C7",fit:"mid",note:"Budget Carrara look — cooler than MB21"}]},
+
+{id:"PT",name:"Perpetuo",type:"Porcelain, matte & polished",
+ surfaces:{floor:{g:4,fmt:"12x24 matte",pat:"b1224"},surround:{g:4,fmt:"12x24 matte",pat:"b1224"},splash:{g:5,fmt:"8in hex / 1.5in hex mosaic",pat:"hexm"}},
+ colours:[{c:"PT20",n:"Timeless White",f:"#ECE8DF",fit:"high",note:"Warm white — Shoji-adjacent"},
+          {c:"PT21",n:"Brilliant White",f:"#F4F3EF",fit:"mid",note:"Bright white — cooler than palette"},
+          {c:"PT22",n:"Elegant Beige",f:"#DFD3BE",fit:"high",note:"Natural Tan territory"},
+          {c:"PT23",n:"Eternal Grey",f:"#C2BFB7",fit:"mid",note:"Neutral grey"},
+          {c:"PT24",n:"Infinite Black",f:"#3B3B39",fit:"mid",note:"Matte black — heavy as a field, strong as accent"}]},
+
+{id:"PF",name:"Portfolio",type:"Colorbody porcelain",
+ surfaces:{floor:{g:4,fmt:"24x24",pat:"g24"},surround:{g:4,fmt:"24x24",pat:"g24"}},
+ colours:[{c:"PF01",n:"Ice",f:"#E9E9E9",fit:"mid",note:"Cool white"},
+          {c:"PF02",n:"White",f:"#EFEDE8",fit:"high",note:"Soft warm white"},
+          {c:"PF04",n:"Dove Grey",f:"#C9C7C2",fit:"mid",note:"Quiet grey"},
+          {c:"PF05",n:"Ash Grey",f:"#A3A19B",fit:"mid",note:"Mid grey"},
+          {c:"PF09",n:"Charcoal",f:"#4F4E4A",fit:"mid",note:"Near-black concrete look"}]},
+
+{id:"FH",name:"Forgehaus",type:"Colorbody porcelain",
+ surfaces:{floor:{g:5,fmt:"12x24",pat:"b1224"},surround:{g:5,fmt:"12x24 / 24x24",pat:"b1224"},splash:{g:5,fmt:"2x4 trapezoid mosaic",pat:"br24"}},
+ colours:[{c:"FH10",n:"Beam",f:"#C9C1B2",fit:"high",note:"Warm greige concrete"},
+          {c:"FH11",n:"Terra",f:"#A56B4E",fit:"low",note:"Rust — outside palette"},
+          {c:"FH12",n:"Chroma",f:"#9E9A92",fit:"mid",note:"Warm mid grey"},
+          {c:"FH13",n:"Basalt",f:"#45443F",fit:"mid",note:"Charcoal"}]},
+
+{id:"AL",name:"Alterations",type:"Glazed porcelain",
+ surfaces:{surround:{g:4,fmt:"12x24",pat:"b1224"}},
+ colours:[{c:"AT61",n:"Cotton",f:"#EAE4D8",fit:"high",note:"Warm textile white"},
+          {c:"AT62",n:"Linen",f:"#DCD2C0",fit:"high",note:"Natural Tan register"},
+          {c:"AT63",n:"Light Thread",f:"#CFC7BA",fit:"high",note:"Soft greige weave"},
+          {c:"AT64",n:"Woven Slate",f:"#8A867D",fit:"mid",note:"Mid slate weave"}]},
+
+{id:"AR",name:"Articulo",type:"Glazed porcelain, matte",
+ surfaces:{surround:{g:4,fmt:"12x24 matte",pat:"b1224"}},
+ colours:[{c:"AR06",n:"Editorial White",f:"#EFECE6",fit:"high",note:"Warm white"},
+          {c:"AR07",n:"Feature Beige",f:"#DFD5C4",fit:"high",note:"Warm beige"},
+          {c:"AR09",n:"Column Grey",f:"#B4B2AC",fit:"mid",note:"Neutral grey"}],
+ polished:[{c:"AR06P",n:"Editorial White — polished (G5)",f:"#F1EEE8",fit:"low",note:"Breaks matte rule; polished prices as Group 5"}]},
+
+{id:"AY",name:"Artsy",type:"Glazed porcelain, matte",
+ surfaces:{surround:{g:4,fmt:"12x24 / 24x24 matte",pat:"b1224"}},
+ vein:true,
+ colours:[{c:"AT31",n:"Studio Carrara",f:"#E9E9E6",v:"#C6C8C6",fit:"mid",note:"Carrara look, cool cast"},
+          {c:"AT32",n:"Gallery Pearl",f:"#E8E3D9",v:"#CFC7B8",fit:"high",note:"Warm pearl marble look"}]},
+
+{id:"CA",name:"Calligo",type:"Glazed porcelain",
+ surfaces:{surround:{g:4,fmt:"15x30 matte",pat:"b1530"},splash:{g:5,fmt:"1x6 straight-set mosaic",pat:"s16"}},
+ colours:[{c:"CA41",n:"Tusk",f:"#EDE7DA",fit:"high",note:"Warm off-white"},
+          {c:"CA42",n:"Almond",f:"#E0D5C1",fit:"high",note:"Natural Tan register"},
+          {c:"CA43",n:"Nimbus",f:"#C6C4BE",fit:"mid",note:"Soft grey"}]},
+
+{id:"MC",name:"Moroccan Concrete",type:"Glazed porcelain",
+ surfaces:{surround:{g:4,fmt:"8in hexagon",pat:"hex8"}},
+ colours:[{c:"MC50",n:"Off White",f:"#E5DFD2",fit:"high",note:"Warm plaster white"},
+          {c:"MC51",n:"Taupe",f:"#C0B2A0",fit:"high",note:"Mushroom taupe"},
+          {c:"MC52",n:"Gray",f:"#ADAAA3",fit:"mid",note:"Concrete grey"},
+          {c:"MC53",n:"Light Moss",f:"#B3B49B",fit:"high",note:"Pale moss — Pewter-adjacent"},
+          {c:"MC54",n:"Blue Gray",f:"#93A0A6",fit:"mid",note:"Soft blue-grey"},
+          {c:"MC55",n:"Ochre",f:"#C29455",fit:"low",note:"Ochre — outside palette"},
+          {c:"MC56",n:"Terra Cotta",f:"#A9613F",fit:"low",note:"Terracotta — outside palette"},
+          {c:"MC57",n:"Charcoal",f:"#4D4C48",fit:"mid",note:"Charcoal"}]},
+
+{id:"RK",name:"Rekindle",type:"Colorbody porcelain, Microban",
+ surfaces:{surround:{g:4,fmt:"12x24",pat:"b1224"},splash:{g:6,fmt:"2x6 herringbone mosaic",pat:"her26"}},
+ vein:true,
+ colours:[{c:"RK10",n:"White",f:"#ECE9E2",v:"#D5D1C7",fit:"high",note:"Soft stone white"},
+          {c:"RK11",n:"Beige",f:"#DCD0BC",v:"#C4B69E",fit:"high",note:"Warm stone beige"},
+          {c:"RK12",n:"Light Grey",f:"#CFCDC6",v:"#B7B5AD",fit:"mid",note:"Light grey stone"},
+          {c:"RK13",n:"Medium Grey",f:"#A8A6A0",v:"#8E8C85",fit:"mid",note:"Mid grey stone"},
+          {c:"RK14",n:"Terracotta",f:"#A96A4B",v:"#8F5539",fit:"low",note:"Terracotta — outside palette"}]},
+
+{id:"VR",name:"Vertuo",type:"Colorbody porcelain, travertine look",
+ surfaces:{surround:{g:4,fmt:"12x24",pat:"trav1224"},splash:{g:6,fmt:"2x5 chevron mosaic",pat:"chev25"}},
+ colours:[{c:"VR10",n:"Maestro",f:"#E4DAC6",fit:"high",note:"Light ivory travertine — organic-modern anchor"},
+          {c:"VR11",n:"Composer",f:"#D3C1A3",fit:"high",note:"Warm beige travertine"},
+          {c:"VR12",n:"Bravura",f:"#B7AB99",fit:"high",note:"Grey-taupe travertine"}]},
+
+{id:"MM",name:"Mesmerist",type:"Glazed ceramic wall",
+ surfaces:{surround:{g:4,fmt:"3x6 / 3x12 wall",pat:"s36"},splash:{g:4,fmt:"3x6 / 3x12",pat:"s36",g2:{g:5,fmt:"arabesque mosaic",pat:"arab"}}},
+ colours:[{c:"MM30",n:"Spirit",f:"#EDEAE2",fit:"high",note:"Warm white"},
+          {c:"MM31",n:"Trance",f:"#D9D3C6",fit:"high",note:"Soft greige"},
+          {c:"MM32",n:"Charm",f:"#CBB89C",fit:"high",note:"Warm sand"},
+          {c:"MM33",n:"Allure",f:"#7F9189",fit:"high",note:"Muted green — Pewter Green register"},
+          {c:"MM34",n:"Whimsy",f:"#A8B4B0",fit:"high",note:"Pale sage-grey"},
+          {c:"MM35",n:"Mystique",f:"#3E5049",fit:"high",note:"Deep green — Shade-Grown register"}]},
+
+{id:"LS",name:"C.F. Advantage LS",type:"Glazed ceramic, wood/stone look",
+ surfaces:{surround:{g:3,fmt:"12x24 / 18x18",pat:"b1224"},splash:{g:5,fmt:"2x4 brick-joint mosaic",pat:"br24"}},
+ colours:[{c:"LS40",n:"Washed White",f:"#E7E1D6",fit:"high",note:"Washed warm white"},
+          {c:"LS41",n:"Distressed Beige",f:"#D6C9B4",fit:"high",note:"Distressed beige"},
+          {c:"LS42",n:"Aged Grey",f:"#ADA9A0",fit:"mid",note:"Aged grey"}]},
+
+{id:"SV",name:"C.F. Advantage Stella Vista",type:"Glazed ceramic",
+ surfaces:{surround:{g:3,fmt:"18x18 / 12x24",pat:"b1224"}},
+ colours:[{c:"SV16",n:"White Canvas",f:"#ECE8DE",fit:"high",note:"Canvas white"},
+          {c:"SV17",n:"Golden Sand",f:"#DECFB2",fit:"high",note:"Golden sand"},
+          {c:"SV18",n:"Cement Grey",f:"#BDBAB2",fit:"mid",note:"Cement grey"}]},
+
+{id:"NS",name:"C.F. Prime NS",type:"Glazed ceramic",
+ surfaces:{surround:{g:3,fmt:"18x18 / 12x24",pat:"b1224"},splash:{g:5,fmt:"1x3 herringbone mosaic",pat:"her13"}},
+ colours:[{c:"NS10",n:"Heirloom White",f:"#EBE5D9",fit:"high",note:"Heirloom warm white"},
+          {c:"NS11",n:"Lineage Greige",f:"#D3C9B8",fit:"high",note:"Greige"},
+          {c:"NS12",n:"Historic Grey",f:"#ABA79E",fit:"mid",note:"Historic grey"}]},
+
+{id:"BA",name:"C.F. Prime BA Balans",type:"Glazed ceramic",
+ surfaces:{surround:{g:3,fmt:"18x18 / 12x24",pat:"b1224"},splash:{g:3,fmt:"2x4 straight-joint mosaic",pat:"br24"}},
+ colours:[{c:"BA30",n:"White",f:"#ECEAE4",fit:"high",note:"Clean warm white"},
+          {c:"BA34",n:"Charcoal",f:"#4A4A48",fit:"mid",note:"Charcoal"}]},
+
+{id:"CO",name:"Coastline",type:"Glazed ceramic",
+ surfaces:{surround:{g:3,fmt:"12x12 / 18x18 / 12x24",pat:"b1224"}},
+ colours:[{c:"CO31",n:"Dune",f:"#DFD4BF",fit:"high",note:"Dune sand"},
+          {c:"CO32",n:"Isle",f:"#C9CCC6",fit:"mid",note:"Pale grey-green"}]},
+
+{id:"ME",name:"Memoir",type:"Glazed ceramic, patterned 12x12",
+ surfaces:{surround:{g:3,fmt:"12x12 patterned",pat:"memo"}},
+ colours:[{c:"ME20",n:"Petal Grey",f:"#C7C5BF",v:"#6E6C66",fit:"low",note:"Encaustic pattern — off-DNA ornament"},
+          {c:"ME21",n:"Petal Black",f:"#4B4A47",v:"#C9C7C1",fit:"low",note:"Encaustic pattern — off-DNA ornament"},
+          {c:"ME24",n:"Crystal Grey",f:"#C7C5BF",v:"#6E6C66",fit:"low",note:"Encaustic pattern"},
+          {c:"ME25",n:"Crystal Black",f:"#4B4A47",v:"#C9C7C1",fit:"low",note:"Encaustic pattern"},
+          {c:"ME26",n:"Jewel Grey",f:"#C7C5BF",v:"#6E6C66",fit:"low",note:"Encaustic pattern"},
+          {c:"ME27",n:"Jewel Black",f:"#4B4A47",v:"#C9C7C1",fit:"low",note:"Encaustic pattern"},
+          {c:"ME28",n:"Cosmo Grey",f:"#C7C5BF",v:"#6E6C66",fit:"low",note:"Encaustic pattern"},
+          {c:"ME29",n:"Cosmo Blue",f:"#5C6B7C",v:"#D8D6D0",fit:"low",note:"Encaustic pattern"}]},
+
+{id:"HV",name:"Haverford",type:"Glazed ceramic wall, matte & glossy",
+ surfaces:{surround:{g:3,fmt:"3x6 / 4x12 / 4x16",pat:"s36"},splash:{g:3,fmt:"3x6 / 4x12 / 4x16",pat:"s36"}},
+ colours:[{c:"HV20",n:"White (matte)",f:"#EFEDE7",fit:"high",note:"Quiet subway"},
+          {c:"HV21",n:"Almond (matte)",f:"#E4D8C2",fit:"high",note:"Warm almond subway",vfy:true}],
+ polished:[{c:"HV20G",n:"White — glossy",f:"#F2F0EA",fit:"low",note:"Breaks matte rule"}]},
+
+{id:"CS",name:"C.F. Choice CS Cabris",type:"Glazed ceramic mosaic",
+ surfaces:{splash:{g:3,fmt:"2x2 mosaic",pat:"m22"}},
+ colours:[{c:"CS20",n:"White",f:"#EDEBE4",fit:"high",note:"Simple warm mosaic"},
+          {c:"CS22",n:"Biscuit",f:"#DFD3BD",fit:"high",note:"Biscuit",vfy:true},
+          {c:"CS23",n:"Grey",f:"#B5B3AC",fit:"mid",note:"Grey",vfy:true}]},
+
+{id:"AZ",name:"Artezen",type:"Glazed ceramic wall mosaics",
+ surfaces:{splash:{g:5,fmt:"2x5 picket / 2x4 herringbone / 2x4 brick / 1.5in hex",pat:"pick25"}},
+ colours:[{c:"AT21",n:"White — matte",f:"#ECE9E1",fit:"high",note:"Warm white picket",vfy:true},
+          {c:"AT23",n:"Grey — matte",f:"#B3B2AC",fit:"mid",note:"Grey picket",vfy:true},
+          {c:"AT25",n:"Dark Blue — matte",f:"#35455A",fit:"high",note:"Naval register",vfy:true}],
+ polished:[{c:"AT20",n:"White — gloss",f:"#F0EEE8",fit:"low",note:"Breaks matte rule",vfy:true},
+           {c:"AT22",n:"Grey — gloss",f:"#B9B8B3",fit:"low",note:"Breaks matte rule",vfy:true},
+           {c:"AT24",n:"Dark Blue — gloss",f:"#33455A",fit:"low",note:"Breaks matte rule",vfy:true}]},
+
+{id:"CB",name:"Conrad Brick",type:"Glazed porcelain wall, 2x8",
+ surfaces:{splash:{g:5,fmt:"2x8 brick",pat:"br28"}},
+ handmade:true,
+ colours:[{c:"CB90",n:"Canvas",f:"#EDE8DE",fit:"high",note:"Handmade-look white",vfy:true},
+          {c:"CB91",n:"Fog",f:"#CFCCC5",fit:"mid",note:"Soft fog grey",vfy:true},
+          {c:"CB92",n:"Oat",f:"#D9CBB1",fit:"high",note:"Oat beige",vfy:true},
+          {c:"CB93",n:"Sage",f:"#97A08B",fit:"high",note:"Sage — Pewter Green register"},
+          {c:"CB94",n:"Clay",f:"#B47653",fit:"low",note:"Clay — outside palette",vfy:true},
+          {c:"CB95",n:"Siren",f:"#46584F",fit:"high",note:"Deep green — Shade-Grown register"},
+          {c:"CB96",n:"Ink",f:"#33383E",fit:"high",note:"Ink — Naval-adjacent",vfy:true}]},
+
+{id:"RD",name:"Remedy",type:"Glazed porcelain wall, 3x9",
+ surfaces:{splash:{g:5,fmt:"3x9",pat:"s39"},surround:{g:null,fmt:"3x9 full wall — custom quote",pat:"s39",quote:true}},
+ colours:[{c:"RD20",n:"Salve",f:"#EAE7DF",fit:"high",note:"Warm white",vfy:true},
+          {c:"RD21",n:"Balm",f:"#DCD2BF",fit:"high",note:"Cream",vfy:true},
+          {c:"RD22",n:"Tonic",f:"#C2CBB9",fit:"high",note:"Pale green",vfy:true},
+          {c:"RD23",n:"Herbal",f:"#74836F",fit:"high",note:"Herbal green — Pewter register"},
+          {c:"RD24",n:"Hydro",f:"#6C8291",fit:"mid",note:"Blue-grey",vfy:true},
+          {c:"RD25",n:"Remedium",f:"#3C4440",fit:"high",note:"Deep green-black",vfy:true}]},
+
+{id:"SC",name:"Stagecraft",type:"Glazed ceramic wall, undulated picket",
+ surfaces:{splash:{g:4,fmt:"3x12 picket",pat:"pick312"},surround:{g:null,fmt:"3x12 picket full wall — custom quote",pat:"pick312",quote:true}},
+ handmade:true,
+ colours:[{c:"0190",n:"Arctic White — matte",f:"#EFEEE9",fit:"high",note:"Undulated white picket"},
+          {c:"X714",n:"Desert Gray — matte",f:"#C9C4B8",fit:"high",note:"Warm desert grey"},
+          {c:"1769",n:"Galaxy — matte",f:"#3A4653",fit:"high",note:"Galaxy — Naval register"},
+          {c:"0748",n:"Spa — matte",f:"#C3D0C9",fit:"high",note:"Pale spa green"},
+          {c:"K711",n:"Black — matte",f:"#2F2E2C",fit:"mid",note:"Matte black picket"}],
+ polished:[{c:"0790",n:"Arctic White — gloss",f:"#F1F0EB",fit:"low",note:"Breaks matte rule"},
+           {c:"149",n:"Galaxy — gloss",f:"#3C4855",fit:"low",note:"Breaks matte rule"},
+           {c:"0148",n:"Spa — gloss",f:"#C6D3CC",fit:"low",note:"Breaks matte rule"},
+           {c:"K111",n:"Black — gloss",f:"#312F2D",fit:"low",note:"Breaks matte rule"},
+           {c:"X114",n:"Desert Gray — gloss",f:"#CCC7BB",fit:"low",note:"Breaks matte rule"}]},
+
+{id:"ZL",name:"Zellige Neo",type:"Glazed ceramic wall, 4x4",
+ surfaces:{splash:{g:4,fmt:"4x4",pat:"zel44"},surround:{g:null,fmt:"4x4 full wall — custom quote",pat:"zel44",quote:true}},
+ handmade:true,
+ colours:[{c:"ZL11",n:"Gesso",f:"#EFEBE1",fit:"high",note:"Plaster white zellige"},
+          {c:"ZL07",n:"Lana",f:"#E9E2D3",fit:"high",note:"Wool-warm white"},
+          {c:"ZL08",n:"Argilla",f:"#C9A17C",fit:"mid",note:"Clay tan — warm but loud"},
+          {c:"ZL03",n:"Bosco",f:"#4A5D50",fit:"high",note:"Forest green — Shade-Grown register"},
+          {c:"ZL06",n:"China",f:"#33475C",fit:"high",note:"Deep blue — Naval register"}]},
+
+{id:"MR",name:"Miramo",type:"Glazed ceramic wall mosaics, Microban",
+ surfaces:{splash:{g:6,fmt:"picket / 1x6 / fan mosaics",pat:"fan"}},
+ colours:[{c:"MR44",n:"Salt",f:"#EDEAE3",fit:"high",note:"Warm white",vfy:true},
+          {c:"MR45",n:"Fawn",f:"#D9CCB7",fit:"high",note:"Fawn beige",vfy:true},
+          {c:"MR46",n:"Mist",f:"#BFC7C4",fit:"mid",note:"Pale mist",vfy:true},
+          {c:"MR47",n:"Reef",f:"#7E948A",fit:"high",note:"Reef green — Pewter register",vfy:true},
+          {c:"MR48",n:"Dusk",f:"#55707E",fit:"mid",note:"Dusk blue",vfy:true},
+          {c:"MR49",n:"Coal",f:"#45464A",fit:"mid",note:"Coal",vfy:true}]},
+
+{id:"RV",name:"Revalia Remix",type:"Glazed ceramic wall",
+ surfaces:{splash:{g:6,fmt:"2x6 bevel / 3in fan mosaic",pat:"fan"}},
+ colours:[{c:"RV08",n:"Centennial White (bevel)",f:"#EFEDE6",fit:"high",note:"Bevel white"},
+          {c:"RV09",n:"Festive Gray (bevel)",f:"#C4C2BC",fit:"mid",note:"Bevel grey"},
+          {c:"RV10",n:"Jubilee Beige (bevel)",f:"#DDD0BA",fit:"high",note:"Bevel beige"},
+          {c:"RV11",n:"Celebration Teal (bevel)",f:"#4E6B68",fit:"high",note:"Teal — Pewter register"},
+          {c:"RV26",n:"Felicity White (fan)",f:"#EEECE5",fit:"high",note:"Fan white"},
+          {c:"RV27",n:"Graceful Greige (fan)",f:"#CFC6B8",fit:"high",note:"Fan greige"},
+          {c:"RV28",n:"Delightful Tan (fan)",f:"#D6C3A4",fit:"high",note:"Fan tan"},
+          {c:"RV29",n:"Exquisite Sky (fan)",f:"#A9BCC2",fit:"mid",note:"Fan sky"},
+          {c:"RV30",n:"Sublime Gray (fan)",f:"#B6B4AE",fit:"mid",note:"Fan grey"}]}
+];
+
+/* Floor picker sets. Lock = Marble Obsession; comparators toggle-revealed. */
+const FLOOR_LOCK = [{col:"MB",c:"MB21"},{col:"MB",c:"MB22"}];
+const FLOOR_CMP  = [{col:"FL",c:"FL06"},{col:"PT",c:"PT20"},{col:"PT",c:"PT22"},{col:"PF",c:"PF02"},{col:"FH",c:"FH10"},{col:"MC",c:"MC51"}];
+
+const BASEMENT = {
+  title:"Basement bath — contractor scope (Daniel's envelope)",
+  body:"Spec per the interior design brief: green tile only inside the shower, floor to ceiling, with long niche and built-in bench; warm cream large-format floor coordinated with electric radiant heat; walnut vanity, matte-black fixtures; Shoji White ceiling. Not priced through KB — sourced and quoted by the basement contractor. Shown here only so whole-home coherence can be judged.",
+  shower:"#4A5D50", floor:"#E7DFCE"
+};
+
+/* ============================================================
+   ENGINE
+   ============================================================ */
+const ROOMS = {
+  primary:{name:"Primary bath",ladder:"primary",pan:"panPrimary",mock:"shower",
+           note:"Shower-in-lieu-of-tub is on the contract; the surround wraps three walls with a solid-surface seat."},
+  bath2:{name:"Bath 2",ladder:"bath2",pan:null,mock:"tub",
+           note:"Tub/shower combination. Ladder capped at Group 3 — Group 4/5 field tile is not offered here at list prices."},
+  bath3:{name:"Bath 3",ladder:"bath3",pan:"panBath3",mock:"shower",
+           note:"Walk-in shower. Ladder capped at Group 3 — Group 4/5 field tile is not offered here at list prices."},
+  kitchen:{name:"Kitchen splash",mock:"kitchen",
+           note:"Tile backsplash replaces the included 4-inch granite splash. Quartz full-height splash ($1,529–$2,229) is the competing route on the same wall."},
+  basement:{name:"Basement (context)",mock:"basement",note:""}
+};
+
+let state = {
+  floor:{col:"MB",c:"MB21"},
+  rooms:{
+    primary:{sel:{col:"INC",c:"WHT"},pan:false,shelf:false,frame:false},
+    bath2:{sel:{col:"INC",c:"WHT"},pan:false,shelf:false,frame:false},
+    bath3:{sel:{col:"INC",c:"WHT"},pan:false,shelf:false,frame:false}
+  },
+  kitchen:{sel:null},
+  grout:"#B9B0A1", showCmp:false, showNM:false, active:"primary"
+};
+
+const $ = id => document.getElementById(id);
+const money = n => "$" + n.toLocaleString("en-US");
+const getCol = id => COLLECTIONS.find(c=>c.id===id);
+function getColour(colId, code){
+  const col = getCol(colId); if(!col) return null;
+  return (col.colours||[]).find(x=>x.c===code) || (col.polished||[]).find(x=>x.c===code) || null;
+}
+const isPolished = (colId, code) => !!((getCol(colId)||{}).polished||[]).find(x=>x.c===code);
+
+/* ---------- SVG pattern factory ---------- */
+let PATSEQ = 0;
+function hexPts(cx,cy,r){ // pointy-top
+  let p=[]; for(let i=0;i<6;i++){const a=Math.PI/180*(60*i-30);p.push((cx+r*Math.cos(a)).toFixed(2)+","+(cy+r*Math.sin(a)).toFixed(2));}
+  return p.join(" ");
+}
+function picketPts(x,y,w,h,tip){
+  return [ (x+tip)+","+y, (x+w-tip)+","+y, (x+w)+","+(y+h/2), (x+w-tip)+","+(y+h), (x+tip)+","+(y+h), x+","+(y+h/2) ]
+    .map(s=>s).join(" ");
+}
+function veinPaths(w,h,vc){
+  return '<path d="M'+(-w*0.1)+' '+(h*0.3)+' C '+(w*0.25)+' '+(h*0.15)+', '+(w*0.5)+' '+(h*0.55)+', '+(w*1.1)+' '+(h*0.35)+'" stroke="'+vc+'" stroke-width="1.4" fill="none" opacity="0.5"/>' +
+         '<path d="M'+(-w*0.05)+' '+(h*0.75)+' C '+(w*0.3)+' '+(h*0.9)+', '+(w*0.7)+' '+(h*0.6)+', '+(w*1.05)+' '+(h*0.8)+'" stroke="'+vc+'" stroke-width="0.9" fill="none" opacity="0.35"/>';
+}
+function shade(hex,amt){
+  const n=parseInt(hex.slice(1),16);let r=(n>>16)+amt,g=((n>>8)&255)+amt,b=(n&255)+amt;
+  r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
+  return "#"+((r<<16)|(g<<8)|b).toString(16).padStart(6,"0");
+}
+function makePattern(patKey,colour,grout,vein,handmade){
+  const id="pt"+(PATSEQ++);
+  const f=colour.f, vc=colour.v||shade(colour.f,-26);
+  const gs='stroke="'+grout+'" stroke-width="1.3"';
+  const hm = handmade
+    ? '<rect width="{W}" height="{H}" fill="url(#hmv'+id+')" opacity="0.5"/>'
+    : "";
+  let W,H,body;
+  switch(patKey){
+    case "g66": W=22;H=22; body='<rect x="0" y="0" width="22" height="22" fill="'+f+'" '+gs+'/>'; break;
+    case "m22": W=11;H=11; body='<rect x="0" y="0" width="11" height="11" fill="'+f+'" '+gs+'/>'; break;
+    case "g24": W=64;H=64; body='<rect x="0" y="0" width="64" height="64" fill="'+f+'" '+gs+'/>'+(vein?veinPaths(64,64,vc):""); break;
+    case "b1530": W=120;H=60;
+      body='<rect x="0" y="0" width="120" height="30" fill="'+f+'" '+gs+'/><rect x="-60" y="30" width="120" height="30" fill="'+f+'" '+gs+'/><rect x="60" y="30" width="120" height="30" fill="'+f+'" '+gs+'/>'+(vein?veinPaths(120,60,vc):""); break;
+    case "trav1224": case "b1224": W=96;H=48;
+      body='<rect x="0" y="0" width="96" height="24" fill="'+f+'" '+gs+'/><rect x="-48" y="24" width="96" height="24" fill="'+f+'" '+gs+'/><rect x="48" y="24" width="96" height="24" fill="'+f+'" '+gs+'/>'
+          +(vein?veinPaths(96,48,vc):"")
+          +(patKey==="trav1224"?'<g opacity="0.28" stroke="'+vc+'" stroke-width="0.7"><line x1="0" y1="6" x2="96" y2="6"/><line x1="0" y1="14" x2="96" y2="14"/><line x1="0" y1="31" x2="96" y2="31"/><line x1="0" y1="41" x2="96" y2="41"/></g>':""); break;
+    case "s36": W=72;H=24;
+      body='<rect x="0" y="0" width="72" height="12" fill="'+f+'" '+gs+'/><rect x="-36" y="12" width="72" height="12" fill="'+f+'" '+gs+'/><rect x="36" y="12" width="72" height="12" fill="'+f+'" '+gs+'/>'; break;
+    case "s39": W=54;H=36;
+      body='<rect x="0" y="0" width="54" height="18" fill="'+f+'" '+gs+'/><rect x="-27" y="18" width="54" height="18" fill="'+f+'" '+gs+'/><rect x="27" y="18" width="54" height="18" fill="'+f+'" '+gs+'/>'; break;
+    case "br24": W=48;H=24;
+      body='<rect x="0" y="0" width="24" height="12" fill="'+f+'" '+gs+'/><rect x="24" y="0" width="24" height="12" fill="'+f+'" '+gs+'/><rect x="-12" y="12" width="24" height="12" fill="'+f+'" '+gs+'/><rect x="12" y="12" width="24" height="12" fill="'+f+'" '+gs+'/><rect x="36" y="12" width="24" height="12" fill="'+f+'" '+gs+'/>'; break;
+    case "br28": W=64;H=32;
+      body='<rect x="0" y="0" width="64" height="16" fill="'+f+'" '+gs+'/><rect x="-32" y="16" width="64" height="16" fill="'+f+'" '+gs+'/><rect x="32" y="16" width="64" height="16" fill="'+f+'" '+gs+'/>'; break;
+    case "s16": W=72;H=12; body='<rect x="0" y="0" width="72" height="12" fill="'+f+'" '+gs+'/>'; break;
+    case "hex8": case "hexm": {
+      const r = patKey==="hex8" ? 16 : 8;
+      const w = Math.sqrt(3)*r, h = 1.5*r; W=w; H=2*h;
+      body='<polygon points="'+hexPts(w/2,r,r-0)+'" fill="'+f+'" '+gs+'/>' +
+           '<polygon points="'+hexPts(0,r+h,r)+'" fill="'+f+'" '+gs+'/>' +
+           '<polygon points="'+hexPts(w,r+h,r)+'" fill="'+f+'" '+gs+'/>' +
+           '<polygon points="'+hexPts(w/2,r+2*h,r)+'" fill="'+f+'" '+gs+'/>';
+      break; }
+    case "pick25": W=60;H=24;
+      body='<polygon points="'+picketPts(0,0,60,12,10)+'" fill="'+f+'" '+gs+'/>' +
+           '<polygon points="'+picketPts(-30,12,60,12,10)+'" fill="'+f+'" '+gs+'/>' +
+           '<polygon points="'+picketPts(30,12,60,12,10)+'" fill="'+f+'" '+gs+'/>'; break;
+    case "pick312": W=30;H=84;
+      body='<polygon points="'+[ "15,0","30,12","30,72","15,84","0,72","0,12" ].join(" ")+'" fill="'+f+'" '+gs+'/>'; break;
+    case "her13": case "her26": case "her24": {
+      const L = patKey==="her13"?24: (patKey==="her26"?36:28), T = patKey==="her13"?8:12;
+      W=L; H=L;
+      body='<g '+gs+' fill="'+f+'">'
+          +'<rect x="0" y="0" width="'+L+'" height="'+T+'" transform="rotate(45 0 0)"/>'
+          +'<rect x="0" y="'+L+'" width="'+L+'" height="'+T+'" transform="rotate(-45 0 '+L+')"/>'
+          +'</g>'; break; }
+    case "chev25": W=48;H=20;
+      body='<g '+gs+' fill="'+f+'"><polygon points="0,20 24,8 24,20 0,32"/><polygon points="24,8 48,20 48,32 24,20"/><polygon points="0,0 24,-12 24,0 0,12"/><polygon points="24,-12 48,0 48,12 24,0"/><polygon points="0,40 24,28 24,40 0,52"/><polygon points="24,28 48,40 48,52 24,40"/></g>'; break;
+    case "zel44": W=56;H=56;
+      body='<g '+gs+'>'
+          +'<rect x="0" y="0" width="28" height="28" fill="'+f+'"/><rect x="28" y="0" width="28" height="28" fill="'+shade(f,7)+'"/>'
+          +'<rect x="0" y="28" width="28" height="28" fill="'+shade(f,-7)+'"/><rect x="28" y="28" width="28" height="28" fill="'+shade(f,3)+'"/>'
+          +'</g>'; break;
+    case "fan": W=48;H=24;
+      body='<g '+gs+' fill="'+f+'">'
+          +'<path d="M0 24 A24 24 0 0 1 48 24 Z"/><path d="M-24 48 A24 24 0 0 1 24 48 Z"/><path d="M24 48 A24 24 0 0 1 72 48 Z"/>'
+          +'</g>'; break;
+    case "arab": W=48;H=24;
+      body='<g '+gs+' fill="'+f+'"><path d="M0 24 A24 24 0 0 1 48 24 Z"/><path d="M-24 48 A24 24 0 0 1 24 48 Z"/><path d="M24 48 A24 24 0 0 1 72 48 Z"/></g>'; break;
+    case "memo": W=48;H=48;
+      body='<rect x="0" y="0" width="48" height="48" fill="'+f+'" '+gs+'/>'
+          +'<g fill="none" stroke="'+vc+'" stroke-width="2" opacity="0.85">'
+          +'<circle cx="24" cy="24" r="10"/><circle cx="0" cy="0" r="10"/><circle cx="48" cy="0" r="10"/><circle cx="0" cy="48" r="10"/><circle cx="48" cy="48" r="10"/>'
+          +'</g>'; break;
+    default: W=40;H=40; body='<rect width="40" height="40" fill="'+f+'"/>';
+  }
+  let defsExtra="";
+  if(handmade){
+    defsExtra='<pattern id="hmv'+id+'" width="'+(W/2)+'" height="'+(H/2)+'" patternUnits="userSpaceOnUse">'
+      +'<rect width="'+(W/4)+'" height="'+(H/4)+'" fill="#FFFFFF" opacity="0.06"/>'
+      +'<rect x="'+(W/4)+'" y="'+(H/4)+'" width="'+(W/4)+'" height="'+(H/4)+'" fill="#000000" opacity="0.05"/>'
+      +'</pattern>';
+  }
+  const patDef='<pattern id="'+id+'" width="'+W+'" height="'+H+'" patternUnits="userSpaceOnUse">'
+    +'<rect width="'+W+'" height="'+H+'" fill="'+grout+'"/>'+body+hm.replace(/{W}/g,W).replace(/{H}/g,H)+'</pattern>'+defsExtra;
+  return {id, def:patDef};
+}
+
+function swatchSVG(patKey,colour,col){
+  PATSEQ++;
+  const p = makePattern(patKey,colour,state.grout,!!col.vein,!!col.handmade);
+  return '<svg viewBox="0 0 128 64" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>'+p.def+'</defs><rect width="128" height="64" fill="url(#'+p.id+')"/></svg>';
+}
+
+/* ---------- room mocks ---------- */
+function mockSVG(roomKey){
+  const defs=[]; 
+  function P(sel, fallbackFill){
+    if(!sel) return fallbackFill;
+    const col=getCol(sel.col), clr=getColour(sel.col,sel.c);
+    if(!col||!clr) return fallbackFill;
+    const surf = roomKey==="kitchen" ? col.surfaces.splash : col.surfaces.surround;
+    const p = makePattern((surf&&surf.pat)||"b1224", clr, state.grout, !!col.vein, !!col.handmade);
+    defs.push(p.def); return "url(#"+p.id+")";
+  }
+  function FP(){
+    const col=getCol(state.floor.col), clr=getColour(state.floor.col,state.floor.c);
+    if(!col||!clr) return "#DDD8CC";
+    const surf=col.surfaces.floor||col.surfaces.surround;
+    const p=makePattern((surf&&surf.pat)||"b1224",clr,state.grout,!!col.vein,!!col.handmade);
+    defs.push(p.def); return "url(#"+p.id+")";
+  }
+  const black="#2F2E2C", brass="#A98A4F", shoji="#E8E2D5", walnut="#5C4633", oak="#C7B299";
+  let inner="";
+  if(roomKey==="basement"){
+    inner =
+      '<rect x="0" y="0" width="720" height="440" fill="'+shoji+'"/>'
+     +'<rect x="18" y="18" width="360" height="322" fill="'+BASEMENT.shower+'"/>'
+     +'<g stroke="'+shade(BASEMENT.shower,14)+'" stroke-width="1">'+Array.from({length:22},(_,i)=>'<line x1="18" y1="'+(18+i*15)+'" x2="378" y2="'+(18+i*15)+'"/>').join("")+Array.from({length:24},(_,i)=>'<line x1="'+(18+i*15)+'" y1="18" x2="'+(18+i*15)+'" y2="340"/>').join("")+'</g>'
+     +'<rect x="270" y="70" width="84" height="34" fill="'+shade(BASEMENT.shower,-16)+'"/>'
+     +'<rect x="60" y="250" width="150" height="26" fill="'+shade(BASEMENT.shower,-10)+'"/>'
+     +'<rect x="96" y="40" width="6" height="84" fill="'+black+'"/><circle cx="99" cy="36" r="12" fill="'+black+'"/>'
+     +'<rect x="430" y="250" width="240" height="90" fill="'+walnut+'"/><rect x="430" y="244" width="240" height="8" fill="'+oak+'"/>'
+     +'<rect x="470" y="120" width="160" height="104" fill="'+shoji+'" stroke="'+black+'" stroke-width="3"/>'
+     +'<rect x="446" y="130" width="5" height="70" fill="'+black+'"/><rect x="650" y="130" width="5" height="70" fill="'+black+'"/>'
+     +'<rect x="0" y="340" width="720" height="100" fill="'+BASEMENT.floor+'"/>'
+     +'<g stroke="#CDC4B0" stroke-width="1">'+Array.from({length:6},(_,i)=>'<line x1="'+(i*140-40)+'" y1="440" x2="'+(i*140+60)+'" y2="340"/>').join("")+'</g>';
+  } else if(roomKey==="kitchen"){
+    const splashFill = state.kitchen.sel ? P(state.kitchen.sel,"#DDD9D0") : shoji;
+    inner =
+      '<rect x="0" y="0" width="720" height="440" fill="'+shoji+'"/>'
+     +'<rect x="20" y="16" width="680" height="86" fill="'+shade(shoji,-10)+'"/><g stroke="'+shade(shoji,-26)+'" stroke-width="2"><line x1="190" y1="16" x2="190" y2="102"/><line x1="360" y1="16" x2="360" y2="102"/><line x1="530" y1="16" x2="530" y2="102"/></g>'
+     +'<circle cx="260" cy="140" r="9" fill="'+brass+'"/><circle cx="460" cy="140" r="9" fill="'+brass+'"/><line x1="260" y1="102" x2="260" y2="131" stroke="'+black+'" stroke-width="2"/><line x1="460" y1="102" x2="460" y2="131" stroke="'+black+'" stroke-width="2"/>'
+     +'<rect x="20" y="168" width="680" height="120" fill="'+splashFill+'"/>'
+     +(state.kitchen.sel?"":'<rect x="20" y="272" width="680" height="16" fill="#CFCAC0"/>')
+     +'<rect x="20" y="288" width="680" height="14" fill="#DDD9D0"/>'
+     +'<path d="M120 288 v-46 q0 -18 20 -18 h14" fill="none" stroke="'+black+'" stroke-width="6" stroke-linecap="round"/>'
+     +'<rect x="20" y="302" width="680" height="106" fill="'+walnut+'"/><g stroke="'+shade(walnut,-14)+'" stroke-width="2"><line x1="190" y1="302" x2="190" y2="408"/><line x1="360" y1="302" x2="360" y2="408"/><line x1="530" y1="302" x2="530" y2="408"/></g>'
+     +'<rect x="0" y="408" width="720" height="32" fill="#C9BFA9"/>';
+  } else {
+    const r = state.rooms[roomKey];
+    const wallFill = P(r.sel,"#F2F1EC");
+    const frameC = r.frame ? black : "#9C9890";
+    inner =
+      '<rect x="0" y="0" width="720" height="440" fill="'+shoji+'"/>'
+     +'<rect x="18" y="18" width="382" height="322" fill="'+wallFill+'"/>'
+     +'<rect x="284" y="66" width="92" height="40" fill="rgba(0,0,0,0.18)"/><rect x="284" y="66" width="92" height="40" fill="none" stroke="'+black+'" stroke-width="2"/>'
+     +(r.shelf?'<path d="M400 150 L352 150 L400 198 Z" fill="rgba(255,255,255,0.35)" stroke="'+black+'" stroke-width="1.5"/>':"")
+     +'<rect x="70" y="44" width="6" height="88" fill="'+black+'"/><circle cx="73" cy="40" r="13" fill="'+black+'"/><circle cx="73" cy="176" r="7" fill="'+black+'"/>'
+     +(roomKey==="bath2"
+        ? '<rect x="18" y="268" width="382" height="72" rx="10" fill="#F4F2EC" stroke="#D8D3C6" stroke-width="2"/>'
+        : '<rect x="18" y="18" width="382" height="322" fill="none" stroke="'+frameC+'" stroke-width="4"/><line x1="252" y1="18" x2="252" y2="340" stroke="'+frameC+'" stroke-width="3"/>')
+     +'<rect x="436" y="252" width="248" height="88" fill="'+walnut+'"/><rect x="436" y="246" width="248" height="8" fill="'+oak+'"/>'
+     +'<path d="M520 246 v-24 q0 -10 12 -10 h10" fill="none" stroke="'+black+'" stroke-width="5" stroke-linecap="round"/>'
+     +'<rect x="470" y="104" width="180" height="120" fill="'+shade(shoji,6)+'" stroke="'+black+'" stroke-width="3"/>'
+     +'<circle cx="448" cy="150" r="8" fill="'+brass+'"/><circle cx="672" cy="150" r="8" fill="'+brass+'"/>'
+     +'<rect x="0" y="340" width="720" height="100" fill="'+FP()+'"/>'
+     +'<rect x="0" y="340" width="720" height="100" fill="rgba(38,36,31,0.06)"/>';
+  }
+  return '<svg viewBox="0 0 720 440" role="img" aria-label="Schematic room preview"><defs>'+defs.join("")+'</defs>'+inner+'</svg>';
+}
+
+function floorPlaneSVG(){
+  const col=getCol(state.floor.col), clr=getColour(state.floor.col,state.floor.c);
+  const surf=(col.surfaces.floor||col.surfaces.surround);
+  const p=makePattern((surf&&surf.pat)||"b1224",clr,state.grout,!!col.vein,!!col.handmade);
+  return '<svg viewBox="0 0 720 236" role="img" aria-label="Wet-area floor at scale"><defs>'+p.def+'</defs>'
+    +'<g transform="scale(1.5)"><rect width="480" height="158" fill="url(#'+p.id+')"/></g>'
+    +'<rect width="720" height="9" fill="rgba(38,36,31,0.10)"/></svg>';
+}
+function floorPlaneCaption(){
+  const col=getCol(state.floor.col), clr=getColour(state.floor.col,state.floor.c);
+  const fmt=(col.surfaces.floor||col.surfaces.surround).fmt;
+  const price = state.floor.col==="MB" ? "flooring contract "+money(FLOOR_QUOTE)+" (quoted)" : "outside lock — flooring-contract quote required";
+  return "Whole-house package floor · "+col.name+" "+clr.n+" · "+fmt+" · "+price+". Plan crop, enlarged ~1.5x to read grout rhythm and veining.";
+}
+
+/* ---------- pickers ---------- */
+function fitChip(clr){ return '<span class="fit '+clr.fit+'">'+clr.fit+'</span>'; }
+function optCard(colId,code,surface,room){
+  const col=getCol(colId), clr=getColour(colId,code);
+  const surf = surface==="splash" ? col.surfaces.splash : (surface==="floor" ? (col.surfaces.floor||col.surfaces.surround) : col.surfaces.surround);
+  const g = surf.g;
+  let priceTxt="", blocked=false, sel=false, quote=!!surf.quote;
+  if(surface==="floor"){
+    sel = state.floor.col===colId && state.floor.c===code;
+    priceTxt = colId==="MB" ? "Flooring contract — "+money(FLOOR_QUOTE)+" (quoted)" : "Flooring contract — quote req'd";
+  } else if(surface==="splash"){
+    sel = state.kitchen.sel && state.kitchen.sel.col===colId && state.kitchen.sel.c===code;
+    priceTxt = "G"+g+" · "+money(LADDERS.splash.price[g])+" · "+LADDERS.splash.codes[g];
+  } else {
+    const lad=LADDERS[ROOMS[room].ladder];
+    sel = state.rooms[room].sel.col===colId && state.rooms[room].sel.c===code;
+    if(quote){ priceTxt="Full wall — custom quote (Udie)"; }
+    else if(g>lad.cap){ blocked=true; priceTxt="Not offered — G"+lad.cap+" cap"; }
+    else priceTxt = g===1 ? "G1 · included" : "G"+g+" · "+money(lad.price[g])+" · "+lad.codes[g];
+  }
+  const vfy = clr.vfy ? ' <span title="Colour name read from page image — verify">✻</span>' : "";
+  return '<button type="button" class="opt'+(sel?" sel":"")+(blocked?" blocked":"")+'" '
+    +'data-surface="'+surface+'" data-room="'+(room||"")+'" data-col="'+colId+'" data-c="'+code+'" data-blocked="'+blocked+'" data-quote="'+quote+'">'
+    +'<span class="sw">'+swatchSVG(surf.pat,clr,col)+'</span>'
+    +'<span class="nm">'+clr.n+vfy+'</span>'
+    +'<span class="cd">'+col.name+' · '+clr.c+'</span>'
+    +'<span class="pr">'+priceTxt+'</span>'
+    +fitChip(clr)
+    +'<span class="tagline">'+clr.note+'</span>'
+    +'</button>';
+}
+
+function renderFloor(){
+  let html = FLOOR_LOCK.map(x=>optCard(x.col,x.c,"floor",null)).join("");
+  if(state.showCmp){
+    html += FLOOR_CMP.map(x=>optCard(x.col,x.c,"floor",null)).join("");
+  }
+  $("floorOpts").innerHTML = html;
+}
+
+function surroundGroups(room){
+  const lad=LADDERS[ROOMS[room].ladder];
+  const groups={};
+  COLLECTIONS.forEach(col=>{
+    const s=col.surfaces.surround; if(!s) return;
+    const push=(code,pol)=>{
+      const key = s.quote ? "Q" : s.g;
+      (groups[key]=groups[key]||[]).push({col:col.id,c:code});
+    };
+    (col.colours||[]).forEach(x=>push(x.c,false));
+    if(state.showNM) (col.polished||[]).forEach(x=>push(x.c,true));
+  });
+  let html="";
+  [1,2,3,4,5].forEach(g=>{
+    const over = g>lad.cap;
+    const priceLbl = g===2 ? money(lad.price[2]||0) : (g===1?"included":(lad.price[g]!==undefined?money(lad.price[g]):"—"));
+    html+='<div class="grouphead"><span>Group '+g+(over?" — beyond this bath's ladder":"")+'</span><span class="gp">'+(over?"n/a":priceLbl+(g>1?" · "+ (lad.codes[g]||""):""))+'</span></div>';
+    if(g===2){
+      html+='<div class="inforow">No Group 2 collections appear in this Daltile catalogue. The '+money(lad.price[2]||0)+' tier exists on the worksheet ('+(lad.codes[2]||"")+') — ask Udie which lines fill it before treating G2 as unavailable.</div>';
+      return;
+    }
+    const opts=(groups[g]||[]);
+    html += opts.length ? '<div class="optrow">'+opts.map(o=>optCard(o.col,o.c,"surround",room)).join("")+'</div>'
+                        : '<div class="inforow">No catalogued collections in this group.</div>';
+  });
+  if(groups["Q"]){
+    html+='<div class="grouphead"><span>Full-wall statement tile — custom quote</span><span class="gp">excluded from totals</span></div>';
+    html+='<div class="optrow">'+groups["Q"].map(o=>optCard(o.col,o.c,"surround",room)).join("")+'</div>';
+  }
+  return html;
+}
+
+function splashOptions(){
+  const items=[];
+  COLLECTIONS.forEach(col=>{
+    const s=col.surfaces.splash; if(!s) return;
+    (col.colours||[]).forEach(x=>items.push({col:col.id,c:x.c,g:s.g}));
+    if(state.showNM)(col.polished||[]).forEach(x=>items.push({col:col.id,c:x.c,g:s.g}));
+  });
+  let html='<div class="grouphead"><span>Keep included splash</span><span class="gp">$0</span></div>'
+    +'<div class="optrow"><button type="button" class="opt'+(state.kitchen.sel?"":" sel")+'" data-surface="splashnone">'
+    +'<span class="sw"><svg viewBox="0 0 128 64"><rect width="128" height="64" fill="#E8E2D5"/><rect y="48" width="128" height="8" fill="#CFCAC0"/><rect y="56" width="128" height="8" fill="#DDD9D0"/></svg></span>'
+    +'<span class="nm">Included 4-inch granite splash</span><span class="cd">baseline</span><span class="pr">$0</span><span class="fit mid">mid</span>'
+    +'<span class="tagline">Painted wall above — quietest, cheapest route</span></button></div>';
+  [1,2,3,4,5,6].forEach(g=>{
+    const opts=items.filter(i=>i.g===g);
+    html+='<div class="grouphead"><span>Group '+g+'</span><span class="gp">'+money(LADDERS.splash.price[g])+' · '+LADDERS.splash.codes[g]+'</span></div>';
+    if(g===1){ html+='<div class="optrow">'+optCard("INC","WHT","splash",null)+'</div>'; return; }
+    if(g===2){ html+='<div class="inforow">No Group 2 collections in this catalogue — verify with Udie ('+LADDERS.splash.codes[2]+', '+money(LADDERS.splash.price[2])+').</div>'; return; }
+    html += opts.length ? '<div class="optrow">'+opts.map(o=>optCard(o.col,o.c,"splash",null)).join("")+'</div>'
+                        : '<div class="inforow">No catalogued collections in this group.</div>';
+  });
+  html+='<div class="inforow">Competing route: 2cm Silestone quartz full-height splash — Signature '+money(1529)+' · Elite '+money(1809)+' · Chef '+money(1949)+' · Designer '+money(2229)+' (OSW p7). Choosing tile forgoes these.</div>';
+  return html;
+}
+
+function renderRoom(){
+  const room=state.active;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.room===room));
+  if(room==="basement"){
+    $("mockFrame").innerHTML=mockSVG("basement");
+    $("mockCaption").textContent="Fixed spec for coherence only — green floor-to-ceiling shower, cream heated floor, walnut vanity, matte-black fixtures.";
+    $("pickerCol").innerHTML='<div class="basecard"><h3>'+BASEMENT.title+'</h3><p>'+BASEMENT.body+'</p></div>';
+    $("floorFrame").hidden=true; $("floorCaption").hidden=true;
+    return;
+  }
+  if(room==="kitchen"){
+    $("mockFrame").innerHTML=mockSVG("kitchen");
+    $("mockCaption").textContent=ROOMS.kitchen.note+" Brass appears as pendants only — never on plumbing or hardware.";
+    $("pickerCol").innerHTML='<h3>Backsplash</h3>'+splashOptions();
+    $("floorFrame").hidden=true; $("floorCaption").hidden=true;
+    return;
+  }
+  const r=state.rooms[room], cfg=ROOMS[room];
+  $("mockFrame").innerHTML=mockSVG(room);
+  $("mockCaption").textContent=cfg.note+" Sconces render aged brass (lighting only); tap, frame and fittings matte black.";
+  let extras='<div class="extras">';
+  if(cfg.pan) extras+='<label><input type="checkbox" data-extra="pan" data-room="'+room+'"'+(r.pan?" checked":"")+'> Tile shower pan — '+money(EXTRAS[cfg.pan].price)+' ('+EXTRAS[cfg.pan].code+')</label>';
+  extras+='<label><input type="checkbox" data-extra="shelf" data-room="'+room+'"'+(r.shelf?" checked":"")+'> Corner shelf — '+money(EXTRAS.shelf.price)+' ('+EXTRAS.shelf.code+')</label>';
+  extras+='<label><input type="checkbox" data-extra="frame" data-room="'+room+'"'+(r.frame?" checked":"")+'> Matte-black enclosure frame — '+money(EXTRAS.blackFrame.price)+' ('+EXTRAS.blackFrame.code+')</label>';
+  extras+='</div>';
+  const rb = isPolished(r.sel.col,r.sel.c) ? '<p class="rulebreak">Current selection breaks the matte rule — flagged, not forbidden.</p>' : "";
+  $("pickerCol").innerHTML='<h3>Surround</h3>'+extras+rb+surroundGroups(room);
+  $("floorFrame").hidden=false; $("floorCaption").hidden=false;
+  $("floorFrame").innerHTML=floorPlaneSVG();
+  $("floorCaption").textContent=floorPlaneCaption();
+}
+
+/* ---------- pricing ---------- */
+function computed(){
+  const lines=[], excl=[];
+  let total=0;
+  ["primary","bath2","bath3"].forEach(rm=>{
+    const r=state.rooms[rm], cfg=ROOMS[rm], lad=LADDERS[cfg.ladder];
+    const col=getCol(r.sel.col), clr=getColour(r.sel.col,r.sel.c), s=col.surfaces.surround;
+    if(s.quote){ excl.push(cfg.label||ROOMS[rm].name+": "+col.name+" "+clr.n+" — custom quote"); }
+    else{
+      const p=lad.price[s.g]||0; total+=p;
+      lines.push({sec:ROOMS[rm].name, l:col.name+" "+clr.n+" · G"+s.g+" · "+(s.g===1?"—":lad.codes[s.g]), v:p});
+    }
+    if(r.pan && cfg.pan){ total+=EXTRAS[cfg.pan].price; lines.push({sec:ROOMS[rm].name,l:"Tile pan · "+EXTRAS[cfg.pan].code,v:EXTRAS[cfg.pan].price}); }
+    if(r.shelf){ total+=EXTRAS.shelf.price; lines.push({sec:ROOMS[rm].name,l:"Corner shelf · "+EXTRAS.shelf.code,v:EXTRAS.shelf.price}); }
+    if(r.frame){ total+=EXTRAS.blackFrame.price; lines.push({sec:ROOMS[rm].name,l:"Matte-black frame · "+EXTRAS.blackFrame.code,v:EXTRAS.blackFrame.price}); }
+  });
+  if(state.kitchen.sel){
+    const col=getCol(state.kitchen.sel.col), clr=getColour(state.kitchen.sel.col,state.kitchen.sel.c), g=col.surfaces.splash.g;
+    const p=LADDERS.splash.price[g]; total+=p;
+    lines.push({sec:"Kitchen",l:col.name+" "+clr.n+" · G"+g+" · "+LADDERS.splash.codes[g],v:p});
+  } else {
+    lines.push({sec:"Kitchen",l:"Included 4-inch splash",v:0});
+  }
+  const fcol=getCol(state.floor.col), fclr=getColour(state.floor.col,state.floor.c);
+  const floorNote = state.floor.col==="MB"
+    ? "Floor: "+fclr.n+" — flooring contract "+money(FLOOR_QUOTE)+" (quoted, separate)"
+    : "Floor: "+fcol.name+" "+fclr.n+" — outside lock, flooring-contract quote required";
+  return {total, lines, excl, floorNote};
+}
+
+function renderLedger(){
+  const c=computed();
+  $("kbTotal").textContent=money(c.total);
+  $("floorNote").textContent=c.floorNote;
+  let html="";
+  let lastSec="";
+  c.lines.forEach(x=>{ if(x.sec!==lastSec){html+='<div class="sec">'+x.sec+'</div>';lastSec=x.sec;} html+='<div><span>'+x.l+'</span><span>'+(x.v?money(x.v):"$0")+'</span></div>'; });
+  if(c.excl.length){ html+='<div class="sec">Excluded — custom quote</div>'+c.excl.map(e=>'<div><span>'+e+'</span><span>TBD</span></div>').join(""); }
+  html+='<div class="sec">Baseline</div><div><span>G1 surrounds, vinyl wet-area floor, 4-inch splash</span><span>$0</span></div>';
+  $("lineItems").innerHTML=html;
+}
+
+/* ---------- storage (defensive; artifact preview lacks localStorage) ---------- */
+let CANSTORE=false;
+function safeLS(fn,fb){ try{ return fn(); }catch(e){ return fb; } }
+function initStorage(){
+  CANSTORE = safeLS(()=>{ localStorage.setItem("__cdh_t","1"); localStorage.removeItem("__cdh_t"); return true; }, false);
+  let msg;
+  if(CANSTORE){
+    const ledger = safeLS(()=>localStorage.getItem("cdh_selection_ledger_v2"), null);
+    const saved  = safeLS(()=>localStorage.getItem("cdh_combos_v1"), null);
+    if(saved){ try{ const s=JSON.parse(saved); if(s && s.rooms) state=Object.assign(state,s); }catch(e){} }
+    msg = ledger ? "ledger v2 detected ("+ledger.length+" chars) · combos saved locally"
+                 : "no ledger on this device · combos saved locally";
+  } else {
+    msg = "session-only preview — storage unavailable here";
+  }
+  $("storageStatus").textContent=msg;
+}
+function persist(){ if(CANSTORE) safeLS(()=>localStorage.setItem("cdh_combos_v1",JSON.stringify(state)),null); }
+
+/* ---------- summary ---------- */
+function summaryText(){
+  const c=computed();
+  const out=["CASA DOS HERMANOS — TILE COMBINATION SUMMARY","Source: Daltile 05.06.2026 + OSW 25.06.2026 (plan 2088-224)",""];
+  out.push(c.floorNote);
+  let lastSec="";
+  c.lines.forEach(x=>{ if(x.sec!==lastSec){out.push("", x.sec.toUpperCase()); lastSec=x.sec;} out.push("  "+x.l+" — "+(x.v?money(x.v):"$0")); });
+  if(c.excl.length){ out.push("","CUSTOM QUOTE (excluded)"); c.excl.forEach(e=>out.push("  "+e)); }
+  out.push("","KB TILE ADDS vs baseline: "+money(c.total));
+  out.push("Note: ledger write-back pending schema verification against studio.html — transfer codes manually for now.");
+  return out.join("\n");
+}
+function copySummary(){
+  const t=summaryText();
+  const done=()=>{ $("copyBtn").textContent="Copied"; setTimeout(()=>$("copyBtn").textContent="Copy summary",1400); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(()=>fallbackCopy(t,done)); }
+  else fallbackCopy(t,done);
+}
+function fallbackCopy(t,done){
+  const ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta); done();
+}
+
+/* ---------- events ---------- */
+function flash(msg){ $("valMsg").textContent=msg; if(msg) setTimeout(()=>{ if($("valMsg").textContent===msg) $("valMsg").textContent=""; }, 4200); }
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".opt");
+  if(b){
+    const {surface,room,col,c}=b.dataset;
+    if(surface==="splashnone"){ state.kitchen.sel=null; }
+    else if(b.dataset.blocked==="true"){ flash("Group cap: this bath's ladder stops at Group "+LADDERS[ROOMS[room].ladder].cap+" — Group 4/5 field tile is primary-only at list prices."); return; }
+    else if(surface==="floor"){ state.floor={col,c}; if(col!=="MB") flash("Outside the Marble Obsession lock — comparator only; needs a flooring-contract quote."); }
+    else if(surface==="splash"){ state.kitchen.sel={col,c}; }
+    else { state.rooms[room].sel={col,c};
+           if(b.dataset.quote==="true") flash("Full-wall statement tile is custom-quote — excluded from the running total.");
+           if(isPolished(col,c)) flash("Matte rule break — kept visible because you asked, flagged in the summary."); }
+    persist(); renderAll(); return;
+  }
+  const t=e.target.closest(".tab");
+  if(t){ state.active=t.dataset.room; persist(); renderRoom(); }
+});
+document.addEventListener("change",e=>{
+  const x=e.target;
+  if(x.dataset && x.dataset.extra){ state.rooms[x.dataset.room][x.dataset.extra]=x.checked; persist(); renderLedger(); return; }
+  if(x.id==="groutSel"){ state.grout=x.value; persist(); renderAll(); }
+  if(x.id==="cmpToggle"){ state.showCmp=x.checked; persist(); renderFloor(); }
+  if(x.id==="nonMatte"){ state.showNM=x.checked; persist(); renderRoom(); }
+});
+$("copyBtn").addEventListener("click",copySummary);
+
+function renderTabs(){
+  $("roomTabs").innerHTML=Object.keys(ROOMS).map(k=>'<button type="button" class="tab'+(state.active===k?" on":"")+'" data-room="'+k+'">'+ROOMS[k].name+'</button>').join("");
+}
+function renderAll(){ renderFloor(); renderTabs(); renderRoom(); renderLedger(); }
+
+initStorage();
+$("groutSel").value=state.grout;
+$("cmpToggle").checked=state.showCmp;
+$("nonMatte").checked=state.showNM;
+renderAll();
+</script>
+</body>
+</html>

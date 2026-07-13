@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<!-- Casa Dos Hermanos · Unified Design Resource v9
+     Built from v8's interaction shell + CD8's full content.
+     Locks applied: planning wall = Pewter Green field + Naval inset board · network AP mix = 3x U7 Pro.
+     Route C imagery: paste hosted URLs into the IMG map (top of script).
+     Single-page, self-contained, data-driven. Print -> Save as PDF for a studio copy. -->
+<html lang="en-GB" class="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Dos Hermanos · The Contemporary Heirloom House — v25</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1C1A16; --bg-2:#211E1A; --surface:#26221C; --surface-2:#2D2922;
+  --line:#3A352C; --line-2:#4A4438;
+  --cream:#E6DFD3; --muted:#A89E8C; --faint:#7C7464;
+  --bronze:#B79A5B; --bronze-dim:#8A744099;
+  --glow:1;
+  --shoji:#E6DFD3; --tan:#DDD2C1; --pewter:#5E6259; --shade:#4E5147; --naval:#2F3D4C;
+  --oak:#C9A86A; --walnut:#7A5230; --black:#1a1a1a; --brass:#B79A5B;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --disp:'Archivo',var(--sans);
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+}
+/* NOON — bright first. EVENING (default) — moody second; the thesis. */
+html.noon{
+  --bg:#262019; --bg-2:#2C261E; --surface:#322B22; --surface-2:#393128;
+  --line:#473f31; --line-2:#574d3c; --cream:#efe9de; --muted:#c0b6a4; --faint:#948a78;
+  --bronze:#c6a868; --glow:0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:var(--sans);font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;letter-spacing:.005em;transition:background .8s ease,color .8s ease}
+::selection{background:var(--bronze);color:#1a1a1a}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin:0 0 14px}
+h2.sec{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4vw,40px);line-height:1.02;letter-spacing:-.01em;margin:0 0 10px}
+.sub{color:var(--muted);max-width:64ch;margin:0 0 30px}
+.serif{font-family:var(--serif);font-style:italic}
+.flag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);
+  border:1px solid var(--bronze-dim);border-radius:4px;padding:1px 5px;vertical-align:.08em;margin-left:5px}
+.subhead{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);margin:34px 0 12px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:50;background:rgba(28,26,22,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:background .8s ease}
+.bar .wrap{display:flex;align-items:center;gap:16px;height:58px}
+.brand{font-family:var(--disp);font-weight:800;font-size:13.5px;letter-spacing:.04em;white-space:nowrap}
+.brand b{color:var(--bronze)}
+.nav{display:flex;gap:2px;margin-left:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-size:12px;color:var(--muted);padding:7px 9px;border-radius:7px;white-space:nowrap;transition:.16s}
+.nav a:hover,.nav a.active{color:var(--cream);background:var(--surface)}
+.toggles{display:flex;gap:7px}
+.tg{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--muted);background:var(--surface);
+    border:1px solid var(--line-2);border-radius:999px;padding:7px 12px;cursor:pointer;white-space:nowrap;transition:.18s}
+.tg:hover{color:var(--cream);border-color:var(--bronze-dim)}
+.tg[aria-pressed="true"]{background:var(--bronze);color:#1a1a1a;border-color:var(--bronze);font-weight:500}
+.tg .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.5;margin-right:6px;vertical-align:middle}
+.lightseg{display:inline-flex;background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:2px}
+.lightseg button{font-family:var(--mono);font-size:11px;border:0;background:transparent;color:var(--muted);padding:5px 11px;border-radius:999px;cursor:pointer;transition:.2s}
+.lightseg button[aria-pressed="true"]{background:var(--bronze);color:#1a1a1a;font-weight:500}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero .bgglow{position:absolute;inset:0;background:radial-gradient(70% 60% at 80% 25%,rgba(183,154,91,calc(.06 + var(--glow)*.10)),transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;padding:74px 28px 60px;display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:center}
+.hero h1{font-family:var(--disp);font-weight:900;font-size:clamp(44px,9vw,90px);line-height:.9;letter-spacing:-.02em;margin:14px 0 14px}
+.hero .hline{font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.4vw,23px);color:var(--cream);margin:0 0 18px}
+.lede{color:var(--muted);max-width:48ch;font-size:15.5px}
+.lede b{color:var(--cream);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:5px 9px}
+.chip b{color:var(--cream);font-weight:500}
+.compass{width:100%;max-width:330px;justify-self:center;color:var(--bronze)}
+.compass .ghost{stroke:var(--line-2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.compass .rose{transform-origin:center;animation:spin 140s linear infinite}
+
+/* sections */
+.section{padding:62px 0;border-bottom:1px solid var(--line)}
+.section.alt{background:var(--bg-2)}
+.divider{display:flex;align-items:center;justify-content:center;gap:18px;padding:38px 0;background:var(--bg)}
+.divider .l{height:1px;width:min(120px,16vw);background:linear-gradient(90deg,transparent,var(--bronze-dim))}
+.divider .l.r{background:linear-gradient(270deg,transparent,var(--bronze-dim))}
+.divider .w{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+
+/* manifesto */
+.tens{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:8px}
+.tens .t{background:var(--surface);padding:16px 17px}
+.tens .t .vs{font-size:12px;color:var(--faint)}
+.tens .t .ch{font-family:var(--disp);font-weight:700;font-size:16px;margin:6px 0 4px}
+.tens .t .nt{font-size:12.5px;color:var(--muted)}
+.stmts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:13px;margin-top:24px}
+.stmt{border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:15px 16px;display:flex;gap:12px}
+.stmt .num{font-family:var(--mono);color:var(--bronze);font-size:13px;flex:none}
+.stmt h4{font-family:var(--disp);font-weight:600;font-size:14.5px;margin:0 0 4px}
+.stmt p{margin:0;font-size:12.5px;color:var(--muted)}
+.pull{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3vw,26px);color:var(--cream);line-height:1.35;max-width:32ch;margin:28px 0 0;border-left:2px solid var(--bronze);padding-left:20px}
+
+/* archetype neighbours + heirloom qualities + arc + priorities */
+.neigh{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:8px}
+.neigh .n{background:var(--surface);padding:14px 16px}
+.neigh .n b{font-family:var(--disp);font-weight:700;font-size:13.5px;color:var(--cream);display:block}
+.neigh .n span{font-size:12.5px;color:var(--muted)}
+.quals{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px;margin-top:8px}
+.qual{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 17px}
+.qual h4{font-family:var(--disp);font-weight:700;font-size:16px;margin:0 0 4px}
+.qual .q{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:13.5px;margin:0 0 12px}
+.qual .qr{padding:8px 0;border-top:1px solid var(--line);font-size:12.5px}
+.qual .qr .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.qual .qr .v{color:var(--cream);margin-top:3px}
+.arc{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:8px}
+.arc .a{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 17px}
+.arc .a .ph{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.arc .a h4{font-family:var(--disp);font-weight:700;font-size:18px;margin:8px 0 6px;line-height:1.05}
+.arc .a p{margin:0;font-size:12.5px;color:var(--muted)}
+.prio{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:11px;margin-top:8px}
+.prio .p{display:flex;gap:12px;border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:13px 15px}
+.prio .p .pn{font-family:var(--disp);font-weight:900;font-size:20px;color:var(--bronze);line-height:1;flex:none}
+.prio .p h4{font-family:var(--disp);font-weight:600;font-size:14px;margin:0 0 3px}
+.prio .p span{font-size:12px;color:var(--muted)}
+.narrwrap{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:start;margin-top:8px}
+.narr{font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.3vw,22px);line-height:1.4;color:var(--cream)}
+.narr b{font-style:normal;font-weight:400;color:var(--bronze)}
+.never{display:grid;gap:14px}
+.never .nb .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.never .nb .v{font-size:13px;color:var(--muted)}
+@media(max-width:760px){.arc{grid-template-columns:1fr}.narrwrap{grid-template-columns:1fr}}
+
+/* DNA with evidence */
+.dna3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.dnacard{border:1px solid var(--line);border-radius:13px;background:var(--surface);overflow:hidden;border-top:3px solid var(--ac)}
+.dnacard .hd{padding:16px 17px 12px}
+.dnacard .pc{font-family:var(--disp);font-weight:900;font-size:30px;color:var(--ac);line-height:1}
+.dnacard .nm{font-family:var(--disp);font-weight:600;font-size:15px;margin-top:4px}
+.dnacard .rl{font-size:12.5px;color:var(--muted);margin-top:7px}
+.dnacard .bd{padding:0 17px 16px;font-size:12.5px}
+.dnacard .row{padding:9px 0;border-top:1px solid var(--line)}
+.dnacard .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.dnacard .v{margin-top:4px;color:var(--cream)}
+.dnacard .v.ev{color:var(--muted)}
+.dnacard .chars{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.dnacard .chars span{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--line-2);border-radius:5px;padding:2px 6px}
+.dnacard .seen{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:9px;letter-spacing:.03em}
+.matrix-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:22px}
+table.matrix{width:100%;border-collapse:collapse;font-size:13px}
+table.matrix th,table.matrix td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:center}
+table.matrix th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:400}
+table.matrix td:first-child,table.matrix th:first-child{text-align:left}
+table.matrix td:first-child{font-family:var(--disp);font-weight:600;color:var(--cream)}
+table.matrix .hi{color:var(--cream)} table.matrix .lo{color:var(--faint)}
+@media(max-width:760px){.dna3{grid-template-columns:1fr}}
+
+/* palette */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px}
+.sw{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);cursor:pointer;text-align:left;color:inherit;font:inherit;transition:.18s;display:block}
+.sw:hover{transform:translateY(-2px);border-color:var(--bronze-dim)}
+.sw:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.sw .chipface{height:92px}
+.sw .body{padding:12px 13px 14px}
+.sw .nm{font-family:var(--disp);font-weight:700;font-size:14.5px}
+.sw .role{color:var(--muted);font-size:12px;margin-top:2px}
+.sw .code{font-family:var(--mono);font-size:11.5px;color:var(--bronze);margin-top:9px;display:flex;justify-content:space-between}
+.sw .code .hx{color:var(--faint)}
+.fams{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:9px;margin-top:10px}
+.famsw{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--surface);cursor:pointer;text-align:left;color:inherit;font:inherit;transition:.16s;display:block}
+.famsw:hover{transform:translateY(-2px);border-color:var(--bronze-dim)}
+.famsw:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.famsw .f{height:46px}
+.famsw .l{padding:7px 9px}
+.famsw .l .n{font-size:12px;font-weight:600;color:var(--cream)}
+.famsw .l .h{font-family:var(--mono);font-size:9.5px;color:var(--faint)}
+.zoneown{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.zoneown .zo{border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:14px 16px}
+.zoneown .zo h4{font-family:var(--disp);font-weight:700;font-size:14px;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.zoneown .zo h4 i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.zoneown .zo p{margin:0;font-size:12.5px;color:var(--muted)}
+.mats{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.mat{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:7px 11px}
+.mat i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.verify{margin-top:22px;font-size:12.5px;color:var(--faint);border-left:2px solid var(--bronze-dim);padding:4px 0 4px 14px}
+.verify b{color:var(--muted)}
+@media(max-width:760px){.zoneown{grid-template-columns:1fr}}
+
+/* materials */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:13px;margin-top:8px}
+.mblock{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 17px}
+.mblock h4{font-family:var(--disp);font-weight:700;font-size:15px;margin:0 0 4px}
+.mblock .lead{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.mrow{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:12.5px}
+.mrow i{width:14px;height:14px;border-radius:3px;flex:none;margin-top:3px;border:1px solid #0003}
+.mrow .mn{color:var(--cream)} .mrow .md{color:var(--muted)}
+.mblock .avoid{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:11px;border-top:1px dashed var(--line);padding-top:9px}
+.mblock .avoid b{color:var(--muted)}
+.mlist{margin:0;padding-left:16px;color:var(--muted);font-size:12.5px}
+.mlist li{margin:4px 0}
+.mlist li b{color:var(--cream);font-weight:500}
+
+/* room explorer */
+.filters{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:22px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:8px}
+.fg .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.fc{font-size:12px;color:var(--muted);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;transition:.16s;display:flex;align-items:center;gap:7px}
+.fc:hover{color:var(--cream)}
+.fc[aria-pressed="true"]{background:var(--cream);color:#1a1a1a;border-color:var(--cream);font-weight:500}
+.fc .z{width:9px;height:9px;border-radius:50%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:12px}
+.room{position:relative;text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--surface);
+  border:1px solid var(--line);border-left:3px solid var(--z,var(--line-2));border-radius:11px;padding:15px;transition:.16s}
+.room:hover{background:var(--surface-2);transform:translateY(-2px)}
+.room:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.room.sel{border-color:var(--bronze);background:var(--surface-2)}
+.room .rn{font-family:var(--disp);font-weight:700;font-size:15.5px;line-height:1.15}
+.room .rmeta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line-2);border-radius:5px;padding:3px 6px}
+.tag.own{color:var(--cream)} .tag.swing{color:var(--bronze);border-color:var(--bronze-dim)} .tag.tier{color:var(--bronze)}
+.room .acc{display:flex;align-items:center;gap:7px;margin-top:11px;font-size:12px;color:var(--muted)}
+.room .acc i{width:12px;height:12px;border-radius:50%;flex:none}
+body.daniel .room[data-daniel="0"]{display:none}
+.danielnote{display:none;font-size:13px;color:var(--bronze);border:1px solid var(--bronze-dim);background:#b79a5b12;border-radius:9px;padding:12px 15px;margin-bottom:20px}
+body.daniel .danielnote{display:block}
+.detail{margin-top:16px;border:1px solid var(--line-2);border-radius:13px;background:linear-gradient(180deg,var(--surface-2),var(--surface));overflow:hidden}
+.detail[hidden]{display:none}
+.detail .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 22px 14px;border-bottom:1px solid var(--line)}
+.detail h3{font-family:var(--disp);font-weight:800;font-size:24px;margin:0;letter-spacing:-.01em}
+.detail .floor{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.detail .x{background:none;border:1px solid var(--line-2);color:var(--muted);border-radius:7px;width:30px;height:30px;cursor:pointer;font-size:16px;flex:none}
+.detail .x:hover{color:var(--cream);border-color:var(--bronze-dim)}
+.rimg{margin:16px 22px 0;border-radius:11px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:var(--bg-2)}
+.rimg img{width:100%;height:100%;object-fit:cover;display:block}
+.rimg.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-style:dashed;color:var(--faint);text-align:center;padding:18px}
+.rimg.ph .lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.rimg.ph .cap{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.dnabar{display:flex;height:7px;margin:16px 22px 0;border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.dnabar span{display:block}
+.dnakey{font-family:var(--mono);font-size:10px;color:var(--muted);margin:7px 22px 0;display:flex;gap:14px;flex-wrap:wrap}
+.specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);margin:16px 0 0}
+.spec{background:var(--surface);padding:14px 16px}
+.spec .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.spec .v{margin-top:6px;font-size:14px;display:flex;align-items:center;gap:8px}
+.spec .v i{width:13px;height:13px;border-radius:3px;flex:none;border:1px solid #0003}
+.practice{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);margin-top:1px}
+.practice .pc{background:var(--surface);padding:14px 16px}
+.practice .pc .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--bronze)}
+.practice .pc ul{margin:8px 0 0;padding-left:15px;list-style:none}
+.practice .pc li{font-size:12.5px;color:var(--cream);position:relative;margin:5px 0;padding-left:14px}
+.practice .pc li::before{content:"—";position:absolute;left:0;color:var(--bronze)}
+.practice .pc p{margin:8px 0 0;font-size:12.5px;color:var(--cream)}
+.detail .foot{padding:14px 22px 20px;color:var(--muted);font-size:13.5px}
+.detail .foot .blend{font-family:var(--mono);font-size:11px;color:var(--bronze);margin-top:8px;letter-spacing:.04em}
+
+/* occupancy */
+.occgrid{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start}
+table.occ{width:100%;border-collapse:collapse;font-size:13.5px}
+table.occ th,table.occ td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+table.occ th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:400}
+table.occ td:first-child{font-weight:600}
+table.occ .swap{color:var(--bronze)}
+.bar-stack{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line);margin:6px 0 14px}
+.bar-stack span{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:#fff;text-shadow:0 1px 2px #0006}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted)}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+.caution{margin-top:20px;font-size:13px;color:var(--muted);border-left:2px solid var(--bronze-dim);padding:6px 0 6px 15px}
+.caution b{color:var(--cream)}
+
+/* systems — network + smart-home */
+.netgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:8px}
+.netgrid .nd{background:var(--surface);padding:14px 16px}
+.netgrid .nd .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze)}
+.netgrid .nd .v{margin-top:6px;font-size:13px;color:var(--cream)}
+.netgrid .nd .v b{color:var(--bronze)}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:16px}
+.tier{border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:15px 16px}
+.tier .tn{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze)}
+.tier h4{font-family:var(--disp);font-weight:600;font-size:15px;margin:7px 0 8px}
+.tier ul{margin:0;padding-left:15px;color:var(--muted);font-size:12.5px}
+.tier li{margin:5px 0}
+.tier p{margin:0;font-size:12.5px;color:var(--muted)}
+
+/* playbook + sheets tables */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.tbl th,.tbl td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:400}
+.tbl td:first-child{font-family:var(--disp);font-weight:600;color:var(--cream);white-space:nowrap}
+.tbl .pref{color:var(--cream)} .tbl .avoid{color:var(--faint)}
+.tbl .t1{color:var(--bronze)}
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.scrollx{overflow-x:auto}
+
+/* thuma */
+.thuma{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.tcol{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 17px}
+.tcol h4{font-family:var(--disp);font-weight:700;font-size:14px;margin:0 0 10px}
+.tcol.pass{border-top:3px solid var(--pewter)} .tcol.fail{border-top:3px solid var(--walnut)}
+.tcol ul{margin:0;padding-left:16px;color:var(--muted);font-size:13px} .tcol li{margin:4px 0}
+@media(max-width:760px){.thuma,.tiers{grid-template-columns:1fr}}
+
+/* decisions */
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 17px;border-top:2px solid var(--st)}
+.card .id{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--st);display:flex;justify-content:space-between;align-items:center}
+.card .stt{font-size:10px;text-transform:uppercase;letter-spacing:.1em;border:1px solid currentColor;border-radius:4px;padding:2px 6px}
+.card h4{font-family:var(--disp);font-weight:700;font-size:15.5px;margin:10px 0 7px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.card .res{color:var(--cream);margin-top:8px;font-size:13px}
+.card .res b{color:var(--bronze);font-weight:600}
+.flagbox{margin-top:24px;border:1px solid var(--bronze-dim);border-radius:12px;background:#b79a5b0d;padding:18px 20px}
+.flagbox h4{font-family:var(--disp);font-weight:700;margin:0 0 10px;font-size:16px;color:var(--bronze)}
+.flagbox ul{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px} .flagbox li{margin:5px 0}
+
+/* appendix */
+.apx{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+.apx .ab .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin-bottom:8px}
+.apx .ab .v{font-size:13px;color:var(--muted);line-height:1.6}
+.apx .ab .v b{color:var(--cream);font-weight:500}
+
+footer{padding:44px 0 60px;color:var(--faint);font-size:12.5px}
+footer .serif{color:var(--muted);font-size:15px;max-width:60ch}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--cream);color:#1a1a1a;
+  font-family:var(--mono);font-size:12.5px;font-weight:500;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.22s;z-index:99}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr;gap:28px}.compass{grid-row:1;max-width:200px}.occgrid{grid-template-columns:1fr}.nav{display:none}.arc{grid-template-columns:1fr}}
+
+/* print -> ink-economical, expand everything */
+@media print{
+  html{--bg:#fff;--bg-2:#fff;--surface:#fff;--surface-2:#fff;--cream:#1a1a1a;--muted:#444;--faint:#777;--line:#ccc;--line-2:#bbb;--bronze:#7a6420}
+  body{font-size:11px}
+  .bar,.toggles,.filters,.danielnote,.detail .x,#toast,.nav,.compass,.lightseg,.rimg.ph{display:none!important}
+  .section,.hero{border-color:#ddd;padding:18px 0;break-inside:avoid}
+  .room,.card,.dnacard,.stmt,.tier,.qual,.mblock,.arc .a{break-inside:avoid;transform:none!important}
+  body.daniel .room[data-daniel="0"]{display:block!important}
+  .hero .wrap{padding:18px 0}
+}
+.heroback{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center 42%;filter:brightness(calc(.62 + var(--glow)*.05))}.heroback::after{content:"";position:absolute;inset:0;background:linear-gradient(96deg,var(--bg) 23%,rgba(28,26,22,.60) 50%,rgba(28,26,22,.24))}.dnacard .img{height:208px;overflow:hidden;border-bottom:1px solid var(--line)}.dnacard .img img{width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:brightness(calc(.82 + var(--glow)*.06))}.invwrap{margin-top:42px;border-top:1px solid var(--line);padding-top:26px}.invtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}.invtable th{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);font-weight:600;opacity:.7;font-size:11px;letter-spacing:.04em;text-transform:uppercase}.invtable td{padding:7px 10px;border-bottom:1px solid var(--line)}.invtable .grp td{font-weight:700;font-size:12px;letter-spacing:.05em;text-transform:uppercase;opacity:.85;padding-top:16px;border-bottom:1px solid var(--ink)}.invtable .muted{opacity:.5}.invtag{font-size:11px;padding:2px 8px;border-radius:10px;white-space:nowrap;border:1px solid var(--line)}.invtag.bu{color:#3f6b4f}.invtag.sh{color:#7C7464}.invtag.pl{color:#9a6a2f}.invtag.op{color:#3a5570}.invtag.ci{opacity:.5}.invtag.ref{color:#6a4a86}.tref{margin:26px 0 30px}.trlead{font-size:14px;opacity:.8;max-width:60ch;margin-bottom:16px}.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:14px}.tcard{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card,rgba(255,255,255,.02))}.tcard.hero{grid-column:span 2}.tcimg{height:150px;overflow:hidden;border-bottom:1px solid var(--line)}.tcard.hero .tcimg{height:206px}.tcimg img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(calc(.92 + var(--glow)*.05))}.tcbody{padding:10px 12px}.tcn{font-weight:600;font-size:13px;letter-spacing:.01em}.tcd{font-size:12px;opacity:.62;margin-top:3px;line-height:1.4}@media(max-width:560px){.tcard.hero{grid-column:span 1}.tcard.hero .tcimg{height:150px}}:root{--glow:1}.matsw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:10px 0 26px}.msw{border:1px solid var(--line);border-radius:8px;padding:8px 10px}.msw i{display:block;height:30px;border-radius:5px;margin-bottom:7px;border:1px solid rgba(0,0,0,.08)}.msw .mn{font-size:12px;font-weight:600}.msw .mh{font-size:11px;opacity:.5;font-variant-numeric:tabular-nums}#motif .invtable{margin:8px 0 20px}#motif .mlist{margin:6px 0 16px}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}.gcard{border:1px solid var(--line);border-radius:10px;overflow:hidden}.gimg{height:140px;background:rgba(127,116,100,.08);position:relative}.gimg img{width:100%;height:100%;object-fit:cover;display:block}.gimg.missing::after{content:'not hosted';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;opacity:.5}.gmeta{padding:8px 10px}.gmeta b{font-size:12px}.gmeta span{display:block;font-size:11px;opacity:.55}.mboard{margin:10px 0 30px}.mgroup{margin-bottom:20px}.mglabel{font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:5px}.mrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}.msw2 .sw{height:58px;border-radius:7px;border:1px solid rgba(0,0,0,.14);margin-bottom:7px;box-shadow:inset 0 -8px 14px rgba(0,0,0,.06)}.msw2 .mn{font-size:12.5px;font-weight:600}.msw2 .md{font-size:11px;opacity:.6;line-height:1.35;margin-top:2px}.projpanel td:first-child{opacity:.6;white-space:nowrap;width:140px}</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="bar">
+  <div class="wrap">
+    <div class="brand">CASA DOS HERMANOS <b>·</b> v25</div>
+    <nav class="nav" id="nav"><a href="#manifesto">Manifesto</a><a href="#dna">DNA</a><a href="#palette">Palette</a><a href="#materials">Materials</a><a href="#systems">Systems</a><a href="#rooms">Rooms</a><a href="#occupancy">Occupancy</a><a href="#playbook">Playbook</a><a href="#budget">Budget</a><a href="#sheets">Sheets</a><a href="#decisions">Decisions</a><a href="#appendix">Appendix</a><a href="#furniture">Furniture</a><a href="#checklist">Checklist</a><a href="#gallery">Gallery</a></nav>
+    
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="heroback" id="heroback"></div>
+  <div class="bgglow"></div>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Casa Dos Hermanos · Plan 2088 · Elevation C</p>
+      <h1>CASA DOS<br>HERMANOS</h1>
+      <p class="hline">The Contemporary Heirloom House — bright first, moody second.</p>
+      <p class="lede">A live working reference, not a pitch. Mitch's manifesto supplies the <b>logic</b>; Daniel's gallery supplies the <b>codes and imagery</b>. Defer to the imagery on look, to the brief on detail. <b>Click any swatch to copy its spec.</b></p>
+      <div class="meta">
+        <span class="chip"><b>2,088</b> above-grade + <b>~880</b> basement ≈ <b>2,968</b> ft²</span>
+        <span class="chip"><b>$520,215</b> investment</span>
+        <span class="chip">Aurora, <b>CO</b></span>
+        <span class="chip">Drywall: <b>pending</b></span>
+      </div>
+    </div>
+    <svg class="compass" viewBox="0 0 200 200" role="img" aria-label="Planning-wall motif — a soft-octagonal Naval inset, the great room's one architectural statement">
+      <g class="ghost" fill="none" stroke-width="1"><circle cx="100" cy="100" r="92" opacity=".18"/></g>
+      <polygon points="62,40 138,40 170,72 170,128 138,160 62,160 30,128 30,72" fill="none" stroke="#2F3D4C" stroke-width="2.5"/>
+      <polygon points="74,58 126,58 148,80 148,120 126,142 74,142 52,120 52,80" style="fill:#2F3D4C;opacity:.10"/>
+      <rect x="84" y="78" width="32" height="44" rx="2" fill="none" stroke="#B79A5B" stroke-width="1.5"/>
+    </svg>
+  </div>
+</section>
+<section class="section" id="manifesto">
+  <div class="wrap">
+    <p class="eyebrow">§01 · Manifesto</p>
+    <h2 class="sec">Elevated, not expensive</h2>
+    <p class="subhead">The project</p>
+    <div class="scrollx"><table class="invtable projpanel"><tbody><tr><td>Plan</td><td>KB Home · Windler Wildflower 2088</td></tr><tr><td>Address</td><td>5266 N Eaton Park St, Aurora CO</td></tr><tr><td>Elevation</td><td>C</td></tr><tr><td>Footprint</td><td>2,088 + ~880 basement ≈ 2,968 ft²</td></tr><tr><td>Investment</td><td>$520,215</td></tr><tr><td>Upgrades locked</td><td>Taller ceilings / doors · 42″ uppers · larger island · open rail · shower i.l.o. tub · finished basement (Opt 1) · garage extension</td></tr><tr><td>Who lives here</td><td>Mitch — Floor 2 (primary, office, loft) · Daniel — finished basement · Parents — Floor 2 guest</td></tr></tbody></table></div>
+    <p class="sub">A home designed for modern living on timeless principles. <span class="serif">"Heirloom"</span> means built to last and to deepen with use — never traditional, inherited, or ornamental. Calmness over excitement, permanence over novelty, material quality over visual complexity.</p>
+    <p class="subhead">Core rule</p>
+    <p class="sub">One architectural statement per room — repeat the material language, not the same feature everywhere.</p>
+    <p class="subhead">Per-floor mood</p>
+    <ul class="mlist"><li><b>Main floor</b> — French-café / Hong-Kong coffee-house warmth; lightest, most social.</li><li><b>Upper floor</b> — light Kyoto-penthouse calm with tailored Naval.</li><li><b>Basement</b> — London-lounge + Singapore-spa; richer, more intimate, moodiest.</li></ul>
+
+    <p class="subhead">The archetype · defined against its neighbours</p>
+    <div class="neigh" id="neigh"></div>
+
+    <p class="subhead">What makes it heirloom · four qualities</p>
+    <div class="quals" id="quals"></div>
+
+    <p class="subhead">The design narrative</p>
+    <div class="narrwrap">
+      <p class="narr">A contemporary Colorado home influenced by Scandinavian simplicity, Japanese restraint, and the warmth of a private mountain retreat — with occasional moments of intellectual depth drawn from libraries, travel, and collected objects. <b>It should feel bright first and moody second</b> — balanced between a luxury hotel and a personal retreat.</p>
+      <div class="never">
+        <div class="nb"><div class="k">Never feel</div><div class="v">sterile · ultra-modern · farmhouse · industrial · flashy · trendy · uncomfortably minimal</div></div>
+        <div class="nb"><div class="k">Never become</div><div class="v">dark · heavy · rustic · cabin-like · traditional</div></div>
+      </div>
+    </div>
+
+    <p class="subhead">One emotional arc · the day's progression</p>
+    <div class="arc" id="arc"></div>
+    <p class="pull">Many builder homes look best at noon. This home should look best at 8 PM.</p>
+
+    <p class="subhead">Five tensions · one answer each</p>
+    <div class="tens" id="tens"></div>
+
+    <p class="subhead">Design priorities · in order</p>
+    <div class="prio" id="prio"></div>
+
+    <p class="subhead">Six load-bearing statements</p>
+    <div class="stmts" id="stmts"></div>
+    <p class="pull">A visitor's first thought should not be "they spent a lot on upgrades." It should be "this house feels incredibly calm."</p>
+  </div>
+</section>
+<section class="section alt" id="dna">
+  <div class="wrap">
+    <p class="eyebrow">§02 · Design DNA</p>
+    <h2 class="sec">Why it's in the DNA</h2>
+    <p class="sub">Percentages are priorities, not a literal ratio. Each is proven three ways — the feeling in a specific gallery image, the material that creates it, and the builder selection it implies. <b style="color:var(--cream)">Organic Modern carries the warmth, Japandi does the editing, Dark Academia adds the depth.</b></p>
+    <div class="dna3" id="dna3"></div>
+    <div class="matrix-wrap">
+      <table class="matrix" id="matrix">
+        <thead><tr><th>Trait</th><th>Organic Modern</th><th>Japandi</th><th>Dark Academia</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section class="section" id="palette">
+  <div class="wrap">
+    <p class="eyebrow">§03 · Palette</p>
+    <h2 class="sec">The coded palette</h2>
+    <p class="sub">The Brief's abstract families, pinned to Daniel's Sherwin-Williams specifications. <b style="color:var(--cream)">Green out-presents navy</b> — olive is wherever people gather, navy is reserved. Two paint-greens only; sage lives in textiles. Click any swatch to copy its spec.</p>
+    <p class="subhead">The five coded paints · the spec</p>
+    <div class="swatches" id="swatches"></div>
+    <p class="subhead">The broader families · 80 / 15 / 5</p>
+    <div class="fams" id="fams"></div>
+    <div class="zoneown" id="zoneown"></div>
+    <div class="mats" id="mats"></div>
+    <p class="verify"><b>Verify:</b> hex values are screen approximations and read differently from cured paint at 2700K. Confirm against a physical SW fan deck and on-site peel-and-stick samples — the named colour is the spec, the hex is a hint. Verify Pewter holds warmth in north-facing rooms; if it greys, sage is promoted to a paint. The broader family swatches are unspecced abstractions; only the five named SW codes are the build spec.</p>
+  </div>
+</section>
+<section class="section alt" id="materials">
+  <div class="wrap">
+    <p class="eyebrow">§04 · Materials</p>
+    <h2 class="sec">Real things, honestly made</h2>
+    <p class="sub">If one thing is remembered about the house, it should be the wood. Under budget pressure the wood strategy is preserved first; texture replaces pattern, grain replaces print, natural variation reads as a feature. Metals are resolved by function, not by one house-wide finish.</p>
+
+    <p class="subhead">Material board</p><p class="sub" style="margin-top:-4px">The whole-home palette, woods, stone, metals and textiles at a glance — names and notes, the way the studio reads them.</p><div class="mboard"><div class="mgroup"><div class="mglabel">Colour · whole home</div><div class="mrow"><div class="msw2"><div class="sw" style="background:#2F3D4C"></div><div class="mn">Navy</div><div class="md">Deep, timeless anchor</div></div><div class="msw2"><div class="sw" style="background:#DCD2C3"></div><div class="mn">Warm Taupe</div><div class="md">Soft, balanced neutral</div></div><div class="msw2"><div class="sw" style="background:#E6DFD3"></div><div class="mn">Cream</div><div class="md">Warm white base</div></div><div class="msw2"><div class="sw" style="background:#C9A86A"></div><div class="mn">Light Oak</div><div class="md">Natural warmth & texture</div></div><div class="msw2"><div class="sw" style="background:#5E6259"></div><div class="mn">Sage Green</div><div class="md">Subtle, earthy accent</div></div></div></div><div class="mgroup"><div class="mglabel">Woods</div><div class="mrow"><div class="msw2"><div class="sw" style="background:repeating-linear-gradient(88deg,#C9A86A,#C9A86A 7px,#bd9a58 7px,#bd9a58 9px)"></div><div class="mn">White Oak</div><div class="md">Warm, natural, timeless — secondary</div></div><div class="msw2"><div class="sw" style="background:repeating-linear-gradient(90deg,#6E4A2F,#6E4A2F 9px,#4f3420 9px,#4f3420 12px)"></div><div class="mn">Wood Slat Paneling</div><div class="md">Adds depth & rhythm</div></div><div class="msw2"><div class="sw" style="background:repeating-linear-gradient(86deg,#6E4A2F,#6E4A2F 8px,#5e3f28 8px,#5e3f28 11px)"></div><div class="mn">Walnut</div><div class="md">Rich, warm — primary</div></div></div></div><div class="mgroup"><div class="mglabel">Stone & countertops</div><div class="mrow"><div class="msw2"><div class="sw" style="background:radial-gradient(circle at 30% 30%,#efe9dc,#E4DCCB)"></div><div class="mn">Quartz (warm white)</div><div class="md">Subtle veining, clean & soft</div></div><div class="msw2"><div class="sw" style="background:radial-gradient(circle at 40% 30%,#e6ddcd,#DCD2C3)"></div><div class="mn">Limestone / wall finish</div><div class="md">Natural, matte, tactile</div></div><div class="msw2"><div class="sw" style="background:radial-gradient(circle at 35% 30%,#33312e,#2B2A28)"></div><div class="mn">Soapstone</div><div class="md">Deep, moody, organic — accent</div></div></div></div><div class="mgroup"><div class="mglabel">Metals & hardware</div><div class="mrow"><div class="msw2"><div class="sw" style="background:linear-gradient(135deg,#34322f,#2B2A28)"></div><div class="mn">Matte Black</div><div class="md">Modern, grounding, high contrast — primary</div></div><div class="msw2"><div class="sw" style="background:linear-gradient(135deg,#5a4833,#4A3B2A)"></div><div class="mn">Oil-Rubbed Bronze</div><div class="md">Warm, traditional sophistication</div></div><div class="msw2"><div class="sw" style="background:linear-gradient(135deg,#cdb068,#B79A5B)"></div><div class="mn">Aged Brass</div><div class="md">Restrained warm accent — lighting only</div></div><div class="msw2"><div class="sw" style="background:repeating-linear-gradient(90deg,#a8a39a,#a8a39a 2px,#9A958C 2px,#9A958C 4px)"></div><div class="mn">Brushed Nickel</div><div class="md">Soft, subtle — quiet fallback</div></div></div></div><div class="mgroup"><div class="mglabel">Textiles & fabrics</div><div class="mrow"><div class="msw2"><div class="sw" style="background:radial-gradient(circle at 20% 20%,#e3d9c2,#D9CCB0)"></div><div class="mn">Bouclé</div><div class="md">Soft, cosy, textured</div></div><div class="msw2"><div class="sw" style="background:repeating-linear-gradient(90deg,#e0d7c6,#e0d7c6 3px,#DCD2C3 3px,#DCD2C3 5px)"></div><div class="mn">Linen</div><div class="md">Light, breathable, natural</div></div><div class="msw2"><div class="sw" style="background:repeating-linear-gradient(45deg,#cdb07e,#cdb07e 4px,#C9A86A 4px,#C9A86A 7px)"></div><div class="mn">Woven Wool / Jute</div><div class="md">Natural-fibre rug</div></div><div class="msw2"><div class="sw" style="background:radial-gradient(circle at 30% 30%,#8a8273,#7C7464)"></div><div class="mn">Ceramic Pottery</div><div class="md">Earthy, organic finishes</div></div></div></div></div><p class="subhead">Wood &amp; stone</p>
+    <div class="mgrid" id="mWoodStone"></div>
+
+    <p class="subhead">Metals · textiles · leather</p>
+    <div class="mgrid" id="mMetalsFabric"></div>
+
+    <p class="subhead">Millwork &amp; lighting language</p>
+    <div class="mgrid" id="mMillLight"></div>
+  </div>
+</section>
+<section class="section" id="systems">
+  <div class="wrap">
+    <p class="eyebrow">§05 · Systems</p>
+    <h2 class="sec">One backbone, three households</h2>
+    <p class="sub">A UniFi prosumer backbone, sized for three semi-independent households sharing one connection — which is why VLAN segmentation, not just coverage, is the design driver. The pre-drywall window is the only practical one; all cabling goes through KB's Structured Wiring option. <b style="color:var(--cream)">AP mix locked at 3× U7 Pro.</b></p>
+    <div class="netgrid" id="netgrid"></div>
+
+    <p class="subhead">Smart-home MVP · technology should disappear</p>
+    <p class="sub" style="margin-bottom:14px">Build the irreversible layer now; keep the visible layer small, swappable, ecosystem-light. <b style="color:var(--cream)">Brain: Home Assistant</b>, self-hosted at the head-end (local, no subscription); Matter-over-Thread + Zigbee for device longevity.</p>
+    <div class="tiers" id="smartTiers"></div>
+    <p class="verify"><b>Verify:</b> device/brand names &amp; Matter/Thread support are unverified against current releases; confirm rough-in options exist in KB's Structured Wiring / electrical menu before committing Tier-0. Avoid builder smart-home packages · voice-assistant lock-in · app sprawl · cameras everywhere. <span class="flag">Gateway tier still open</span></p>
+  </div>
+</section>
+<section class="section" id="rooms">
+  <div class="wrap">
+    <p class="eyebrow">§06 · Rooms</p>
+    <h2 class="sec">Room explorer</h2>
+    <p class="sub">Filter by who lives there and by colour zone. Click a room for its full paint, material, DNA and the CD8 four-column practice spec — <span class="serif">Material · Builder · Lighting · Furnishing</span>. Swing rooms shift with the <span class="serif">Pre / Post-transition</span> toggle in the bar.</p>
+    <div class="danielnote">Daniel view — showing shared spaces, the basement, and the swing rooms only. Mitch's private Floor-2 rooms are hidden. These are the items needing your sign-off.</div>
+    <div class="filters">
+      <div class="fg"><span class="lbl">Occupant</span><div class="fchips" id="fOwner"></div></div>
+      <div class="fg"><span class="lbl">Colour zone</span><div class="fchips" id="fZone"></div></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="detail" id="detail" hidden></div>
+    <div class="invwrap"><h4>Full plan inventory <span class="muted">· per KB Plan 2088 set, 18 Jun 2026 · construction set 2088_D4 merged 12 Jul 2026</span></h4><p class="sub" style="margin-top:-6px">Every space on the authoritative plan. <b>Built</b> = on the plan · <b>Shell</b> = present in the unfinished basement · <b>Planned</b> = Option 1 finish, not yet documented · <b>Option</b> = selected upgrade · <b>Dimensioned ref</b> = from the 9 Jun finished-basement plan.</p><div class="scrollx"><table class="invtable"><thead><tr><th>Space</th><th>Floor</th><th>Status</th></tr></thead><tbody><tr class="grp"><td colspan="3">Floor 1</td></tr><tr><td>Extended Garage</td><td class="muted">Floor 1</td><td><span class="invtag op">Option selected</span></td></tr><tr><td>Entry</td><td class="muted">Floor 1</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Great Room <span class="muted">· window wall 13′-8½″ · ~272 ft² KB est.</span></td><td class="muted">Floor 1</td><td><span class="invtag bu">Built · open-rail option</span></td></tr><tr><td>Kitchen <span class="muted">· galley · 7′-2″ strip + island</span></td><td class="muted">Floor 1</td><td><span class="invtag bu">Built · double-island option</span></td></tr><tr><td>Pantry</td><td class="muted">Floor 1</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Laundry</td><td class="muted">Floor 1</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Coats closet</td><td class="muted">Floor 1</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Powder</td><td class="muted">Floor 1</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Porch</td><td class="muted">Floor 1</td><td><span class="invtag bu">Built · non-living</span></td></tr><tr><td>Stair</td><td class="muted">Floor 1</td><td><span class="invtag ci">Circulation</span></td></tr><tr class="grp"><td colspan="3">Floor 2</td></tr><tr><td>Primary Bedroom <span class="muted">· 14′-3″ × 14′-4″ · 204 ft²</span></td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Primary Bath <span class="muted">· 11′-1″ main · 88 ft² + alcoves</span></td><td class="muted">Floor 2</td><td><span class="invtag bu">Built · shower i.l.o. tub</span></td></tr><tr><td>Primary W.I.C.</td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Bedroom 2 (Office) <span class="muted">· 11′-4″ × 12′-9½″ · 145 ft²</span></td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Bedroom 2 W.I.C.</td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Bedroom 3 (Guest) <span class="muted">· 10′-8″ × 12′-6″ · 133 ft²</span></td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Bedroom 3 W.I.C.</td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Bath 2</td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Water-heater closet <span class="muted">· off Bath 2 / stair chase · floor drain</span></td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Linen ×2</td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Loft <span class="muted">· 14′-2″ × 10′-0½″ · 142 ft²</span></td><td class="muted">Floor 2</td><td><span class="invtag bu">Built</span></td></tr><tr><td>Stair</td><td class="muted">Floor 2</td><td><span class="invtag ci">Circulation</span></td></tr><tr class="grp"><td colspan="3">Basement <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">· dimensioned reference 9 Jun 2026 · ≈880 ft² (24'-0" × 36'-8") · 9'-0" clg · final Option 1 may differ</span></td></tr><tr><td>Stair</td><td class="muted">Basement</td><td><span class="invtag sh">Shell</span></td></tr><tr><td>Under-stair Storage</td><td class="muted">Basement</td><td><span class="invtag sh">Shell</span></td></tr><tr><td>Mechanical — furnace / sump (water heater is on Floor 2) <span class="muted">· ~80 ft² (~7.4 m²)</span></td><td class="muted">Basement</td><td><span class="invtag sh">Shell</span></td></tr><tr><td>Egress windows ×2</td><td class="muted">Basement</td><td><span class="invtag sh">Shell</span></td></tr><tr><td>Plumbing rough-in ×1</td><td class="muted">Basement</td><td><span class="invtag sh">Shell</span></td></tr><tr><td>Recreation Room → Lounge / Coffee Bar <span class="muted">· 14'-1½" deep · 9' clg · carpet</span></td><td class="muted">Basement</td><td><span class="invtag ref">Dimensioned ref</span></td></tr><tr><td>Bedroom 5 <span class="muted">· 13'-1½" wide · 9' clg · 5040 egress</span></td><td class="muted">Basement</td><td><span class="invtag ref">Dimensioned ref</span></td></tr><tr><td>Bath 3 <span class="muted">· 115 sq ft · 9' clg · 5×8 shower (green tile, niche + bench)</span></td><td class="muted">Basement</td><td><span class="invtag ref">Dimensioned ref</span></td></tr><tr><td>Walk-through Closet <span class="muted">· 10×9 ft · Shoji White reset</span></td><td class="muted">Basement</td><td><span class="invtag ref">Dimensioned ref</span></td></tr></tbody></table></div></div>
+  </div>
+</section>
+<section class="section alt" id="occupancy">
+  <div class="wrap">
+    <p class="eyebrow">§07 · Occupancy &amp; the two-state model</p>
+    <h2 class="sec">One room moves, one function moves</h2>
+    <p class="sub">Finishing the basement flips the occupancy map; the design must work in both states. Bedroom 3 is the durable parents' room and is never disturbed — so Bedroom 2 is the swing room and the office is the swing function.</p>
+    <div class="occgrid">
+      <div><div class="scrollx"><table class="occ"><thead><tr><th>Space</th><th>Pre-transition</th><th>Post-transition</th></tr></thead><tbody id="occBody"></tbody></table></div></div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px">Occupancy-weighted area · post</p>
+        <div class="bar-stack" id="weightBar"></div>
+        <div class="legend" id="weightLegend"></div>
+        <p class="caution"><b>Cost-model caution.</b> Raw area weights Daniel highest (28%) — yet he funds the basement separately. A naïve split double-counts his contribution; the carrying-cost allocator must net occupancy against separate basement capital. <span class="flag">Financial-model decision</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section alt" id="playbook">
+  <div class="wrap">
+    <p class="eyebrow">§08 · Playbook</p>
+    <h2 class="sec">Chase foundations, not moments</h2>
+    <p class="sub">Carry-on-the-day guidance by decision. Every brand is verify-flagged — confirm against KB's live selection / electrical sheets before committing. The better question is never "which upgrade looks expensive" but "which upgrade improves the architecture."</p>
+    <div class="tblwrap"><table class="tbl" id="playbook"><thead><tr><th>Decision</th><th>Preferred</th><th>Avoid</th><th>Tier</th></tr></thead><tbody></tbody></table></div>
+    <p class="verify"><b>Don't conflate:</b> lighting <i>design</i> is Tier 1 and decided upfront; decorative light <i>fixtures</i> are Tier 3 and swappable. Unbundle "luxury packages" and choose individually. <b>Metals — the functional split:</b> matte black / dark bronze for water &amp; doors; aged brass for light &amp; warmth; brushed nickel the quiet fallback. Not reopened as brass-vs-black.</p>
+  </div>
+</section>
+<section class="section" id="budget">
+  <div class="wrap">
+    <p class="eyebrow">§09 · Perceived-custom strategy</p>
+    <h2 class="sec">Built-In Look, Bolt-On Budget</h2>
+    <p class="subhead" style="margin-top:-6px">Replicating millwork without millwork money</p>
+    <p class="sub"><b>True custom millwork is off the table — the look is not.</b> Built-ins read as custom because of a handful of <i>visual signals</i>, not the joinery underneath. Buy the signals, skip the joinery: hit the six tells below and a low-cost carcass reads as bespoke at three paces. The single highest-leverage move is free — paint the cabinet and the wall the same colour so the box dissolves into architecture.</p>
+
+    <p class="subhead">The six tells of “custom” — and the budget fix for each</p>
+    <div class="scrollx"><table class="invtable"><thead><tr><th>Signal the eye reads as custom</th><th>The expensive way</th><th>The bolt-on-budget fix</th></tr></thead><tbody><tr><td>Full-height, floor-to-ceiling</td><td>Built to size</td><td>Stack stock frame-cabinets + a painted filler &amp; crown to bridge to the ceiling</td></tr><tr><td>No gaps to wall / ceiling</td><td>Scribed custom panels</td><td>Scribe-cut filler strips; caulk the final reveal</td></tr><tr><td>Sits “grown from” the floor</td><td>Custom base</td><td>Box out or remove the toe-kick; run the room’s baseboard across the face</td></tr><tr><td>Cabinet disappears into the wall</td><td>Same custom finish</td><td><b>Paint wall + cabinet the same colour &amp; sheen</b> — the highest-leverage move, near-free</td></tr><tr><td>Tied into the house</td><td>Original trim</td><td>Carry the existing crown + baseboard across the unit</td></tr><tr><td>Quality “feel”</td><td>Solid hardwood</td><td>Spend the saved money on <b>hardware + integrated LED</b> — tiny budget, huge perceived lift</td></tr></tbody></table></div>
+
+    <p class="subhead">The cost ladder — cheapest to priciest, all reversible-capable</p>
+    <div class="scrollx"><table class="invtable"><thead><tr><th>Tier</th><th>Method</th><th>Best for</th></tr></thead><tbody><tr><td>1 · Paint &amp; trim illusion</td><td>MDF battens / stop-moulding on painted drywall — slat walls, board-and-batten, shaker panels. Cost is mostly paint + cheap moulding.</td><td>Primary navy slat wall · powder · entry · stair</td></tr><tr><td>2 · Floating &amp; framed</td><td>Thick-front floating shelves, picture rails, a single cabinet run framed with trim.</td><td>Lounge · loft · secondary walls</td></tr><tr><td>3 · Frame-cabinet semi-custom</td><td>Kitchen-grade IKEA-type carcasses + upgraded/painted fronts + the six fixes above.</td><td>Office bookcase wall · kitchen · coffee-bar run</td></tr><tr><td>4 · Targeted true custom</td><td>One hero element only, where the saved budget concentrates.</td><td>Pick <i>one</i>: e.g. the kitchen island face</td></tr></tbody></table></div>
+
+    <p class="subhead">Spend where it counts</p>
+    <ul class="mlist">
+      <li><b>Spend</b> on guest-facing, eye-level, high-dwell surfaces: kitchen island faces, office bookcase fronts, powder.</li>
+      <li><b>Save</b> on private / low-dwell / behind-a-door surfaces, cabinet interiors, and Daniel’s separately-funded basement (cheapest methods only).</li>
+      <li>Hardware is the cheapest tell to fix and the loudest if wrong — never builder-grade on a hero face.</li>
+    </ul>
+
+    <p class="subhead">Room application <span class="muted">(maps to the room cards)</span></p>
+    <div class="scrollx"><table class="invtable"><thead><tr><th>Room</th><th>Approach</th><th>The trick</th></tr></thead><tbody><tr><td>Office (Bed 2) — Naval built-ins</td><td>Tier 3</td><td>Frame-cabinets to the ceiling, fronts painted Naval, <b>wall painted Naval too</b>; brass hardware; LED on shelves. The “library” is paint + boxes, not joinery.</td></tr><tr><td>Primary navy slat wall</td><td>Tier 1</td><td>MDF slats on a Naval backer — likely the cheapest high-impact element in the house.</td></tr><tr><td>Kitchen</td><td>Tier 3</td><td>Frame system + better fronts; the “oak disappears into architecture” read comes from continuous fronts + minimal hardware, not solid-oak boxes.</td></tr><tr><td>Basement lounge / coffee-bar</td><td>Tier 1–2</td><td>Daniel’s domain → cheapest methods: floating shelves + a stock-cabinet base painted out.</td></tr><tr><td>Loft</td><td>Tier 2 · <b>freestanding</b></td><td>Bookcases <i>styled</i> as built-ins but not attached — the reversibility rule (Occupancy) overrides cost here.</td></tr></tbody></table></div>
+
+    <p class="subhead">The tells to avoid — what screams “cheap”</p>
+    <ul class="mlist">
+      <li>Visible gaps / reveals to wall or ceiling · exposed stock toe-kick · sheen mismatch between cabinet and wall paint.</li>
+      <li>Builder-grade hardware · non-full-height boxes with a dead gap above · visible fasteners or unfinished edges.</li>
+    </ul>
+
+    <p class="subhead">Cost reality</p>
+    <p class="sub"><span class="flag">Unknown · needs verification</span> As a rule of thumb, true custom millwork commonly runs several times the cost of a frame-cabinet hack — treat that as a heuristic, not a quote; prices vary by Denver-metro labour, year, and finish. <b>Check path:</b> get one cabinetmaker quote for the office wall, price the frame-box + fronts + trim equivalent, and compare — the delta sets the budget and your confidence. Named products (IKEA frame systems, third-party fronts) are examples; <span class="flag">verify current US/region availability &amp; pricing</span>.</p>
+    <p class="sub"><b>Reversibility holds.</b> Every Tier-1/2 method and “freestanding-styled-as-built-in” keeps shared / transition spaces (loft) reversible — consistent with the Occupancy rule.</p>
+  </div>
+</section>
+<section class="section alt" id="sheets">
+  <div class="wrap">
+    <p class="eyebrow">§10 · Spec sheets</p>
+    <h2 class="sec">Carry these to the desk</h2>
+    <p class="sub">Master question at the top of every decision: <span class="serif">does this make the house feel more like a Contemporary Heirloom Home?</span> Fastest filter — retreat or showroom? Always choose the retreat. Use Print → Save as PDF for a clean studio copy.</p>
+    <div class="tblwrap"><table class="tbl" id="sheets"><thead><tr><th>Sheet</th><th>Preferred</th><th>Acceptable</th><th>Avoid</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</section>
+<section class="section" id="decisions">
+  <div class="wrap">
+    <p class="eyebrow">§11 · Decision log</p>
+    <h2 class="sec">What was reconciled</h2>
+    <p class="sub">Four rulings made, four auto-resolved, two newly locked this version, the rest surfaced and still open. Nothing was overwritten silently.</p>
+    <div class="deck" id="deck"></div>
+    <div class="flagbox"><h4>Still open · coordination flags</h4><ul id="open"></ul></div>
+  </div>
+</section>
+<section class="section alt" id="appendix">
+  <div class="wrap">
+    <p class="eyebrow">§12 · Appendix — material hierarchy</p>
+    <h2 class="sec">Appendix</h2>
+    <p class="sub">Every principle, followed to its material, builder, and furnishing implication.</p>
+    <div class="apx" id="apx"></div>
+  </div>
+</section>
+<section class="section" id="furniture">
+  <div class="wrap">
+    <p class="eyebrow">§13 · Appendix — furniture</p>
+    <h2 class="sec">Furniture</h2>
+    <p class="subhead" style="margin-top:-6px">The Thuma Filter — would it feel like Thuma?</p>
+    <p class="sub">Not a furniture mandate — the purest representation of the values: material honesty, simple geometry, visual weight. A 7–8 on the minimalism scale: not a <span class="serif">sparse</span> home, a <span class="serif">selective</span> one. Before buying anything: <span class="serif">would this sit naturally in a Thuma campaign?</span> If yes, keep evaluating. If no, pause.</p>
+    <div class="tref"><p class="trlead">The reference set — the ten pieces that define the standard. Solid wood, clean geometry, made to last; the bed leads, the rest follow its discipline.</p><div class="tgrid" id="thumaGrid"></div></div>
+    <div class="thuma">
+      <div class="tcol pass"><h4>Passes</h4><ul id="tPass"></ul></div>
+      <div class="tcol fail"><h4>Usually fails</h4><ul id="tFail"></ul></div>
+    </div>
+    <div class="tiers" id="tiers"></div>
+    <p class="verify"><b>Sourcing</b> <span class="flag">Added · uncited</span> The filter is Thuma; the sourcing is realistic. Hero pieces = Thuma or equivalent (the primary bed above all). Workhorse = higher-end IKEA solid-oak / walnut lines (verify current ranges at purchase). Accent = vintage / collected.</p>
+  </div>
+</section>
+<section class="section" id="checklist">
+  <div class="wrap">
+    <p class="eyebrow">§14 · Appendix — designer conference</p>
+    <h2 class="sec">Pre-procurement checklist</h2>
+    <p class="sub">Resolve before pricing or procurement — measure, verify, sample, then approve budget &amp; scope.</p>
+    <ul class="mlist"><li>Actual room dimensions, window/door locations and ceiling drops</li><li>Basement mechanical / duct / soffit conflicts</li><li>Furniture clearances and sectional orientation</li><li>5×8 shower splash path and glassless feasibility</li><li>Large paint boards under daylight and 2700K light</li><li>One walnut stain / sample standard across rooms</li><li>Olive-brown leather sample beside Pewter Green and Natural Tan</li><li>Green shower tile, grout and warm floor material together</li><li>Separate essential bones from optional custom millwork</li><li>Price PAX vs custom closet; include the laundry alternative</li><li>Prioritise lighting controls and shower system before decor</li><li>Confirm which walnut accents are permanent construction vs furniture</li></ul>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Appendix · Image gallery</p>
+    <h2 class="sec">Gallery &amp; image manifest</h2>
+    <p class="sub">Every image slot in one place — audit what’s set, spot gaps, swap a version. Images load from <span class="serif">IMG_BASE</span> (top of the script). To host: drop files named <span class="serif">windler_&lt;key&gt;.jpg</span> into your GitHub Pages <span class="serif">/images</span> folder; slots marked “not hosted” just need the file uploaded.</p>
+    <div class="gallery" id="galleryGrid"></div>
+  </div>
+</section>
+
+
+
+<footer>
+  <div class="wrap">
+    <p class="serif">"The goal is not perfection. It is alignment. When a decision becomes difficult, return to one question: does this make the house feel more like a Contemporary Heirloom Home?"</p>
+    <p style="margin-top:14px">Unified Resource v9 · Casa Dos Hermanos — two brothers, one home. · Share-safe (Mitch / Daniel / Parents) · Locked this version: planning wall = Pewter Green field + Naval inset board · AP mix = 3× U7 Pro. · Print → Save as PDF for a studio copy.</p>
+  </div>
+</footer>
+<div id="toast">Copied</div>
+
+<script>
+/* ================= IMAGE MAP (Route C) =================
+   Paste hosted image URLs here to populate the room slots.
+   Key = exact room name. Empty string = show a labelled placeholder.
+   Self-contained: no upload, no storage — one edit point.            */
+/* IMAGE MANIFEST — hosted, not embedded. Set IMG_BASE to your GitHub Pages /images/ path. */
+const IMG_BASE='https://raw.githubusercontent.com/mhooper420/CasaDosHermanos/main/';
+const IMG=Object.fromEntries(Object.entries({hero:'windler_hero.jpg',primarybed:'windler_primarybed.jpg',exterior:'windler_exterior.jpg',planning:'windler_planning_01.jpg',greatroom:'windler_greatroom_03.jpg',kitchen:'windler_kitchen.jpg',powder:'windler_powder_03.jpg',bath:'windler_bath_03.jpg',laundry:'windler_laundry.jpg',closet:'windler_closet_02.jpg',office:'windler_office_04.jpg',loft:'windler_loft_01.jpg',guest:'windler_guest.jpg',bsmt_lounge:'windler_bsmt_lounge_03.jpg',bsmt_bed:'windler_bsmt_bed_01.jpg',bsmt_bath:'windler_bsmt_bath_02.jpg',bsmt_closet:'windler_bsmt_closet_01.jpg',bsmt_closet_open:'windler_bsmt_closet_open_02.jpg',dna_organic:'windler_dna_organic.jpg',dna_japandi:'windler_dna_japandi.jpg',dna_dark:'windler_dna_dark.jpg',thuma_bed:'windler_thuma_bed.jpg',thuma_nightstand:'windler_thuma_nightstand.jpg',thuma_chest:'windler_thuma_chest.jpg',thuma_dresser:'windler_thuma_dresser.jpg',thuma_mirror:'windler_thuma_mirror.jpg',thuma_endtable:'windler_thuma_endtable.jpg',thuma_bench:'windler_thuma_bench.jpg',thuma_desk:'windler_thuma_desk.jpg',thuma_bookcase:'windler_thuma_bookcase.jpg',thuma_chair:'windler_thuma_chair.jpg',bsmt_office:'windler_bsmt_office_03.jpg',stairs:'windler_stairs_02.jpg',moodboard:'windler_moodboard_03.jpg'}).map(function(p){return [p[0],IMG_BASE+p[1]];}));
+
+/* ================= DATA ================= */
+const ZONE={naval:{nm:'Naval',c:'#2F3D4C'},pewter:{nm:'Pewter',c:'#5E6259'},shade:{nm:'Shade-Grown',c:'#4E5147'},neutral:{nm:'Neutral',c:'#DDD2C1'}};
+
+const NEIGH=[
+  ['Not Modern Farmhouse','refinement, nothing thematic'],
+  ['Not Scandinavian','more warmth, texture, grounding'],
+  ['Not Mountain Modern','softer transitions, less spectacle'],
+  ['Not Generic Contemporary','timeless principles, not of-the-moment'],
+];
+const QUALS=[
+  {h:'Longevity',q:'Will this still feel good in twenty years?',mat:'Finishes that patina rather than date — oak, stone, linen, leather.',build:'Spend Tier 1 on permanent surfaces — floors, cabinets, stone, tile height.',furn:'Buy fewer, better, slower — pieces chosen to keep, not replace.'},
+  {h:'Material honesty',q:'Is it pretending to be something it isn\u2019t?',mat:'Solid wood, natural stone, natural fibres, full-grain leather — no laminate mimicry.',build:'Real wood &amp; solid-surface stone over printed looks; honest reveals over applied trim.',furn:'Solid-wood frames, wool &amp; linen upholstery, ceramic and stone objects.'},
+  {h:'Craftsmanship',q:'Was this thoughtfully made?',mat:'Visible joinery, honest reveals, considered transitions.',build:'Full-height millwork &amp; consistent details over decorative mouldings.',furn:'Well-made over decorative — pieces that reward a second look.'},
+  {h:'Restraint',q:'Was enough left unsaid?',mat:'Texture replaces pattern; grain replaces print; one statement, not five.',build:'Edit better, never add more; negative space is a material.',furn:'Each item gets visual breathing room; intentional, not accumulated.'},
+];
+const ARC=[
+  ['Arrival','Grounded, not impressed','Warmth comes through material and lighting, not decorative objects. Natural wood, warm light, and simple forms do the work.'],
+  ['Daily living','Easy to occupy','Nothing precious; furniture invites use; materials tolerate life. Every object earns its place; clutter is minimised. The result is mental calm.'],
+  ['Evening','Where it truly shines','Pools of warm light, visible grain, layered texture, soft shadow, quiet contrast.'],
+];
+const PRIO=[
+  ['01','Comfort &amp; livability','Every decision supports living, not display. Nothing too precious to use.'],
+  ['02','Warmth over coolness','From wood, texture, lighting &amp; fabric — not from excessive colour.'],
+  ['03','Architecture over decoration','Designed at the level of the shell, not the room.'],
+  ['04','Texture over pattern','Tactile richness over visual excitement — oak, quartz, linen, wool, plaster.'],
+  ['05','Permanence &amp; flexibility','Permanent finishes stay timeless; trend lives in swappable layers.'],
+];
+
+const PALETTE=[
+  {nm:'Shoji White',code:'SW 7042',hex:'#E6DFD3',role:'Ceilings + light walls'},
+  {nm:'Natural Tan',code:'SW 7567',hex:'#DDD2C1',role:'Warm walls · feature warmth'},
+  {nm:'Pewter Green',code:'SW 6208',hex:'#5E6259',role:'Social green · gathering'},
+  {nm:'Shade-Grown',code:'SW 6188',hex:'#4E5147',role:'Deeper green · accent walls'},
+  {nm:'Naval',code:'SW 6244',hex:'#2F3D4C',role:'Reserved navy · private/focus'},
+];
+const FAMS=[
+  {g:'Foundation 80%',items:[['Warm White','#E8E1D4'],['Cream','#E0D7C4'],['Oatmeal','#D9CCB0'],['Mushroom','#BCB09C'],['Warm Taupe','#C2B4A0'],['Putty','#A39C8C']]},
+  {g:'Social greens 15%',items:[['Sage','#8B9478'],['Olive','#6E7350'],['Muted Forest','#475040']]},
+  {g:'Dark accents 5%',items:[['Navy','#1E2A38'],['Charcoal','#2E2B27'],['Bronze','#8A6E45']]},
+];
+const ZONEOWN=[
+  {c:'#2F3D4C',h:'Navy — private &amp; focus',p:'Primary bedroom (signature slat wall), primary bath (selective), office (textiles &amp; built-ins). Reserved and deliberate.'},
+  {c:'#6E7350',h:'Olive / Sage — social',p:'Kitchen accents, great-room textiles, basement primary, loft, laundry. Wherever people gather — green out-presents navy.'},
+];
+const MATS=[{nm:'Medium-dark Walnut (primary)',c:'#6E4A2F'},{nm:'Light off-white island',c:'#E4DCCB'},{nm:'White oak (secondary)',c:'#C9A86A'},{nm:'Matte Black — water & doors',c:'#1a1a1a'},{nm:'Aged Brass — light & warmth',c:'#B79A5B'}];
+
+const TENS=[['Calm','Excitement','Peace, not boredom.'],['Restraint','Abundance','"Edit better," not "add more."'],['Permanence','Novelty','Novelty ages; permanence deepens.'],['Craftsmanship','Decoration','Decoration attracts; craft rewards.'],['Hospitality','Display','Welcoming, never performative.']];
+const STMTS=[['1','Collected, not decorated','Every object should feel earned.'],['2','Calm before impressive','Notice how it feels before the design.'],['3','Warm before modern','Warmth is timeless; modernity dates.'],['4','Architecture over decoration','A better proportion beats a feature wall.'],['5','Materials improve with age','The ideal material looks better in ten years.'],['6','Complete even when empty','The architecture carries the room.']];
+
+const DNA=[
+  {img:'dna_organic',ac:'#B79A5B',pc:'50%',nm:'Organic Modern',role:'The foundation — comfort, warmth, and most of the materials. Without it the home turns sparse.',ev:'grounded low furniture, oak, linen, warm pools of light',mat:'medium-dark walnut + white oak · linen · bouclé · warm quartz · 2700K',build:'white-oak cabinetry + flooring repeated; warm quartz; matte finishes everywhere',chars:['Walnut','Linen','Bouclé','Limestone','Travertine influence','Warm lighting','Organic forms'],seen:'Kitchen · Great Room · Primary Suite studies'},
+  {img:'dna_japandi',ac:'#5E6259',pc:'30%',nm:'Japandi',role:'The editing tool — restraint, negative space, visual calm. Not minimalism: intentionality.',ev:'paper-lantern calm, ordered storage, uncluttered surfaces',mat:'clean silhouettes · uncluttered surfaces · consistent reveals',build:'simple shaker/slab fronts; thin dark pulls; cabinets that disappear',chars:['Restraint','Editing','Simplicity','Negative space','Calmness','Utility'],seen:'Loft · Bathrooms · Walk-Through Closet studies'},
+  {img:'dna_dark',ac:'#2F3D4C',pc:'20%',nm:'Dark Academia',role:'The seasoning — depth and personality, never darkness. Accents, not architecture.',ev:'office library influence, navy slat wall, powder jewel box',mat:'Naval · cognac/tobacco leather · matte black (primary) · restrained brass · vintage art',build:'navy as paint/textile/built-in (Bed 2 only); aged-brass lighting; reversible in loft',chars:['Navy','Walnut','Leather','Books','Vintage art','Intellectual warmth'],seen:'Office · Planning Wall · Primary Bedroom studies'}
+];
+const MATRIX=[
+  ['Warmth','High','Medium','High'],
+  ['Simplicity','Medium','High','Low'],
+  ['Texture','High','Medium','Medium'],
+  ['Colour','Low','Low','Medium'],
+  ['Mood','Warm','Calm','Deep'],
+];
+
+const M_WOODSTONE=[
+  {h:'Wood — the defining material',lead:'Preserved first under budget pressure.',rows:[
+    {c:'#6E4A2F',n:'Medium-dark Walnut',d:'Primary — cabinetry, millwork, furniture'},
+    {c:'#E4DCCB',n:'Light off-white island',d:'Kitchen island reads lighter than perimeter'},
+    {c:'#C9A86A',n:'White oak — secondary',d:'Island surround, calmer upstairs rooms, select furniture'}],
+   avoid:'Grey, distressed, or reclaimed wood · no orange undertones · no dark espresso.'},
+  {h:'Stone',lead:'Subtle and quiet — the backdrop, not the star.',rows:[
+    {c:'#E8E1D4',n:'Warm Quartz',d:'Subtle veining, warm whites'},
+    {c:'#DDD2C1',n:'Limestone / Travertine',d:'Soft natural movement'},
+    {c:'#D9CCB0',n:'Limewash Finish',d:'Plaster-like, tactile, matte'}],
+   avoid:'Dramatic waterfall marble · high-contrast veining · showroom statement stone.'},
+];
+const M_METALSFABRIC=[
+  {h:'Metals — resolved by function',lead:'Matte black is the primary metal; brass is a restrained warm accent only.',rows:[
+    {c:'#1a1a1a',n:'Matte Black / Dark Bronze',d:'Water &amp; doors — plumbing, faucets, hardware'},
+    {c:'#B79A5B',n:'Aged / Antique Brass',d:'Restrained warm accent only — never the package'},
+    {c:'#9a9488',n:'Brushed Nickel',d:'The quiet fallback'}],
+   avoid:'Polished / bright brass · bright gold · polished chrome · champagne finishes.'},
+  {h:'Textiles &amp; leather',lead:'Warm, tactile, texture-forward — layered without busy.',rows:[
+    {c:'#DDD2C1',n:'Linen · Bouclé · Cotton · Wool',d:'Warm neutral textiles'},
+    {c:'#9C5A2E',n:'Cognac · Tobacco · Saddle',d:'Leather — Dark Academia warmth, sparing'}],
+   avoid:'Pattern over texture · synthetic sheen · rust &amp; camel as anything but minor accent notes.'},
+];
+const M_MILLLIGHT=[
+  {h:'Millwork — built in, not decorated',lead:'The most reliable route to perceived custom quality — it improves the architecture rather than decorating it. <b>True custom is off-budget; the look is replicated at the lowest viable cost — see the Budget section.</b>',list:['<b>Full-height cabinetry</b> &amp; integrated storage walls','<b>Built-in</b> home office','<b>Furniture-style</b> vanities','Simple shaker or slab fronts','Thin, dark pulls','Consistent reveal details']},
+  {h:'Lighting — beautiful after sunset',lead:'The lever that makes the home beautiful at 8 PM. Design is cheap and decided upfront; fixtures are marked-up and swappable. Don\u2019t conflate them.',list:['<b>2700K everywhere</b> — no daylight bulbs, no cool LEDs','<b>Three layers</b> per room: ambient · task · accent','<b>Organic fixtures</b> — paper-inspired pendants, aged-brass accents, soft diffused light','Soft light is the cheapest luxury in the house']},
+];
+
+/* rooms — each carries the CD8 four-column practice spec: builder / light / furnish */
+const ROOMS=[
+  {dims:'~110 ft² combined (Entry·Laundry·Powder)',img:'exterior',n:'Entry',f:'Floor 1',own:['Shared'],z:'neutral',walls:'Natural Tan',ceil:'Shoji White',acc:'Warm wood note',wood:'Walnut console',om:null,ja:null,da:null,tier:4,ref:'exterior + foyer · img 36',daniel:1,
+    builder:['Foyer sightline opens into the Great Room','Exterior material hierarchy: Architecture → Landscaping → Lighting → Decoration','Landscaping layered, natural, textural — avoid formal layouts'],
+    light:'Warm, indirect, layered — a decompression chamber, never a spotlight.',
+    furnish:'Simple console · warm wood · a substantial mirror · a single statement object.',
+    note:'A transition between the world and the home. Quiet confidence outside; calm welcome in.'},
+  {dims:'window wall 13′-8½″ · ~272 ft² KB est.',img:'greatroom',n:'Great Room',f:'Floor 1',own:['Shared'],z:'pewter',walls:'Natural Tan',ceil:'Shoji White',acc:'Pewter + Naval (inset)',wood:'Walnut moments · light island beyond',om:60,ja:25,da:15,tier:3,ref:'img 10–16, 19–21',daniel:1,
+    builder:['Fireplace as architectural focal point, not a showpiece','Short-L olive-brown / mossy-tobacco leather sectional + mushroom-taupe walnut-frame chairs (not all-brown)','TV integrated and minimised — never the room\u2019s identity','Open rail at the stair · fireplace surround in warm stone','Planning-wall niche framed into the Pewter Green field with a Naval inset'],
+    light:'Table lamps + sconces carry the room after dark, over recessed-only · 2700K · dimmable zones.',
+    furnish:'Olive leather sectional · low wood coffee table · wool / jute rug to anchor the seating · the planning wall as narrative; one quiet landscape elsewhere.',
+    note:'Boutique hotel meets everyday living — fewer, better pieces with room to breathe. The rug defines the conversation.'},
+  {img:'planning',n:'Planning Wall',f:'Floor 1 \u00b7 feature',own:['Shared'],z:'naval',walls:'Pewter Green field + Naval inset',ceil:'Shoji White',acc:'Pewter Green field · soft-octagonal Naval inset',wood:'—',om:null,ja:null,da:null,tier:2,ref:'great-room detail · img 41',daniel:1,
+    builder:['Pewter Green field with a soft-octagonal Naval inset behind the planning board','Charcoal cork/chalk PLAN board in a walnut frame \u00b7 matte-black or restrained-brass picture light','Free-standing / removable so it survives the resale rule','Prototype the inset full-scale in painter’s tape — integrated joinery, not a geometric mural'],
+    light:'A picture light over the niche · warm, low.',
+    furnish:'Chalk PLAN calendar · framed landscape alongside · a record of family history, travel, goals, life.',
+    note:'Feature, not a discrete plan space. Narrative, not decoration — it carries personality without clutter, and reads as discovered rather than designed. The great room\u2019s one architectural statement.'},
+  {dims:'galley · 7′-2″ strip + island (+ pantry)',img:'kitchen',n:'Kitchen',f:'Floor 1',own:['Shared'],z:'pewter',walls:'Natural Tan',ceil:'Shoji White',acc:'Light island; matte-black hardware',wood:'Existing dark-brown cabinets (preserved) · light off-white island',om:35,ja:50,da:15,tier:3,ref:'img 17–18',daniel:1,
+    builder:['Existing dark-brown cabinets preserved — grain kept; cabinets recede','Double-island option · 42″ uppers to the 9′ ceiling · panel-ready / simple stainless','Warm quartz, simple and continuous · quiet ceramic backsplash','Pewter as a single accent moment on the pantry / hutch'],
+    light:'Two Generation linen pendants over the island · 2700K · under-cabinet task light · clean hood line.',
+    furnish:'Simple wood-and-leather stools · a runner rug · ceramic vessels · one restrained landscape, nothing more.',
+    note:'The most Japandi room. Islands are architecture, not furniture — oak primary; green as a single accent moment. Collected, not outfitted.'},
+  {dims:'within ~110 ft² service group',img:'powder',n:'Powder Room',f:'Floor 1',own:['Shared'],z:'naval',walls:'Naval (all walls)',ceil:'Shoji White',acc:'Pewter art note',wood:'Walnut vanity',om:null,ja:null,da:null,tier:4,ref:'img 4-right · img 51',daniel:1,
+    builder:['Floating walnut vanity · matte-black wall-mount faucet','Warm-white integrated sink · soapstone counter','One green-accented piece of art'],
+    light:'Vertical sconces flanking the mirror · warm brass · a soft glow.',
+    furnish:'Linen hand towel · a single quiet object — restrained drama.',
+    note:'The Navy Jewel Box (D2). Small, low-traffic, windowless — the one place a little drama is welcome, and it doesn\u2019t disturb the daytime social palette.'},
+  {img:'',n:'Staircase',f:'Floor 1\u20132 \u00b7 feature',own:['Shared'],z:'neutral',walls:'Shoji White',ceil:'Shoji White',acc:'Mountain art at landing',wood:'Wood treads · walnut rail cap',om:null,ja:null,da:null,tier:3,ref:'img 51-right',daniel:1,
+    builder:['Open rail — a Tier-1 architectural upgrade','Wood treads · slim metal balusters','Mountain art at the landing carrying the palette between floors'],
+    light:'A warm pendant at the turn · no flat overhead wash.',
+    furnish:'Kept clear — the architecture carries it.',
+    note:'Feature / circulation, not a discrete plan space. The open rail is one of the highest-leverage architectural upgrades; it ties the two floors\u2019 palette together.'},
+  {dims:'serves Beds 2/3',img:'bath',n:'Bath 2',f:'Floor 2',own:['Parents','Shared'],z:'neutral',walls:'Natural Tan',ceil:'Shoji White',acc:'Pewter textiles',wood:'Walnut vanity',om:null,ja:null,da:null,tier:4,ref:'img 4-left',daniel:0,
+    builder:['Walnut vanity · matte-black fixtures · warm limestone-look tile','Walk-in shower with bench + niche · Bath 2 (tub) serves Beds 2/3','Blocking in walls for future grab bars — request at framing'],
+    light:'Sconces flanking the mirror, not over it · 2700K · dimmable.',
+    furnish:'Linen towels · a ceramic vase · a runner.',
+    note:'Warm, light, comfortable. Low-cost future-proofing via grab-bar blocking.'},
+  {dims:'within ~110 ft² service group',img:'laundry',n:'Laundry',f:'Floor 1',own:['Shared'],z:'pewter',walls:'Natural Tan',ceil:'Shoji White',acc:'Pewter cabinets',wood:'Walnut counter',om:null,ja:null,da:null,tier:4,ref:'img 50',daniel:1,
+    builder:['Muted olive / Pewter cabinetry · butcher-block counter','Concealed hampers and a hanging rod · main-floor location','Matte-black hardware'],
+    light:'Warm under-cabinet light · a sconce · no flat overhead.',
+    furnish:'Functional, calm, quietly handsome — a runner underfoot.',
+    note:'Muted-green workhorse. On-palette, practical, calm.'},
+  {dims:'14′-3″ × 14′-4″ · 204 ft²',img:'primarybed',n:'Primary Bedroom',f:'Floor 2',own:['Mitch'],z:'naval',walls:'Shoji White (eggshell)',ceil:'Shoji White',acc:'Naval slat wall',wood:'Walnut',om:40,ja:35,da:25,tier:1,ref:'primary concept · img 42',daniel:0,
+    builder:['Navy slat feature wall · ceiling curtain pocket · blackout','White-oak furniture, linen bedding · aged-brass accents · vintage landscape art','USB-C + USB-A outlets at nightstands &amp; TV wall · zoned dimming'],
+    light:'Bedside sconces + lamps, layered and dimmable · 2700K · no overhead glare · warm pools, soft shadow.',
+    furnish:'Low oak platform bed · linen headboard · woven rug · vintage landscape art · ceiling-mounted linen drapery.',
+    note:'The bed becomes architecture — where Thuma belongs. The navy makes it deeper, never darker. Layer with linen and wool, not colour. The room should feel like an exhale.'},
+  {dims:'11′-1″ main · 88 ft² + alcoves',img:'bath',n:'Primary Bath',f:'Floor 2',own:['Mitch'],z:'naval',walls:'Light stone / Shoji White',ceil:'Shoji White',acc:'Naval selective',wood:'Walnut vanity',om:45,ja:35,da:20,tier:2,ref:'img 44',daniel:0,
+    builder:['Light stone, warm-oak vanity, frameless glass · soapstone-look counter','Full-height shower tile — the biggest bath upgrade · shower in lieu of tub','Architectural (not decorative) tile · double vanity · simple Kohler undermounts'],
+    light:'Sconces flanking the mirror, not over it · 2700K · dimmable · a soft glow for evening.',
+    furnish:'Linen towels · a ceramic vase · one quiet landscape · a runner.',
+    note:'Spa, not showroom. Material continuity, frameless glass, full-height shower tile. Floor-to-ceiling continuity over any single feature — the calm is the luxury.'},
+  {dims:'9′-10″ × 5′-3½″ · 52 ft²',img:'closet',n:'Primary W.I.C.',f:'Floor 2',own:['Mitch'],z:'shade',walls:'Shoji White',ceil:'Shoji White',acc:'Shoji White reset',wood:'White oak / walnut',om:null,ja:null,da:null,tier:2,ref:'closet study',daniel:0,builder:['Large walk-in (7×11 per schedule) · warm-oak storage','Calm, ordered, good lighting','Private from the bedroom; the suite\u2019s single large walk-in'],light:'Integrated shelf lighting · warm.',furnish:'Warm-wood storage · bench · runner.',note:'The primary suite\u2019s single large walk-in (7\u00d711 per schedule). Floor 2, Mitch.'},
+  {dims:'11′-4″ × 12′-9½″ · 145 ft²',img:'office',n:'Office → Bedroom 2',f:'Floor 2',own:['Mitch'],z:'naval',swing:1,walls:'Shoji White',ceil:'Shoji White',acc:'Naval built-ins',wood:'Walnut',om:30,ja:30,da:40,tier:2,ref:'img 23, 46-left',daniel:0,
+    builder:['Naval built-ins / full-height bookcases (post-transition) · navy accent wall','Built-in look at budget (Budget): frame-cabinets to ceiling, fronts + wall both Naval, brass hardware','Exactly ONE curated, gallery-framed personal piece (D3) — brass picture light, within the DA composition','Own network drop · ample outlets + USB-C · considered video-call wall','Permanent navy millwork waits for the Bed 2 phase'],
+    light:'A reading lamp · a picture light on the art · integrated shelf lighting · 2700K, warm and low.',
+    furnish:'Solid walnut desk · leather task chair · a reading chair · collected objects. Video-background rule: warm, clean, personal, uncluttered.',
+    note:'Most Dark-Academia room · the Contributor \u2014 the office\u2019s one Dark-Academia statement. The single personal object reads as collected and earned, not a sports-bar wall. Depth and personality — discovered, not designed.'},
+  {dims:'14′-2″ × 10′-0½″ · 142 ft²',img:'loft',n:'Loft',f:'Floor 2',own:['Shared'],z:'neutral',swing:1,walls:'Natural Tan (confirm by sample)',ceil:'Shoji White',acc:'Naval via display + textiles',wood:'White oak + walnut',om:55,ja:35,da:10,tier:4,ref:'img 46-mid',daniel:1,
+    builder:['Reading / thinking room, not overflow living','Sage in textiles only','Own network drop · no permanent millwork until the office migrates','Pre-transition hosts the office — expression stays furniture-and-lighting'],
+    light:'A floor lamp · warm, low; reversible.',
+    furnish:'Two low chairs · a round table · a meditation corner — reversible by design.',
+    note:'Shared flex zone. Reversible expression until the office migrates to Bed 2.'},
+  {dims:'10′-8″ × 12′-6″ · 133 ft²',img:'guest',n:'Guest · Bedroom 3',f:'Floor 2',own:['Parents'],z:'neutral',walls:'Shoji White',ceil:'Shoji White',acc:'Soft neutral',wood:'White oak',om:null,ja:null,da:null,tier:4,ref:'img 46-right',daniel:0,
+    builder:['Flexible, timeless, adaptable — avoid over-programming','Warm wood, soft linens, a subtle accent','Bath 2 (tub) adjacent serves Beds 2/3 · standard outlets + a bedside USB-C','Never disturbed by the transition'],
+    light:'A reading light · bedside USB-C · soft.',
+    furnish:'A comfortable bed · a reading light · a chair — restful and uncluttered.',
+    note:'The durable parents\u2019 room. Calm and restful for visits; can eventually become fully theirs.'},
+  {dims:'Recreation Room ~14′-1½″ deep · 9′ clg',img:'bsmt_lounge',n:'Basement Lounge / Coffee Bar',f:'Basement (planned)',own:['Daniel'],z:'pewter',swing:1,walls:'Natural Tan',ceil:'Shoji White',acc:'Pewter Green TV wall',wood:'Walnut',om:null,ja:null,da:null,tier:1,ref:'img 49-left · img 1, 34',daniel:1,
+    builder:['Olive walls (primary) · walnut · leather · wool · stone','Coffee bar · conversation first, technology second','Layout &amp; partition TBD per Daniel\u2019s Option 1 plan','Compact coffee bar under the stairs · floating walnut TV ledge (minimal millwork)','Reference plan: Recreation Room \u2248 14\u2032-1\u00bd\u2033 deep \u00b7 9\u2032-0\u2033 clg \u00b7 carpet'],
+    light:'Wall sconces · lamp pools · accent shelf light · 2700K · no flat overhead wash.',
+    furnish:'Leather sectional · green accent chairs · low wood table — built around people, not screens.',
+    note:'Planned \u00b7 Option 1 finish (not yet on the shell plan). The Private Members Club — a sophisticated retreat, not a man-cave. Separately funded; this brief governs shared DNA only.'},
+  {dims:'BDRM.5 ~13′-1½″ wide · 9′ clg',img:'bsmt_bed',n:'Basement Bedroom',f:'Basement (planned)',own:['Daniel'],z:'shade',walls:'Natural Tan (side walls)',ceil:'Shoji White',acc:'Shade-Grown behind bed + slat headboard',wood:'Walnut',om:null,ja:null,da:null,tier:1,ref:'img 49-mid',daniel:1,
+    builder:['Green-accent retreat with a slat headboard wall and a walk-in beyond','Egress windows present on the shell plan · up to 2 conforming · final count per Option 1','Daniel\u2019s domain · shared DNA only','Reference plan: BDRM.5 \u2248 13\u2032-1\u00bd\u2033 wide \u00b7 9\u2032-0\u2033 clg \u00b7 5040 egress'],
+    light:'Bedside lamps · warm.',
+    furnish:'Slat headboard wall · calm green-accent retreat · walk-in beyond.',
+    note:'Planned \u00b7 Option 1 finish (not yet on the shell plan). A dimensioned reference plan (9 Jun) shows BDRM.5 at 9\u2032 clg with a 5040 egress window; our final Option 1 layout may differ.'},
+  {dims:'115 ft² · 5×8 shower · 9′ clg',img:'bsmt_bath',n:'Basement Bath',f:'Basement (planned)',own:['Daniel'],z:'shade',walls:'Warm cream / Natural Tan',ceil:'Shoji White',acc:'Green shower tile (shower only)',wood:'Walnut vanity',om:null,ja:null,da:null,tier:2,ref:'img 49-right',daniel:1,
+    builder:['Green-tiled walk-in shower · warm wood vanity · soapstone-look counter','Rough-in present on the shell plan','Undermount / integrated sink (not a vessel) · glassless shower if splash geometry permits','Reference plan: BA.3 \u00b7 9\u2032-0\u2033 clg \u00b7 32\u2033\u00d748\u2033 shower + 12\u2033 seat @18\u2033 AFF'],
+    light:'A sconce · warm vanity light.',
+    furnish:'The lower-level spa — the shared DNA carried below grade: warm, honest, calm.',
+    note:'Planned \u00b7 Option 1 finish (not yet on the shell plan). Daniel\u2019s domain · shared DNA only. The same warmth as upstairs, scaled for a relaxed lower-floor evening.'},
+  {dims:'10 × 9 ft · 9′ clg',img:'bsmt_closet',n:'Walk-through Closet',f:'Basement (planned)',own:['Daniel'],z:'shade',walls:'Shoji White',ceil:'Shoji White',acc:'Shoji White reset',wood:'Walnut / dark-wood (PAX-look)',om:null,ja:null,da:null,tier:2,ref:'closet study \u00b7 img 38\u201340',daniel:1,builder:['Warm oak \u00b7 good lighting \u00b7 calm ordered storage','Green-accent backdrop \u2014 Daniel\u2019s lower-level palette','Accessed off the basement bedroom','Reference plan shows closets off the basement bed/bath'],light:'Integrated shelf lighting \u00b7 warm.',furnish:'Warm-wood storage \u00b7 bench \u00b7 runner \u2014 everything visible should be intentional.',note:'Planned \u00b7 Option 1 finish (not yet on the shell plan). Daniel\u2019s basement walk-through closet, off the bedroom \u00b7 shared DNA only.'}
+];
+
+const OCC=[
+  {s:'Primary suite',pre:'Mitch',post:'Mitch'},
+  {s:'Bedroom 2',pre:'Daniel\u2019s bedroom',post:'Office (Mitch) — navy',swap:1},
+  {s:'Bedroom 3 (+WIC)',pre:'Parents (guest)',post:'Parents → eventually theirs'},
+  {s:'Loft',pre:'Office (Mitch) + flex',post:'Shared flex zone',swap:1},
+  {s:'Basement (~880 ft²)',pre:'Unfinished',post:'Daniel (external plan)',swap:1},
+];
+const WEIGHT=[{nm:'Shared',pct:47,ft:'1,333 ft²',c:'#5E6259'},{nm:'Daniel',pct:28,ft:'~800 ft²',c:'#4E5147'},{nm:'Mitch',pct:19,ft:'545 ft²',c:'#2F3D4C'},{nm:'Parents',pct:5,ft:'141 ft²',c:'#B79A5B'}];
+
+const NET=[
+  {k:'Core',v:'UniFi Cloud Gateway + PoE switch. Head-end in the <b>garage</b> — shared, neutral, outside Daniel\u2019s funded basement.'},
+  {k:'Coverage',v:'Three ceiling APs, wired backhaul — <b>3× U7 Pro</b> (locked). One AP per level minimum.'},
+  {k:'Cabling',v:'~14–18 home-run CAT6 drops to a single head-end. Per-room drops live in the Room Register.'},
+  {k:'Segments',v:'VLAN per household (Mitch / Daniel / Parents-guest) + shared-IoT — the network analogue of colour-zoning.'},
+  {k:'Power',v:'USB-C + USB-A combo outlets at nightstands, desks, the island &amp; loft; extra circuits + a UPS feed at the head-end.'},
+  {k:'Future',v:'Conduit: tech-closet → attic stub in place (order v2); closet → basement run requested — spare pathways for later pulls without opening walls.'},
+  {k:'Internet',v:'Quantum Fiber, multi-gig tiers available in-area. <b>Gateway tier still open</b> — contingent on the subscription.'},
+];
+const SMART=[
+  {tn:'Tier 0 — pre-drywall',h:'Irreversible · decide now',items:['Neutral wire at every switch box','In-ceiling speaker pre-wire','HVAC C-wire + multi-zone provisioning','Conduit riser + USB-C/USB-A outlets at desks, nightstands, island &amp; loft']},
+  {tn:'Tier 1 — MVP essentials',h:'The named few',items:['Smart thermostat — per HVAC zone','Smart switches, not bulbs','Multi-zone in-ceiling audio (one amp)']},
+  {tn:'Tier 2 — later',h:'Wireless, swappable',items:['Smart lock + video doorbell','Garage controller','A few motorised shades','Leak sensors at mechanical / laundry']},
+];
+
+const PLAYBOOK=[
+  {d:'Flooring',p:'Warm wood-look LVP · wide-plank · matte · low-contrast · textured (walnut/oak tone) — SELECTED 12/07/26: COREtec LVP main · Lake Mabel + 8 lb pad upstairs & stairs · Marble Obsession tile wet',a:'Grey · cool · gloss · distressed · orange oak',t:'1'},
+  {d:'Cabinets',p:'White/natural oak · warm greige · architectural, disappearing',a:'Cool grey · espresso · distressed · heavy grain',t:'1'},
+  {d:'Countertops',p:'Warm quartz · subtle veining · limestone/travertine influence',a:'Dramatic marble · high contrast · busy movement',t:'1'},
+  {d:'Shower tile',p:'Full-height · architectural · light stone',a:'Decorative/specialty accent tile',t:'1'},
+  {d:'Stair rail',p:'Open rail — architectural',a:'Heavy/closed builder rail',t:'1'},
+  {d:'Lighting',p:'2700K everywhere · ambient/task/accent · organic/paper · aged brass',a:'Daylight bulbs · cool LED · cage/lantern industrial',t:'1*'},
+  {d:'Faucets/metals',p:'Matte black / dark bronze (water+doors); aged brass (light)',a:'Polished/bright brass · chrome · champagne',t:'2'},
+  {d:'Paint',p:'Shoji White · Natural Tan · Pewter · Shade-Grown · Naval (zoned)',a:'Builder grey · bright white · sage as a wall paint',t:'1'},
+  {d:'Appliances',p:'Panel-ready look if available · simple forms',a:'Gadget aesthetics · busy control faces',t:'2'},
+  {d:'Light fixtures',p:'Decided upfront as design; swap decorative pieces later',a:'Over-spending on builder-marked-up decorative fixtures',t:'3'},
+];
+const TPASS=['white oak','walnut','wool','linen','stone','ceramic','leather','simple lighting'];
+const TFAIL=['trendy décor','decorative clutter','highly stylised objects','novelty purchases'];
+const TIERS=[['Hero · Thuma or equivalent','The primary bed above all — it is architecture. The few pieces seen daily that anchor a room.'],['Workhorse · higher-end IKEA','Solid-oak / walnut lines; passes the Thuma test on form, sourced for value. Verify current ranges.'],['Accent · vintage / collected','Leather, art, ceramic, lighting — discovered, not designed.']];
+const SHEETS=[
+  {s:'Flooring',p:'Warm wood-look LVP, wide-plank, matte, low-contrast, textured — SELECTED 12/07/26: COREtec LVP main · Lake Mabel + 8 lb pad upstairs & stairs · Marble Obsession tile wet',a:'Medium oak',v:'Grey · cool · gloss · distressed · orange'},
+  {s:'Cabinets',p:'Walnut (primary) / white oak, warm greige',a:'White oak',v:'Cool grey · espresso · distressed'},
+  {s:'Countertops',p:'Warm quartz, subtle veining',a:'Soft limestone look',v:'Busy marble · high contrast'},
+  {s:'Paint',p:'Shoji White / Natural Tan / Pewter / Naval (zoned)',a:'Warm greige',v:'Builder grey · bright white'},
+  {s:'Lighting',p:'2700K, layered, organic/paper, aged brass',a:'Warm-diffused',v:'Daylight · cool LED · industrial'},
+  {s:'Hardware',p:'Matte black/dark bronze (water+doors); aged brass (light)',a:'Brushed nickel',v:'Polished brass/chrome · champagne'},
+  {s:'Upgrade rank',p:'T1: flooring, cabinets, counters, shower-tile, open rail',a:'T2: faucet finish, pulls, doors, island',v:'T3: fixtures, accent tile, "luxury packages"'},
+];
+const DEC=[
+  {id:'D1',st:'Resolved',c:'#B79A5B',h:'Kitchen cabinetry',res:'<b>Existing dark-brown cabinets preserved</b> — no repaint, no green island; light warm-white island; matte-black hardware/sink.',p:'Reference brief: keep grain; island lighter than perimeter; black is the utility metal.'},
+  {id:'D2',st:'Resolved',c:'#B79A5B',h:'Powder room',res:'<b>Allow the navy jewel box.</b> Small, low-traffic, doesn\u2019t disturb the daytime palette.',p:'Floor-1 social zone vs a full-Naval statement room.'},
+  {id:'D3',st:'Resolved',c:'#B79A5B',h:'Office personal art',res:'<b>One</b> curated, gallery-framed piece, picture-lit, inside the Dark-Academia composition.',p:'Timeless-never-of-the-moment vs sports memorabilia.'},
+  {id:'D4',st:'Resolved',c:'#B79A5B',h:'Greens',res:'<b>Two paint-greens</b> (Pewter, Shade-Grown); sage \u2192 textiles only.',p:'sage / olive / muted forest vs two coded paints.'},
+  {id:'D5',st:'Locked',c:'#B79A5B',h:'Planning wall',res:'<b>Pewter Green field + soft-octagonal Naval inset + charcoal cork/chalk PLAN board</b> (walnut frame). Prototype the inset in tape.',p:'Functional planning board; walnut frame; integrated, not a geometric mural.'},
+  {id:'D6',st:'Locked',c:'#B79A5B',h:'Network AP mix',res:'<b>3× U7 Pro</b>, wired backhaul, one AP per level. Gateway tier still open.',p:'Newly locked this version, over 2× Pro + 1× Lite.'},
+  {id:'A1',st:'Auto',c:'#7C7464',h:'\u201CFarmhouse\u201D renders',res:'Keep mood &amp; colour; <b>strip farmhouse signals</b> — fixtures, island contrast.',p:'Several gallery images are so-labelled; the feeling is on-brief, the label is not.'},
+  {id:'A2',st:'Auto',c:'#7C7464',h:'Planning-wall treatment',res:'<b>Pewter Green field + Naval inset + cork/chalk board.</b> Free-standing &amp; removable.',p:'Functional planning board, not a motif; prototype the inset in painter\u2019s tape.'},
+  {id:'A3',st:'Auto',c:'#7C7464',h:'Loft vs Bed 2 office',res:'Built-ins = <b>post-transition Bed 2</b>; loft stays furniture-and-lighting.',p:'Reversibility until Bed 2 vs the navy built-in office shown.'},
+  {id:'A4',st:'Auto',c:'#7C7464',h:'Walnut vanities',res:'Oak in primary bath; <b>walnut acceptable</b> in hall/powder (sparing).',p:'Oak-primary wood strategy vs walnut vanities in the gallery baths.'},
+];
+const OPEN=[
+  'Gateway tier — contingent on the multi-gig fibre subscription decision (Systems).',
+  'Pewter Green in low light: verify it holds warmth in north-facing rooms; if it greys, promote sage to a paint.',
+  'Hex vs SW spec: confirm every code against a physical fan deck + on-site samples.',
+  'Basement Option 1: a dimensioned reference plan is now in hand \u2014 \u2248880 ft\u00b2 (24\u2032-0\u2033 \u00d7 36\u2032-8\u2033), 9\u2032 clg, a 1-bed + rec-room layout. Confirm whether our executed Option 1 matches it.',
+  'Smart-home Tier-0 rough-ins: confirm they exist in KB\u2019s Structured Wiring menu before committing — pre-drywall.',
+  'Field measurements: areas are estimates ±1–2 ft (KB marketing plans carry no scale) — measure stud-to-stud once framed.',
+  'Bedroom 2 (office) vs Bedroom 3 (guest) final assignment — confirm against the dimensioned plan (light / privacy).',
+  'Coordination: the planning wall &amp; basement greens cross into Daniel\u2019s funded domain — his sign-off required.',
+  'Laundry W/D returns in the walk-through closet? \u2014 materially changes PAX layout, ventilation, electrical.',
+  'Glassless basement shower \u2014 confirm the 5\u00d78 splash geometry permits it.',
+  'Walnut accents \u2014 confirm which are permanent construction vs furniture (one stain standard).'
+];
+const APX=[
+  {k:'Material hierarchy',v:'Wood (walnut → white oak) → stone (warm quartz) → texture (linen, wool, bouclé) → leather (cognac, tobacco) → metal (matte black + aged brass).'},
+  {k:'Finish hierarchy',v:'Matte → low sheen. Avoid gloss everywhere. Visible grain over uniform colour.'},
+  {k:'Room investment',v:'1 · Primary bed + basement   2 · Office + primary bath   3 · Great room + kitchen   4 · Supporting spaces.'},
+  {k:'Vendor list',v:'Lighting · Generation. Faucets · Moen. Plumbing · Kohler. Paint · Sherwin-Williams. Doors · Kwikset. Shades · Hunter Douglas. Appliances · KitchenAid / Whirlpool. Network · UniFi.'},
+  {k:'Design vocabulary',v:'Refined · spa-inspired · boutique-hotel · warm-modern · textural · timeless · substantial · grounded · honest · collected · quiet · composed.'},
+  {k:'Architectural upgrades locked',v:'Taller ceilings, doors &amp; 42″ cabinet uppers · larger island · open stair rail · shower in lieu of tub (primary) · finished basement (Opt 1) · garage extension.'},
+];
+
+/* ================= RENDER ================= */
+const $=(s,el=document)=>el.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+
+/* manifesto */
+NEIGH.forEach(([h,d])=>$('#neigh').appendChild(el('div','n',`<b>${h}</b><span>${d}</span>`)));
+QUALS.forEach(q=>$('#quals').appendChild(el('div','qual',
+  `<h4>${q.h}</h4><p class="q">${q.q}</p>
+   <div class="qr"><div class="k">Material</div><div class="v">${q.mat}</div></div>
+   <div class="qr"><div class="k">Builder</div><div class="v">${q.build}</div></div>
+   <div class="qr"><div class="k">Furnishing</div><div class="v">${q.furn}</div></div>`)));
+ARC.forEach(([ph,h,p])=>$('#arc').appendChild(el('div','a',`<div class="ph">${ph}</div><h4>${h}</h4><p>${p}</p>`)));
+PRIO.forEach(([n,h,s])=>$('#prio').appendChild(el('div','p',`<span class="pn">${n}</span><div><h4>${h}</h4><span>${s}</span></div>`)));
+TENS.forEach(([ch,vs,nt])=>$('#tens').appendChild(el('div','t',`<div class="vs">${ch} <span style="opacity:.5">vs</span> ${vs}</div><div class="ch">${ch}</div><div class="nt">${nt}</div>`)));
+STMTS.forEach(([n,h,p])=>$('#stmts').appendChild(el('div','stmt',`<span class="num">${n}</span><div><h4>${h}</h4><p>${p}</p></div>`)));
+
+/* DNA cards + matrix */
+DNA.forEach(d=>{const c=el('div','dnacard');c.style.setProperty('--ac',d.ac);
+  c.innerHTML=`<div class="img"><img loading="lazy" alt="${d.nm}" src="${IMG[d.img]}"></div><div class="hd"><div class="pc">${d.pc}</div><div class="nm">${d.nm}</div><div class="rl">${d.role}</div>
+    <div class="chars">${d.chars.map(x=>`<span>${x}</span>`).join('')}</div><div class="seen">Seen in — ${d.seen}</div></div>
+  <div class="bd"><div class="row"><div class="k">Evidence</div><div class="v ev">${d.ev}</div></div>
+  <div class="row"><div class="k">Material</div><div class="v">${d.mat}</div></div>
+  <div class="row"><div class="k">Builder implication</div><div class="v">${d.build}</div></div></div>`;
+  $('#dna3').appendChild(c);});
+MATRIX.forEach(row=>{const tr=el('tr',null,`<td>${row[0]}</td>`+row.slice(1).map(v=>{
+  const cl=v==='High'?'hi':(v==='Low'?'lo':'');return `<td class="${cl}">${v}</td>`;}).join(''));
+  $('#matrix tbody').appendChild(tr);});
+
+/* palette */
+PALETTE.forEach(p=>{const b=el('button','sw');b.setAttribute('aria-label',`Copy ${p.nm} ${p.code} ${p.hex}`);
+  b.innerHTML=`<div class="chipface" style="background:${p.hex}"></div><div class="body"><div class="nm">${p.nm}</div><div class="role">${p.role}</div><div class="code"><span>${p.code}</span><span class="hx">${p.hex}</span></div></div>`;
+  b.onclick=()=>copy(`${p.nm} · ${p.code} · ${p.hex}`);$('#swatches').appendChild(b);});
+FAMS.forEach(f=>f.items.forEach(([nm,hex])=>{const b=el('button','famsw');b.setAttribute('aria-label',`Copy ${nm} ${hex}`);
+  b.innerHTML=`<div class="f" style="background:${hex}"></div><div class="l"><div class="n">${nm}</div><div class="h">${f.g} · ${hex}</div></div>`;
+  b.onclick=()=>copy(`${nm} · ${f.g} · ${hex}`);$('#fams').appendChild(b);}));
+ZONEOWN.forEach(z=>$('#zoneown').appendChild(el('div','zo',`<h4><i style="background:${z.c}"></i>${z.h}</h4><p>${z.p}</p>`)));
+MATS.forEach(m=>$('#mats').appendChild(el('span','mat',`<i style="background:${m.c}"></i>${m.nm}`)));
+
+/* materials */
+function matCards(list,target){list.forEach(m=>{const c=el('div','mblock');
+  let body=`<h4>${m.h}</h4><p class="lead">${m.lead}</p>`;
+  if(m.rows)body+=m.rows.map(r=>`<div class="mrow"><i style="background:${r.c}"></i><div><div class="mn">${r.n}</div><div class="md">${r.d}</div></div></div>`).join('');
+  if(m.list)body+=`<ul class="mlist">${m.list.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  if(m.avoid)body+=`<div class="avoid"><b>Avoid</b> — ${m.avoid}</div>`;
+  c.innerHTML=body;$(target).appendChild(c);});}
+matCards(M_WOODSTONE,'#mWoodStone');matCards(M_METALSFABRIC,'#mMetalsFabric');matCards(M_MILLLIGHT,'#mMillLight');
+
+/* filters + rooms */
+let owner='All',zone='All';
+const fO=$('#fOwner'),fZ=$('#fZone');
+['All','Mitch','Daniel','Parents','Shared'].forEach((o,i)=>{const b=el('button','fc',o);b.setAttribute('aria-pressed',i===0);b.onclick=()=>{owner=o;mark(fO,b);draw();};fO.appendChild(b);});
+['All','naval','pewter','shade','neutral'].forEach((z,i)=>{const lab=z==='All'?'All':ZONE[z].nm;const dot=z==='All'?'':`<span class="z" style="background:${ZONE[z].c}"></span>`;const b=el('button','fc',dot+lab);b.setAttribute('aria-pressed',i===0);b.onclick=()=>{zone=z;mark(fZ,b);draw();};fZ.appendChild(b);});
+function mark(g,a){[...g.children].forEach(c=>c.setAttribute('aria-pressed',c===a));}
+const grid=$('#grid'),detail=$('#detail');let sel=null;
+function state(){return 'pre';}
+function draw(){grid.innerHTML='';
+  ROOMS.filter(r=>(owner==='All'||r.own.includes(owner))&&(zone==='All'||r.z===zone)).forEach(r=>{
+    const b=el('button','room'+(sel===r.n?' sel':''));b.style.setProperty('--z',ZONE[r.z].c);b.dataset.daniel=r.daniel;
+    const sw=r.swing?`<span class="tag swing">swing</span>`:'';const ti=`<span class="tag tier">T${r.tier}</span>`;
+    b.innerHTML=`<div class="rn">${r.n}</div><div class="rmeta"><span class="tag own">${r.own.join(' / ')}</span>${ti}${sw}</div><div class="acc"><i style="background:${ZONE[r.z].c}"></i>${r.acc}</div>`;
+    b.onclick=()=>openRoom(r);grid.appendChild(b);});
+}
+function imgSlot(r){const src=IMG[r.img];
+  return src?`<div class="rimg"><img src="${src}" alt="${r.n}" loading="lazy"></div>`
+            :`<div class="rimg ph"><span class="lab">Gallery slot</span><span class="cap">${r.ref}</span></div>`;}
+function openRoom(r){sel=r.n;draw();detail.hidden=false;
+  const hasB=r.om!=null;
+  const bar=hasB?`<div class="dnabar"><span style="width:${r.om}%;background:#B79A5B"></span><span style="width:${r.ja}%;background:#5E6259"></span><span style="width:${r.da}%;background:#2F3D4C"></span></div>
+    <div class="dnakey"><span>Organic ${r.om}</span><span>Japandi ${r.ja}</span><span>Dark Academia ${r.da}</span></div>`:'';
+  detail.innerHTML=`<div class="top"><div><h3>${r.n}</h3><div class="floor">${r.f}${r.dims?' \u00b7 '+r.dims:''} · ${r.own.join(' / ')} · Tier ${r.tier} ${r.swing?'· swing room':''}</div></div><button class="x" aria-label="Close">\u2715</button></div>
+    ${imgSlot(r)}
+    ${bar}
+    <div class="specgrid">
+      <div class="spec"><div class="k">Walls</div><div class="v">${r.walls}</div></div>
+      <div class="spec"><div class="k">Ceiling</div><div class="v">${r.ceil}</div></div>
+      <div class="spec"><div class="k">Accent</div><div class="v"><i style="background:${ZONE[r.z].c}"></i>${r.acc}</div></div>
+      <div class="spec"><div class="k">Cabinet / wood</div><div class="v">${r.wood}</div></div></div>
+    <div class="practice">
+      <div class="pc"><div class="k">Builder</div><ul>${r.builder.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="pc"><div class="k">Lighting</div><p>${r.light}</p></div>
+      <div class="pc"><div class="k">Furnishing</div><p>${r.furnish}</p></div></div>
+    <div class="foot">${r.note}<div class="blend">Gallery: ${r.ref}</div></div>`;
+  $('.x',detail).onclick=()=>{detail.hidden=true;sel=null;draw();};
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+draw();
+
+/* occupancy */
+function drawOcc(){const b=$('#occBody');b.innerHTML='';OCC.forEach(o=>{b.appendChild(el('tr',null,`<td>${o.s}</td><td>${o.pre}</td><td class="${o.swap?'swap':''}">${o.post}</td>`));});}
+WEIGHT.forEach(w=>{const s=el('span',null,(w.ft?w.ft+' \u00b7 ':'')+w.pct+'%');s.style.cssText=`flex:${w.pct};background:${w.c}`;$('#weightBar').appendChild(s);
+  $('#weightLegend').appendChild(el('span',null,`<i style="background:${w.c}"></i>${w.nm} · ${w.pct}%`));});
+drawOcc();
+
+/* systems */
+NET.forEach(n=>$('#netgrid').appendChild(el('div','nd',`<div class="k">${n.k}</div><div class="v">${n.v}</div>`)));
+SMART.forEach(t=>$('#smartTiers').appendChild(el('div','tier',`<div class="tn">${t.tn}</div><h4>${t.h}</h4><ul>${t.items.map(x=>`<li>${x}</li>`).join('')}</ul>`)));
+
+/* playbook + sheets + thuma + decisions + appendix */
+PLAYBOOK.forEach(r=>$('#playbook tbody').appendChild(el('tr',null,`<td>${r.d}</td><td class="pref">${r.p}</td><td class="avoid">${r.a}</td><td class="t1">${r.t}</td>`)));
+SHEETS.forEach(r=>$('#sheets tbody').appendChild(el('tr',null,`<td>${r.s}</td><td class="pref">${r.p}</td><td>${r.a}</td><td class="avoid">${r.v}</td>`)));
+TPASS.forEach(x=>$('#tPass').appendChild(el('li',null,x)));TFAIL.forEach(x=>$('#tFail').appendChild(el('li',null,x)));
+TIERS.forEach(([h,p],i)=>$('#tiers').appendChild(el('div','tier',`<div class="tn">Tier ${i+1}</div><h4>${h}</h4><p>${p}</p>`)));
+DEC.forEach(d=>{const c=el('div','card');c.style.setProperty('--st',d.c);
+  c.innerHTML=`<div class="id">${d.id}<span class="stt">${d.st}</span></div><h4>${d.h}</h4><p>${d.p}</p><div class="res">${d.res}</div>`;$('#deck').appendChild(c);});
+OPEN.forEach(o=>$('#open').appendChild(el('li',null,o)));
+APX.forEach(a=>$('#apx').appendChild(el('div','ab',`<div class="k">${a.k}</div><div class="v">${a.v}</div>`)));
+
+/* ================= TOGGLES + UTIL ================= */
+
+
+
+
+/* scroll-spy */
+const links=[...document.querySelectorAll('#nav a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}),{rootMargin:'-50% 0px -48% 0px'});
+links.forEach(a=>{const t=document.querySelector(a.getAttribute('href'));if(t)io.observe(t);});
+
+/* copy + toast */
+let tT;function copy(txt){const done=()=>{const t=$('#toast');t.textContent='Copied  '+txt;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1400);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(done);}
+  else{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();done();}}
+
+try{document.getElementById('heroback').style.backgroundImage="url('"+IMG.hero+"')";}catch(e){}
+
+const THUMAP=[{k:'thuma_bed',n:'The Bed',d:'The hero — minimalist, understated, engineered to last.',hero:1},{k:'thuma_nightstand',n:'The Nightstand',d:'Clean lines, considered details; form and function bedside.',hero:0},{k:'thuma_chest',n:'The Chest',d:'Generous storage, small footprint; sculpted solid wood.',hero:0},{k:'thuma_dresser',n:'The Dresser',d:'Spacious and refined; built for daily use.',hero:0},{k:'thuma_mirror',n:'The Mirror',d:'Solid wood frame — clean, modern, timeless.',hero:0},{k:'thuma_endtable',n:'The End Table',d:'Versatile; used however the room needs.',hero:0},{k:'thuma_bench',n:'The Bench',d:'Solid and minimal; at home anywhere.',hero:0},{k:'thuma_desk',n:'The Desk',d:'Clean and functional; built to focus.',hero:0},{k:'thuma_bookcase',n:'The Bookcase',d:'Open design; flexible to the space.',hero:0},{k:'thuma_chair',n:'The Accent Chair',d:'Comfortable, quietly distinctive.',hero:0}];
+(function(){var g=document.getElementById('thumaGrid');if(!g)return;THUMAP.forEach(function(p){var c=document.createElement('div');c.className='tcard'+(p.hero?' hero':'');c.innerHTML='<div class="tcimg"><img loading="lazy" alt="'+p.n+'" src="'+IMG[p.k]+'"></div>'+'<div class="tcbody"><div class="tcn">'+p.n+'</div><div class="tcd">'+p.d+'</div></div>';g.appendChild(c);});})();
+
+const GALLERY=[{k:'hero',u:'Hero background'},{k:'exterior',u:'Entry / elevation'},{k:'greatroom',u:'Great Room'},{k:'kitchen',u:'Kitchen'},{k:'planning',u:'Planning wall'},{k:'powder',u:'Powder room'},{k:'bath',u:'Bath 2 / Primary Bath'},{k:'laundry',u:'Laundry'},{k:'primarybed',u:'Primary Bedroom'},{k:'office',u:'Office (Bed 2)'},{k:'loft',u:'Loft'},{k:'guest',u:'Guest (Bed 3)'},{k:'closet',u:'Primary W.I.C.'},{k:'bsmt_lounge',u:'Basement Lounge'},{k:'bsmt_bed',u:'Basement Bedroom'},{k:'bsmt_bath',u:'Basement Bath'},{k:'bsmt_closet',u:'Walk-through Closet'},{k:'bsmt_closet_open',u:'Closet (door open)'},{k:'dna_organic',u:'DNA · Organic Modern'},{k:'dna_japandi',u:'DNA · Japandi'},{k:'dna_dark',u:'DNA · Dark Academia'},{k:'thuma_bed',u:'Thuma · Bed'},{k:'thuma_nightstand',u:'Thuma · Nightstand'},{k:'thuma_chest',u:'Thuma · Chest'},{k:'thuma_dresser',u:'Thuma · Dresser'},{k:'thuma_mirror',u:'Thuma · Mirror'},{k:'thuma_endtable',u:'Thuma · End table'},{k:'thuma_bench',u:'Thuma · Bench'},{k:'thuma_desk',u:'Thuma · Desk'},{k:'thuma_bookcase',u:'Thuma · Bookcase'},{k:'thuma_chair',u:'Thuma · Accent chair'},{k:'bsmt_office',u:'Basement Office / Study'},{k:'stairs',u:'Stair circulation (up / down)'},{k:'moodboard',u:'Design direction board'}];
+(function(){var g=document.getElementById('galleryGrid');if(!g)return;GALLERY.forEach(function(x){var c=document.createElement('div');c.className='gcard';c.innerHTML='<div class="gimg"><img loading="lazy" alt="'+x.u+'" src="'+IMG[x.k]+'" onerror="this.style.display=&#39;none&#39;;this.parentElement.classList.add(&#39;missing&#39;)"></div>'+'<div class="gmeta"><b>'+x.k+'</b><span>'+x.u+'</span></div>';g.appendChild(c);});})();
+</script>
+</body>
+</html>

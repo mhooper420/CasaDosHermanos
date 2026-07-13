@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Dos Hermanos</title>
+<style>
+  :root{
+    --paper:#EDE7DA;      /* Shoji White, warmed */
+    --ink:#1C1B18;        /* matte near-black */
+    --walnut:#4A3B2E;     /* walnut */
+    --pewter:#6E7A6C;     /* Pewter Green SW6208, restrained accent */
+    --muted:#7C7566;
+    --line:rgba(28,27,24,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font:400 17px/1.55 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+    padding:max(28px,env(safe-area-inset-top)) 20px 40px;
+    display:flex;justify-content:center;
+  }
+  .wrap{width:100%;max-width:560px}
+  header{border-top:3px solid var(--walnut);padding-top:22px;margin-bottom:30px}
+  .eyebrow{
+    font:600 12px/1.4 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;
+  }
+  h1{font-size:clamp(34px,10vw,46px);font-weight:600;line-height:1.02;margin:0 0 12px;letter-spacing:-.01em}
+  .lede{color:var(--muted);margin:0;max-width:44ch}
+  .cards{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:14px}
+  a.card{
+    display:block;text-decoration:none;color:inherit;background:rgba(255,255,255,.42);
+    border:1px solid var(--line);border-left:3px solid var(--pewter);border-radius:10px;
+    padding:18px 20px;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+  }
+  a.card:hover,a.card:focus-visible{transform:translateY(-2px);background:rgba(255,255,255,.7);box-shadow:0 6px 22px rgba(28,27,24,.10);outline:none}
+  a.card:focus-visible{border-left-color:var(--ink)}
+  .ct{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .card h2{font-size:21px;font-weight:600;margin:0}
+  .arrow{font:600 15px/1 ui-sans-serif,system-ui,sans-serif;color:var(--pewter)}
+  .card p{margin:6px 0 0;color:var(--muted);font-size:15px}
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;
+    font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  footer .mk{color:var(--walnut);font-weight:600;letter-spacing:.02em}
+  @media (prefers-reduced-motion:reduce){a.card{transition:none}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Windler Wildflower · Aurora, Colorado</p>
+      <h1>Casa Dos Hermanos</h1>
+      <p class="lede">The working plan for the home — design direction, selections, and layout. Tap to open. Works on any device.</p>
+    </header>
+
+    <ul class="cards" id="cards">
+      <li><a class="card" href="brief.html" data-check>
+        <span class="ct"><h2>Design Brief</h2><span class="arrow">→</span></span>
+        <p>The full vision: rooms, materials, palette, and finishes.</p>
+      </a></li>
+      <li><a class="card" href="studio.html" data-check>
+        <span class="ct"><h2>Selections</h2><span class="arrow">→</span></span>
+        <p>The option-by-option build sheet.</p>
+      </a></li>
+      <li><a class="card" href="plan.html" data-check>
+        <span class="ct"><h2>Floor Plan</h2><span class="arrow">→</span></span>
+        <p>Room-by-room layout across all three levels.</p>
+      </a>
+      <a class="card" href="network.html" data-check>
+        <span class="ct"><h2>Network</h2><span class="arrow">→</span></span>
+        <p>UniFi topology, CAT6 drops, and the pre-drywall rough-in order.</p>
+      </a>
+      <a class="card" href="combos.html" data-check>
+        <span class="ct"><h2>Tile Combos</h2><span class="arrow">→</span></span>
+        <p>Wet-area tile combinations — collections, grout, and per-room views.</p>
+      </a></li>
+    </ul>
+
+    <footer><span class="mk">Two brothers, one home.</span> &nbsp;A private family reference — please don't share the link.</footer>
+  </div>
+
+<script>
+/* Hide any card whose page isn't in the repo yet, so family never taps a dead link.
+   Runs only when hosted (http/https); does nothing when opened as a local file. */
+(function(){
+  if(!/^https?:/.test(location.protocol)) return;
+  document.querySelectorAll('a.card[data-check]').forEach(function(a){
+    fetch(a.getAttribute('href'),{method:'HEAD'})
+      .then(function(r){ if(!r.ok){ var li=a.closest('li'); if(li) li.style.display='none'; } })
+      .catch(function(){ var li=a.closest('li'); if(li) li.style.display='none'; });
+  });
+})();
+</script>
+</body>
+</html>

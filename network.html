@@ -1,0 +1,125 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Casa Dos Hermanos — Network N-1.0 rev 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--sheet:#FBFAF6;--ink:#1C1A16;--sub:#6A6459;--line:#E3DCCB;--brass:#9C7C49;--naval:#29394F;--green:#5F6F58;--panel:#F4F0E8}
+*{box-sizing:border-box}body{margin:0;background:var(--sheet);color:var(--ink);font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px 60px}
+.tblock{display:flex;flex-wrap:wrap;border:1px solid var(--ink);margin:26px 0 34px}
+.tblock>div{padding:10px 16px;border-right:1px solid var(--ink)}
+.tblock>div:last-child{border-right:0;margin-left:auto;text-align:right}
+.tblock .proj{font-family:Fraunces,Georgia,serif;font-size:21px;font-weight:600}
+.tblock small{display:block;font:600 9.5px ui-monospace,monospace;letter-spacing:.14em;color:var(--sub);text-transform:uppercase}
+h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;margin:44px 0 6px;display:flex;align-items:baseline;gap:10px}
+h2 .kn{font:600 10.5px ui-monospace,monospace;color:var(--sheet);background:var(--ink);padding:2px 7px;border-radius:2px;letter-spacing:.1em}
+p.lede{margin:4px 0 14px;color:var(--sub);max-width:70ch}
+table{width:100%;border-collapse:collapse;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;margin:10px 0}
+th{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--sub);text-align:left;border-bottom:1px solid var(--ink);padding:6px 8px}
+td{border-bottom:1px solid var(--line);padding:6px 8px;vertical-align:top}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.tot td{border-top:1px solid var(--ink);border-bottom:0;font-weight:700}
+.grid2{display:grid;grid-template-columns:388px 1fr;gap:30px;align-items:start}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.tag{font:600 9px ui-monospace,monospace;letter-spacing:.1em;padding:1.5px 6px;border-radius:2px}
+.tag.v{background:var(--panel);color:var(--brass);border:1px dashed var(--brass)}
+.tag.ok{background:var(--green);color:var(--sheet)}
+pre{background:var(--ink);color:var(--sheet);font:12px/1.6 ui-monospace,monospace;padding:18px;overflow:auto;border-radius:3px}
+.note{border-left:3px solid var(--brass);background:var(--panel);padding:10px 14px;margin:14px 0;font-size:13.5px}
+footer{margin-top:56px;border-top:1px solid var(--ink);padding-top:10px;font:10px ui-monospace,monospace;color:var(--sub);letter-spacing:.08em}
+@media print{body{font-size:12px}.wrap{max-width:none}}
+</style></head><body><div class="wrap">
+
+<div class="tblock">
+ <div><small>Project</small><span class="proj">Casa Dos Hermanos</span></div>
+ <div><small>Sheet</small><b>N-1.0 · Home Network</b><br>Structured wiring &amp; hardware</div>
+ <div><small>Basis</small>KB Plan 2088 · Elevation C<br>5266 N Eaton Park St, Aurora CO</div>
+ <div><small>Rev</small><b>v2 — 13 Jul 2026</b><br>Head-end → Bed-2 closet · EV removed</div>
+</div>
+
+<h2><span class="kn">N1</span>Riser — 15 CAT6 home-runs to the Bed-2 (office) closet</h2>
+<p class="lede">All drops route through KB Structured Wiring (buyer installs prohibited pre-closing) and home-run to a tech closet in the office walk-in — conditioned space, directly beneath the attic. Elevation is irrelevant to Ethernet; what matters is the fibre path from the exterior service entry up to the closet, which is now KB question #1. The finished basement still seals Floor 1's ceiling, so everything below the attic plane is wired generously now.</p>
+<div class="grid2">
+ <div><svg viewBox='0 0 388 486' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='CAT6 riser — head-end in Bed-2 closet'><style>.bd{fill:none;stroke:#E3DCCB}.bl{font:600 10px ui-monospace,monospace;fill:#6A6459;letter-spacing:.12em}.dl{font:10.5px ui-monospace,monospace;fill:#1C1A16}.dn{fill:#29394F}.wire{fill:none;stroke:#29394F;stroke-width:.8;opacity:.38}.he{fill:#29394F}.het{font:600 10px ui-monospace,monospace;fill:#FBFAF6}.ask{font:9.5px ui-monospace,monospace;fill:#9C7C49}</style><rect x='8' y='6' width='372' height='22' class='bd'/><text x='16' y='21' class='bl'>ATTIC — conduit stub lands here (pull string)</text><rect x='8' y='34' width='372' height='158' class='bd'/><text x='16' y='51' class='bl'>FLOOR 2</text><rect x='236' y='46' width='138' height='50' rx='3' class='he'/><text x='246' y='63' class='het'>HEAD-END · Bed-2 closet</text><text x='246' y='77' class='het'>UCG-Fiber · 16-PoE · UPS</text><path d='M 305 46 L 305 28' class='wire' stroke-dasharray='4 3'/><circle cx='118' cy='104' r='3.4' class='dn'/><text x='128' y='108' class='dl'>2× office desk wall</text><path d='M 118 104 C 190 104 306 78 306 74' class='wire'/><circle cx='118' cy='121' r='3.4' class='dn'/><text x='128' y='125' class='dl'>1× primary bedroom</text><path d='M 118 121 C 190 121 306 95 306 74' class='wire'/><circle cx='118' cy='138' r='3.4' class='dn'/><text x='128' y='142' class='dl'>1× loft media</text><path d='M 118 138 C 190 138 306 112 306 74' class='wire'/><circle cx='118' cy='155' r='3.4' class='dn'/><text x='128' y='159' class='dl'>1× guest room</text><path d='M 118 155 C 190 155 306 129 306 74' class='wire'/><circle cx='118' cy='172' r='3.4' class='dn'/><text x='128' y='176' class='dl'>1× landing ceiling AP</text><path d='M 118 172 C 190 172 306 146 306 74' class='wire'/><rect x='8' y='198' width='372' height='106' class='bd'/><text x='16' y='215' class='bl'>FLOOR 1</text><circle cx='118' cy='232' r='3.4' class='dn'/><text x='128' y='236' class='dl'>2× great-room media wall</text><path d='M 118 232 C 190 232 306 206 306 96' class='wire'/><circle cx='118' cy='249' r='3.4' class='dn'/><text x='128' y='253' class='dl'>2× F1 ceiling AP (pair)</text><path d='M 118 249 C 190 249 306 223 306 96' class='wire'/><circle cx='118' cy='266' r='3.4' class='dn'/><text x='128' y='270' class='dl'>1× doorbell, door frame</text><path d='M 118 266 C 190 266 306 240 306 96' class='wire'/><circle cx='118' cy='283' r='3.4' class='dn'/><text x='128' y='287' class='dl'>1× garage workbench</text><path d='M 118 283 C 190 283 306 257 306 96' class='wire'/><rect x='8' y='310' width='372' height='92' class='bd'/><text x='16' y='327' class='bl'>BASEMENT — ceiling drywalled by finish contract</text><circle cx='118' cy='344' r='3.4' class='dn'/><text x='128' y='348' class='dl'>1× Daniel media wall</text><path d='M 118 344 C 190 344 306 300 306 96' class='wire'/><circle cx='118' cy='361' r='3.4' class='dn'/><text x='128' y='365' class='dl'>2× basement ceiling AP (pair)</text><path d='M 118 361 C 190 361 306 300 306 96' class='wire'/><path d='M 305 96 C 305 200 340 260 340 330' class='wire' stroke-dasharray='4 3'/><text x='224' y='344' class='ask'>ASK: 2nd conduit ↓</text><rect x='8' y='412' width='372' height='60' class='bd'/><text x='16' y='429' class='bl'>SERVICE ENTRY (exterior wall)</text><text x='16' y='448' class='dl'>Quantum fibre → path/conduit up to closet ONT</text><path d='M 260 440 C 330 440 350 200 340 96' class='wire' stroke-dasharray='2 3'/><text x='268' y='462' class='ask'>KB QUESTION #1</text></svg></div>
+ <div>
+ <table><thead><tr><th>Flr</th><th>Location</th><th class="n">Qty</th><th>Drop</th><th class="n">Cost</th></tr></thead>
+ <tbody><tr><td>F1</td><td>Great Room + Kitchen</td><td class='n'>2</td><td>Great-room media wall — dual-port CAT6</td><td class='n'>$238</td></tr><tr><td>F1</td><td>Great Room + Kitchen</td><td class='n'>2</td><td>Ceiling AP, Floor 1 central — redundant pair</td><td class='n'>$238</td></tr><tr><td>F2</td><td>Bedroom 2 (Office)</td><td class='n'>2</td><td>Office desk wall — dual-port CAT6</td><td class='n'>$238</td></tr><tr><td>F2</td><td>Primary Bedroom</td><td class='n'>1</td><td>Primary TV/desk wall</td><td class='n'>$119</td></tr><tr><td>F2</td><td>Loft</td><td class='n'>1</td><td>Loft media/console wall</td><td class='n'>$119</td></tr><tr><td>F2</td><td>Bedroom 3 (Guest)</td><td class='n'>1</td><td>Guest room desk/TV</td><td class='n'>$119</td></tr><tr><td>F2</td><td>F2 Landing</td><td class='n'>1</td><td>Ceiling AP, F2 landing — single</td><td class='n'>$119</td></tr><tr><td>F1</td><td>Front Porch / Entry</td><td class='n'>1</td><td>Video doorbell, front door frame</td><td class='n'>$119</td></tr><tr><td>F1</td><td>Garage</td><td class='n'>1</td><td>Garage wall (workbench)</td><td class='n'>$119</td></tr><tr><td>BSMT</td><td>Basement (Daniel)</td><td class='n'>1</td><td>Basement media wall (Daniel)</td><td class='n'>$119</td></tr><tr><td>BSMT</td><td>Basement (Daniel)</td><td class='n'>2</td><td>Ceiling AP, basement — redundant pair</td><td class='n'>$238</td></tr><tr><td>F2</td><td>Bedroom 2 (Office)</td><td class='n'>1</td><td>Conduit stub: closet head-end → attic (1¼″, pull string, incl. 2× 110V)</td><td class='n'>$279</td></tr><tr class="tot"><td colspan="2">CAT6 15 drops + attic conduit stub</td><td></td><td></td><td class="n">$2,064</td></tr></tbody></table>
+ <div class="note"><b>Redundant pairs</b> at the F1-ceiling and basement APs (both get sealed behind drywall); <b>single</b> at the F2 landing (attic above = pullable forever). Doorbell kept — a wall penetration is hard later; eave cameras cut — attic-retrofittable and off-manifesto. <b>Governance:</b> shared infrastructure now sits in Unit-A private space — record admin access + escalation for Daniel in the co-ownership agreement (D8 amendment).</div>
+ </div>
+</div>
+
+<h2><span class="kn">N2</span>Power &amp; lighting rough-in (Layer A, same order)</h2>
+<table><thead><tr><th>Flr</th><th>Location</th><th class="n">Qty</th><th>Item</th><th class="n">Cost</th></tr></thead>
+<tbody><tr><td>F2</td><td>Primary Bedroom</td><td class='n'>2</td><td>Bedside outlets, one per side</td><td class='n'>$138</td></tr><tr><td>F2</td><td>Primary Bedroom</td><td class='n'>1</td><td>TV-height outlet, mount wall</td><td class='n'>$69</td></tr><tr><td>F1</td><td>Great Room + Kitchen</td><td class='n'>1</td><td>TV-height outlet, media wall</td><td class='n'>$69</td></tr><tr><td>F2</td><td>Loft</td><td class='n'>1</td><td>TV-height outlet, console wall</td><td class='n'>$69</td></tr><tr><td>F2</td><td>Bedroom 2 (Office)</td><td class='n'>2</td><td>Desk-wall outlets</td><td class='n'>$138</td></tr><tr><td>F1</td><td>Great Room + Kitchen</td><td class='n'>1</td><td>Outlet inside upper cabinet — under-cabinet tape feed</td><td class='n'>$69</td></tr><tr><td>F1</td><td>Great Room + Kitchen</td><td class='n'>1</td><td>Switch for under-cabinet tape circuit</td><td class='n'>$69</td></tr><tr><td>F2</td><td>Primary Bath</td><td class='n'>1</td><td>GFI at WC — washlet supply</td><td class='n'>$79</td></tr><tr><td>F2</td><td>Bedroom 2 (Office)</td><td class='n'>1</td><td>20 A separate circuit — tech closet + office desk</td><td class='n'>$259</td></tr><tr><td>F1</td><td>Front Porch / Entry</td><td class='n'>1</td><td>Exterior GFI at front eave — holiday lighting</td><td class='n'>$209</td></tr><tr><td>F1</td><td>Front Porch / Entry</td><td class='n'>1</td><td>Interior switch for eave outlet</td><td class='n'>$69</td></tr><tr class="tot"><td colspan="4">Power adds</td><td class="n">$1,237</td></tr></tbody></table>
+<table><thead><tr><th>Flr</th><th>Location</th><th class="n">Qty</th><th>Item</th><th class="n">Cost</th></tr></thead>
+<tbody><tr><td>F2</td><td>Primary Bedroom</td><td class='n'>1</td><td>Ceiling fan prewire w/ 2 switches</td><td class='n'>$209</td></tr><tr><td>F2</td><td>Loft</td><td class='n'>1</td><td>Ceiling fan prewire w/ 2 switches</td><td class='n'>$209</td></tr><tr><td>F2</td><td>Bedroom 3 (Guest)</td><td class='n'>1</td><td>Ceiling fan prewire w/ 2 switches — guest room</td><td class='n'>$209</td></tr><tr><td>F2</td><td>Bedroom 2 (Office)</td><td class='n'>1</td><td>Geary two-light flush mount — ceiling-box carrier</td><td class='n'>$169</td></tr><tr><td>F2</td><td>Primary Bedroom</td><td class='n'>1</td><td>Additional switch — accent-layer separation</td><td class='n'>$69</td></tr><tr><td>F2</td><td>Loft</td><td class='n'>1</td><td>Additional switch — accent-layer separation</td><td class='n'>$69</td></tr><tr class="tot"><td colspan="4">Lighting rough-in</td><td class="n">$934</td></tr></tbody></table>
+
+<h2><span class="kn">N3</span>Head-end — the tech closet</h2>
+<p class="lede">Wall board in the Bed-2 walk-in closet: top-down, ONT → UCG-Fiber → USW-Pro-Max-16-PoE → 24-port patch panel → Home Assistant host, UPS on the floor. Conditioned space retires the old garage thermal problem entirely; the switch is fanless and the stack is effectively silent, so it can share a wall with a desk. Feed everything from the new 20&nbsp;A dedicated circuit through the UPS. Post-close (Layer B): swap the closet door for a louvred one or add a passive vent grille — ~60&nbsp;W of gear in a sealed cupboard wants an air path. The attic conduit stub lands here, which makes every attic-reachable point in the house permanently upgradeable from the head-end.</p>
+
+<h2><span class="kn">N4</span>Segmentation — the governance layer</h2>
+<table><thead><tr><th>VLAN</th><th>SSID / scope</th><th>Notes</th></tr></thead><tbody>
+<tr><td>10</td><td>Salieri</td><td>Upper-floor household · trusted devices</td></tr>
+<tr><td>20</td><td>Daniel</td><td>Basement household · isolated from 10/30</td></tr>
+<tr><td>30</td><td>Guest / Parents</td><td>Client isolation on · bandwidth-capped</td></tr>
+<tr><td>40</td><td>IoT (shared)</td><td>Home Assistant + Matter/Thread + doorbell · no internet-initiated ingress · HA is the only cross-VLAN broker</td></tr>
+</tbody></table>
+
+<h2><span class="kn">N5</span>Budgets</h2>
+<table><thead><tr><th>Budget</th><th>Load</th><th>Capacity</th><th>Margin</th></tr></thead><tbody>
+<tr><td>PoE</td><td>3× U7 Pro ≈ 63 W (21 W ea)</td><td>180 W</td><td>117 W for doorbell/expansion</td></tr>
+<tr><td>Ports</td><td>3 AP (2.5G PoE++) + HA + ~8 active rooms</td><td>16 + 2× SFP+</td><td>~4 spare · 10G DAC gateway↔switch</td></tr>
+<tr><td>WAN</td><td>Any Quantum tier ≤ 8 Gbps</td><td>CGF: 10G SFP+/RJ45 WAN, 5 Gbps IDS/IPS</td><td>Gateway independent of tier choice</td></tr>
+</tbody></table>
+
+<h2><span class="kn">N6</span>Procurement — three phases</h2>
+<b style="font:600 11px ui-monospace,monospace;letter-spacing:.12em">PHASE 1 — KB DESIGN STUDIO ORDER (pre-drywall, irreversible)</b>
+<table><thead><tr><th>Code</th><th>Option</th><th class="n">Qty</th><th class="n">Unit</th><th class="n">Total</th></tr></thead>
+<tbody><tr><td>2010394</td><td>One Additional Cat6 Network Outlet</td><td class='n'>15</td><td class='n'>$119</td><td class='n'>$1,785</td></tr><tr><td>2010787</td><td>Ceiling Fan Prewire w/ 2 Switches</td><td class='n'>3</td><td class='n'>$209</td><td class='n'>$627</td></tr><tr><td>2010590</td><td>110V Interior Electrical Outlet</td><td class='n'>8</td><td class='n'>$69</td><td class='n'>$552</td></tr><tr><td>2018557</td><td>KB Entertain — Add Conduit Run (incl. 2× 110V)</td><td class='n'>1</td><td class='n'>$279</td><td class='n'>$279</td></tr><tr><td>2010655</td><td>Additional Switch</td><td class='n'>4</td><td class='n'>$69</td><td class='n'>$276</td></tr><tr><td>2010596</td><td>110V Outlet, 20A Separate Circuit</td><td class='n'>1</td><td class='n'>$259</td><td class='n'>$259</td></tr><tr><td>2010624</td><td>110V Exterior GFI Outlet</td><td class='n'>1</td><td class='n'>$209</td><td class='n'>$209</td></tr><tr><td>2022284</td><td>Geary 77064EN3 Two-Light Flush Mount</td><td class='n'>1</td><td class='n'>$169</td><td class='n'>$169</td></tr><tr><td>2010591</td><td>110V Interior Outlet with GFI</td><td class='n'>1</td><td class='n'>$79</td><td class='n'>$79</td></tr><tr class="tot"><td colspan="4">KB order total</td><td class="n">$4,235</td></tr></tbody></table>
+<b style="font:600 11px ui-monospace,monospace;letter-spacing:.12em">PHASE 2 — HARDWARE (order ~2 weeks before closing)</b>
+<table><thead><tr><th>Role</th><th>Item</th><th class="n">Price</th><th>Status</th></tr></thead><tbody>
+<tr><td>Gateway</td><td>UniFi Cloud Gateway Fiber — 10G WAN, NVR-capable</td><td class="n">$279</td><td><span class="tag ok">VERIFIED</span></td></tr>
+<tr><td>Switch</td><td>USW-Pro-Max-16-PoE — 180 W, 4× 2.5G PoE++ + 12× 1G PoE+ + 2× SFP+, fanless</td><td class="n">$399</td><td><span class="tag ok">VERIFIED</span></td></tr>
+<tr><td>APs ×3</td><td>U7 Pro — F2 landing · F1 central · basement</td><td class="n">$567</td><td><span class="tag ok">VERIFIED</span></td></tr>
+<tr><td>Brain</td><td>Home Assistant host + Thread border router</td><td class="n">~$100–150</td><td><span class="tag v">VERIFY</span></td></tr>
+<tr><td>Power</td><td>Line-interactive UPS ~1000–1500 VA</td><td class="n">~$150–230</td><td><span class="tag v">VERIFY</span></td></tr>
+<tr><td>Termination</td><td>Closet wall board · 24-port keystone patch panel · CAT6 keystones · slim leads · 10G DAC</td><td class="n">~$180–260</td><td>est.</td></tr>
+<tr class="tot"><td colspan="2">Phase 2 core (verified lines)</td><td class="n">$1,245</td><td>≈ $1.7–1.9K all-in</td></tr>
+</tbody></table>
+<b style="font:600 11px ui-monospace,monospace;letter-spacing:.12em">PHASE 3 — AT MOVE-IN (swappable, zero urgency)</b>
+<table><tbody>
+<tr><td>ISP</td><td>Quantum Fiber @ address — indicative 2026: 500M $50 · 1G $75 · 2G $95 · 3G $100 · 8G $165/mo. <b>Rec: start 1 Gig; 3 Gig if three households saturate it.</b> Request ONT placement in the closet at install.</td></tr>
+<tr><td>NVR</td><td>NVMe for UniFi Protect ($80–100) — add if/when a camera decision lands</td></tr>
+<tr><td>Later</td><td>Smart lock (verify Matter/Z-Wave protocol first) · leak sensors · shades — manifesto §25 Tier 2 · louvred closet door / vent grille</td></tr>
+</tbody></table>
+
+<h2><span class="kn">N7</span>Design Studio request — hand this over</h2>
+<pre>STRUCTURED WIRING REQUEST — Casa Dos Hermanos · KB Plan 2088 Elev C
+1. 15× CAT6 (2010394) home-run to ONE termination point in the
+   BEDROOM 2 WALK-IN CLOSET, per attached drop schedule.
+2. If the structured-wiring enclosure cannot be relocated there,
+   state its per-plan location; we will still take all 15 drops
+   to the Bed-2 closet as the termination point.
+3. 1× Conduit Run (2018557): Bed-2 closet → attic. Pull string.
+   ASK: is a second run, closet → basement ceiling void, possible?
+   (Two-storey path — add it if yes.)
+4. Fibre service entry: confirm entry location and provide a
+   path/conduit to the Bed-2 closet so the ONT can live there
+   (or an Ethernet handoff from the entry point).
+5. Confirm exterior CAT6 placement at the front-door frame (doorbell).
+6. Drops tested/certified? Provide per-drop results.
+7. Electrical adds per schedule: outlets 2010590/2010591/2010624,
+   20A circuit 2010596 (Bed-2 closet), switches 2010655,
+   fan prewires 2010787, Geary 2022284.
+8. Confirm: neutral at every switch box · HVAC C-wire + zoning
+   provisioning · in-ceiling speaker pre-wire availability ·
+   Traverse LED colour temperature + dimmability.
+9. Mark all drop/outlet locations + mounting heights on plan
+   for sign-off. No EV outlet — deliberately excluded.</pre>
+
+<h2><span class="kn">N8</span>Open / verify register</h2>
+<table><thead><tr><th>Where</th><th>Item</th></tr></thead><tbody><tr><td>Bedroom 2 (Office)</td><td>ASK: second conduit, closet → basement ceiling void</td></tr><tr><td>Bedroom 2 (Office)</td><td>Fibre service entry → path/conduit to Bed-2 closet; ONT placed in closet (or Ethernet handoff from entry point)</td></tr><tr><td>Bedroom 2 (Office)</td><td>Confirm: all 15 drops terminate in Bed-2 closet; if enclosure relocation is refused, name the per-plan enclosure location</td></tr><tr><td>Front Porch / Entry</td><td>Confirm exterior CAT6 placement at door frame + drops tested/certified with results</td></tr><tr><td>Great Room + Kitchen</td><td>In-ceiling speaker pre-wire (great room) — ask if offered</td></tr><tr><td>Primary Bedroom</td><td>In-ceiling speaker pre-wire (primary) — ask if offered</td></tr><tr><td>Loft</td><td>In-ceiling speaker pre-wire (loft) — ask if offered</td></tr><tr><td>Laundry</td><td>Confirm neutral at every switch box + HVAC C-wire/zoning provisioning</td></tr></tbody></table>
+
+<footer>CDH · N-1.0 rev 2 · generated from cdh_roughin_v2.json — the same dataset drives plan_roughin_v6.html, Register v2.1 and the Selection Schedule · en-GB · prices USD</footer>
+</div></body></html>

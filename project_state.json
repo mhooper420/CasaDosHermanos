@@ -1,0 +1,163 @@
+{
+  "north_star": "Family views the tools via one URL. PUBLISH STILL PENDING — now FIVE HTML files.",
+  "current_build": {
+    "index": "v2 (+Network card)",
+    "brief": "v24",
+    "plan": "interactive_v8 (rough-in v6 base + all branch deltas; head-end = Bed2 closet; order v2)",
+    "studio": "flooring-ledger + LVP catalogue 12/07 (322 rows / 42 groups; 11 lines / 89 colourways; picker persists cdh_lvp_colour_v1)",
+    "network": "N-1.0 rev 2 ($4,235, tech-closet head-end)",
+    "combos": "Tile Combinations v1 (NEW page; reads ledger v2 read-only; own state cdh_combos_v1)"
+  },
+  "merge_note": "plan v7 = plan_roughin_v5 (parallel branch: v4 + rough-in overlay, dims v3) + this branch's deltas (v5 dim-appends, v6 flooring) + dims v3 flags. ROUGHIN layer verified byte-identical through the merge; all non-intended DATA fields proven equal to base.",
+  "authoritative_data": {
+    "dimensions": "2088_authoritative_dims_v3.json — SUPERSEDES v2 (room values unchanged; +FMC confirmed-undefined flag, +R-23 verify flag, insulation provenance). v2 removed from bundle.",
+    "roughin_order": "cdh_roughin_v2.json — single source. KB order draft $4,235 (data 2,064 / power 1,237 / light 934); 31 'add' + 6 'verify'; head-end = Bed2 tech closet. Supersedes v1 ($4,514, garage head-end)."
+  },
+  "resolved_or_advanced": [
+    "Lighting Layer A (rough-in): DECIDED — drafted KB order covers drops, AP/doorbell points, fan prewires, accent-layer switching, head-end 20A, conduit risers",
+    "Low-voltage conduit run: IN the order (2× 2018557, head-end→attic and →basement, incl. 110V)",
+    "EV circuit: explicit HOLD — verify electric-ready code inclusion before paying $779",
+    "FMC tag: confirmed defined nowhere in captured set (dims v3) — site/KB verify only",
+    "Flooring conflict (prev) · Shaw thread (prev) · mobile tables (prev)"
+  ],
+  "open": [
+    "PUBLISH — six files",
+    "KB verify list v2 (see kb_verify_list_v2) -> then confirm $4,235 order (pre-drywall clock)",
+    "EV outlet: dropped from order — confirm whether electric-ready code covers it or it is deferred",
+    "PUBLISH — upload FIVE files (index, brief, plan, studio, network) → Pages main/root → share",
+    "Flooring: quote -7 request · enter Udie figure in studio · colourway sample 120 vs 200 vs Natural Tan",
+    "guest render (404) · primarybed version · bsmt_office card · day/night toggle",
+    "48/53 drawing pages · basement Option 1 partition plan",
+    "R-23 exterior wall: verify from batt label at insulation stage",
+    "Layer B lighting (fixtures/lamping/HA) — formally deferrable post-drywall",
+    "Smart-lock Matter/Z-Wave verification before hardware selection",
+    "Design Studio agenda: Traverse LED specs · Alabaster→Shoji confirm · kitchen-sink hierarchy · hall-bath metals · LVP colourway sample test (shortlist: Wiltshire/Bedford/Bastion/Ravenswood) · carpet colourway (120 Woven Path vs 200 Amber Glow)",
+    "Studio qty-stepper build (compose the $4,235 electrical order in the tally) — proposed, awaiting Proceed"
+  ],
+  "untouched_by_design": [
+    "ROUGHIN overlay internals (verified, not modified)",
+    "whcl/basement floors",
+    "insulation + window/door schedules not surfaced in plan UI",
+    "their standalone interactive_v5 (redundant intermediate — superseded by roughin base)"
+  ],
+  "flooring_lvp_catalogue": {
+    "source": "KB_Home_Vinyl_Plank_Options__v_07_26_.pdf (22 pp, 11 lines)",
+    "quoted_line": "Bryan Crossing KB731 (COREtec, 20 mil) — $5,288/$8,469 quotes attach HERE; other lines reprice",
+    "spec_watch": "Bandera + Layton Lake are 12 mil (below quoted spec); Barbary Coast is 22 mil premium",
+    "dna_shortlist_quoted_line": [
+      "02101 Wiltshire Oak (L/warm)",
+      "02098 Bedford Oak (LM/warm)",
+      "02095 Bastion Elm (LM/warm)",
+      "2091A Ravenswood Oak (M/warm)"
+    ],
+    "caveat": "All tone tags read from catalogue swatches — physical-sample test governs (flat on floor, vs Natural Tan drawdown + walnut offcut, warm light)"
+  },
+  "sitemap": {
+    "pages": {
+      "index.html": {
+        "role": "landing hub (cards HEAD-checked, auto-hide)",
+        "bytes": 4602,
+        "build": "hub (+Network, +Tile Combos cards)",
+        "images": 0,
+        "links_out": [
+          "brief.html",
+          "combos.html",
+          "network.html",
+          "plan.html",
+          "studio.html"
+        ],
+        "ls_keys": []
+      },
+      "brief.html": {
+        "role": "design brief",
+        "bytes": 114161,
+        "build": "v24",
+        "images": 34,
+        "links_out": [],
+        "ls_keys": []
+      },
+      "plan.html": {
+        "role": "interactive plan (dims + rough-in overlay)",
+        "bytes": 131198,
+        "build": "interactive_v8",
+        "images": 15,
+        "links_out": [],
+        "ls_keys": []
+      },
+      "studio.html": {
+        "role": "selection ledger + LVP catalogue + flooring panel",
+        "bytes": 884846,
+        "build": "catalogue build 12/07 (322 rows)",
+        "images": 0,
+        "links_out": [],
+        "ls_keys": []
+      },
+      "network.html": {
+        "role": "UniFi topology + rough-in order",
+        "bytes": 20131,
+        "build": "N-1.0 rev 2",
+        "images": 0,
+        "links_out": [],
+        "ls_keys": []
+      },
+      "combos.html": {
+        "role": "wet-area tile combination explorer (reads ledger read-only)",
+        "bytes": 60650,
+        "build": "combos v1 (12/07)",
+        "images": 0,
+        "links_out": [
+          "brief.html",
+          "index.html",
+          "network.html",
+          "plan.html",
+          "studio.html"
+        ],
+        "ls_keys": [
+          "cdh_combos_v1",
+          "cdh_selection_ledger_v2"
+        ]
+      }
+    },
+    "shared_storage": {
+      "cdh_selection_ledger_v2": "studio writes; combos reads (read-only)",
+      "cdh_flooring_rates_v1": "studio flooring panel",
+      "cdh_lvp_colour_v1": "studio LVP picker",
+      "cdh_combos_v1": "combos own state"
+    },
+    "companions": [
+      "2088_authoritative_dims_v3.json",
+      "cdh_roughin_v2.json",
+      "flooring_ratebook.json",
+      "CDH_Master_Room_Register_v2_1.xlsx",
+      "CDH_Selection_Schedule_v2.md",
+      "CDH_Family_Explainer_Wiring_Network.md"
+    ],
+    "nav_topology": "hub-and-spoke from index; combos additionally carries its own 5-link nav bar; other pages have no cross-links"
+  },
+  "publishing": {
+    "repo": "mhooper420/CasaDosHermanos",
+    "branch": "main",
+    "status": "NOT LIVE. Upload SIX HTML files (index, brief, plan, studio, network, combos) -> Settings>Pages main/root -> share.",
+    "live_url_when_enabled": "https://mhooper420.github.io/CasaDosHermanos/"
+  },
+  "headend_decision_2026_07_13": "Network head-end RELOCATED: garage -> Bedroom 2 (office) walk-in closet ('tech closet'). All 15 drops + fibre entry route there; conduit stub closet->attic ordered; second conduit closet->basement is an ASK. Supersedes all prior garage-head-end references.",
+  "roughin_order": {
+    "version": "cdh_roughin_v2.json",
+    "total": 4235,
+    "split": {
+      "data": 2064,
+      "power": 1237,
+      "light": 934
+    },
+    "items": "31 add + 6 verify (37)",
+    "ev": "REMOVED from order — confirm rationale (electric-ready covers it, or deferred?)"
+  },
+  "kb_verify_list_v2": [
+    "All 15 drops terminate in Bed2 closet",
+    "Fibre service entry -> path/conduit to closet",
+    "ASK: second conduit closet -> basement",
+    "Exterior CAT6 placement at door frame",
+    "Neutral at every switch box + HVAC C-wire",
+    "In-ceiling speaker prewire offered? (great/primary/loft)"
+  ]
+}
