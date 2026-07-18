@@ -1,0 +1,867 @@
+{
+ "provenance": {
+  "source_pdf": "2088_D4_03.21.25.pdf",
+  "pdf_pages_total": 53,
+  "pages_captured": [
+   17,
+   23,
+   32,
+   33,
+   35
+  ],
+  "plan": "224.2088",
+  "series": "Windler 25' Series RL",
+  "issuer": "KB Home Colorado, Inc.",
+  "issue_date": "2024-09-17",
+  "project_no": "840999276",
+  "code_basis": "2021 IRC",
+  "spec_level": "A",
+  "community": "Aurora, CO \u2014 Filing 4",
+  "sheets": {
+   "3.C1": "Floor Plans 'C' (dimension)",
+   "5.1": "First-floor electrical",
+   "p33": "Second-floor electrical",
+   "p35": "Basement electrical"
+  },
+  "scale": "1/4in = 1ft (22x34); 1/8in = 1ft (11x17)",
+  "configuration": "BASIC PLAN (base); contracted options appear as OPT annotations only",
+  "revisions": [
+   {
+    "tri": 1,
+    "desc": "ADDED OPTION",
+    "code": "CO24070COLP",
+    "date": "2024-10-25",
+    "by": "KBA"
+   },
+   {
+    "tri": 2,
+    "desc": "PLANCHECK",
+    "code": "CO24023COLP",
+    "date": "2024-11-13",
+    "by": "KBA"
+   },
+   {
+    "tri": 3,
+    "desc": "DIVISION REVISIONS",
+    "code": "CO24074COLP",
+    "date": "2024-11-27",
+    "by": "CTD"
+   },
+   {
+    "tri": 4,
+    "desc": "REFORMAT SHEETS",
+    "code": null,
+    "date": "~2024-12",
+    "by": null,
+    "confidence": "low"
+   }
+  ],
+  "extraction_date": "2026-07-10",
+  "authority": "Supersedes marketing-plan estimates for dimensions; does NOT supersede stud-to-stud site measurement; base configuration only",
+  "owner_verification": {
+   "date": "2026-07-12",
+   "items": [
+    "primary depth 14-4",
+    "bath2 width 5-3.5",
+    "powder width 5-11 (re-confirmed)",
+    "entry depth ~6-0 (low confidence)",
+    "insulation digits per owner reads"
+   ]
+  },
+  "ocr_verification": {
+   "date": "2026-07-12",
+   "notes": [
+    "Utility-legend transcription OCR-confirmed word-for-word against owner's legend crops (tesseract)",
+    "energysavingscomparisondisclosuresheet.pdf is a ZIP (KB non-standard pattern, 3rd occurrence): JPEG + boilerplate TXT only \u2014 no spec table; cross-check path closed",
+    "colwvol1final.pdf / colwvol2.pdf / Feature_Sheet.pdf are also ZIP-format"
+   ]
+  }
+ },
+ "envelope": {
+  "overall_width_ftin": "24-0",
+  "overall_depth_ftin": "67-0",
+  "front_width_chain": [
+   "5-0",
+   "10-0",
+   "9-0"
+  ],
+  "second_floor_width_chain": [
+   "22-0",
+   "2-0"
+  ],
+  "second_floor_depth_chains": [
+   "56-6",
+   "55-0"
+  ],
+  "living_block_chain": "36-8",
+  "garage_block_depth": "22-4",
+  "garage_rear_interior_chain": [
+   "10-0",
+   "4-2",
+   "7-10"
+  ],
+  "garage_door_ro": "16-4",
+  "porch_front_face_chain": [
+   "1-11",
+   "6-2",
+   "1-11",
+   "7-1",
+   "1-11"
+  ]
+ },
+ "rooms": [
+  {
+   "id": "entry",
+   "floor": 1,
+   "name": "Entry",
+   "finish_drawing": "F.M. SEE SPECS",
+   "ceiling": "8-0 (OPT 9-0)",
+   "dims_as_read": [
+    "width 5-11 strip",
+    "depth ~6-0 (owner, low confidence)"
+   ],
+   "openings": [
+    "3068 front door (OPT 3080 @ 9-1 PLT)"
+   ],
+   "keynotes": [],
+   "confidence": "medium"
+  },
+  {
+   "id": "coats",
+   "floor": 1,
+   "name": "Coats",
+   "finish_drawing": null,
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "2-10 x 4-2",
+    "+5.5in jamb"
+   ],
+   "openings": [],
+   "keynotes": [
+    33
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "powder",
+   "floor": 1,
+   "name": "Powder",
+   "finish_drawing": "F.M. SEE SPECS",
+   "ceiling": "8-0 (OPT 9-0)",
+   "dims_as_read": [
+    "width 5-11 (owner-verified)",
+    "depth unread"
+   ],
+   "openings": [],
+   "keynotes": [
+    17
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "kitchen",
+   "floor": 1,
+   "name": "Kitchen",
+   "finish_drawing": "F.M. SEE SPECS",
+   "ceiling": "8-0 (OPT 9-0)",
+   "dims_as_read": [
+    "counter runs 2-5.5 / 3-11.5 / 3-7",
+    "island offset 1-1",
+    "aisles 4-0.5 and 4-1",
+    "strip depth 7-2",
+    "island zone 8-11",
+    "bartop +34.5in"
+   ],
+   "openings": [],
+   "keynotes": [
+    1,
+    2,
+    3,
+    5,
+    7,
+    8,
+    9,
+    10,
+    41,
+    53
+   ],
+   "confidence": "high",
+   "note": "Galley + island \u2014 schedule's 12x13 square shape is wrong"
+  },
+  {
+   "id": "great",
+   "floor": 1,
+   "name": "Great Room",
+   "finish_drawing": "CARPET",
+   "ceiling": "8-0 (OPT 9-0)",
+   "dims_as_read": [
+    "window-wall seg 13-8.5",
+    "left chains 15-5.5 / 14-6.5",
+    "subs 4-1 / 3-6"
+   ],
+   "openings": [
+    "6068 SGD TEMP (OPT 6080 @ 9-1 PLT)",
+    "2050 SH pairs (OPT 2060)",
+    "6050 SL front (OPT 6060)"
+   ],
+   "keynotes": [],
+   "confidence": "medium"
+  },
+  {
+   "id": "laundry",
+   "floor": 1,
+   "name": "Laundry",
+   "finish_drawing": "F.M. SEE SPECS",
+   "ceiling": "8-0 (OPT 9-0)",
+   "dims_as_read": [
+    "5-2 wide",
+    "2-9.5 sub"
+   ],
+   "openings": [
+    "2668"
+   ],
+   "keynotes": [
+    8,
+    20,
+    21,
+    22,
+    52,
+    66
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "stairs",
+   "floor": 1,
+   "name": "Stairs (15R up)",
+   "finish_drawing": null,
+   "ceiling": null,
+   "dims_as_read": [
+    "width 3-6",
+    "landing 4-2",
+    "opening 4-4"
+   ],
+   "openings": [
+    "2040 SH TEMP sidewall (OPT 2050 SH @ 9-1 PL)",
+    "3050 FX above"
+   ],
+   "keynotes": [
+    31,
+    32,
+    54,
+    59,
+    64
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "garage",
+   "floor": 1,
+   "name": "Garage (base)",
+   "finish_drawing": "CONC.",
+   "ceiling": null,
+   "dims_as_read": [
+    "block depth 22-4",
+    "rear interior chain 22-0",
+    "door RO 16-4",
+    "piers 2-10 each"
+   ],
+   "openings": [
+    "16070 sectional",
+    "2868 man door"
+   ],
+   "keynotes": [
+    26,
+    46,
+    55,
+    56,
+    60,
+    65,
+    69
+   ],
+   "confidence": "high",
+   "note": "BASE plan \u2014 Garage Extension option not drawn"
+  },
+  {
+   "id": "porch",
+   "floor": 1,
+   "name": "Porch",
+   "finish_drawing": "CONC.",
+   "ceiling": "8-0 (OPT 9-0)",
+   "dims_as_read": [
+    "front face 1-11/6-2/1-11/7-1/1-11",
+    "posts 3.5in"
+   ],
+   "openings": [],
+   "keynotes": [
+    37,
+    64
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "stoop",
+   "floor": 1,
+   "name": "Stoop",
+   "finish_drawing": "CONC.",
+   "ceiling": null,
+   "dims_as_read": [
+    "10-0 zone"
+   ],
+   "openings": [],
+   "keynotes": [],
+   "confidence": "medium"
+  },
+  {
+   "id": "bdrm2",
+   "floor": 2,
+   "name": "Bedroom 2",
+   "finish_drawing": "CARPET",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "11-4 wide",
+    "right chain 12-9.5",
+    "shared 14-0"
+   ],
+   "openings": [
+    "3050 SH",
+    "2668"
+   ],
+   "keynotes": [
+    35
+   ],
+   "derived": {
+    "w_ft": 11.33,
+    "d_ft": 12.79,
+    "area_ft2": 144.9,
+    "area_m2": 13.46,
+    "basis": "chain-read depth \u2014 verify"
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "bdrm2_wic",
+   "floor": 2,
+   "name": "Bedroom 2 WIC",
+   "finish_drawing": "CARPET",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "42in shelf note"
+   ],
+   "openings": [
+    "2468"
+   ],
+   "keynotes": [
+    35
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "bdrm3",
+   "floor": 2,
+   "name": "Bedroom 3",
+   "finish_drawing": "CARPET",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "10-8 x 12-6"
+   ],
+   "openings": [
+    "3050 SH",
+    "2668"
+   ],
+   "keynotes": [
+    35
+   ],
+   "derived": {
+    "w_ft": 10.67,
+    "d_ft": 12.5,
+    "area_ft2": 133.3,
+    "area_m2": 12.39,
+    "basis": "clean W x D"
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "bath2",
+   "floor": 2,
+   "name": "Bath 2",
+   "finish_drawing": "REFER TO SPEC",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "5-3.5 wide (owner-verified)",
+    "12-0 strip",
+    "8-6.5 / 6-9.5 / 1-9",
+    "WC 3-5.5"
+   ],
+   "openings": [
+    "2030 SH TEMP",
+    "2468"
+   ],
+   "keynotes": [
+    11,
+    15,
+    17
+   ],
+   "confidence": "high",
+   "note": "floor drain in adjacent chase",
+   "derived": {
+    "w_ft": 5.29,
+    "d_ft": 12.0,
+    "area_ft2": 63.5,
+    "area_m2": 5.9,
+    "basis": "width owner-verified + strip length drawing"
+   }
+  },
+  {
+   "id": "wh_closet",
+   "floor": 2,
+   "name": "Water-heater closet (Bath 2/stair chase)",
+   "finish_drawing": null,
+   "ceiling": null,
+   "dims_as_read": [
+    "within chase"
+   ],
+   "openings": [
+    "2468"
+   ],
+   "keynotes": [
+    24,
+    25,
+    48
+   ],
+   "confidence": "high",
+   "note": "DISCOVERY: WH on Floor 2, not basement; floor drain present"
+  },
+  {
+   "id": "loft",
+   "floor": 2,
+   "name": "Loft / Opt. Bdrm 4",
+   "finish_drawing": "CARPET",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "14-2 x 10-0.5",
+    "stair opening 4-4"
+   ],
+   "openings": [
+    "6050 SL",
+    "3050 FX stairwell"
+   ],
+   "keynotes": [
+    31,
+    41,
+    44,
+    64
+   ],
+   "derived": {
+    "w_ft": 14.17,
+    "d_ft": 10.04,
+    "area_ft2": 142.3,
+    "area_m2": 13.22,
+    "basis": "clean W x D"
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "primary",
+   "floor": 2,
+   "name": "Primary Bedroom",
+   "finish_drawing": "CARPET",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "14-3 wide",
+    "14-4 deep (owner-verified)"
+   ],
+   "openings": [
+    "3050 SH x2",
+    "6050 SL rear",
+    "2668"
+   ],
+   "keynotes": [],
+   "confidence": "high",
+   "note": "Depth verified 14-4; supersedes 14x16 schedule assumption",
+   "derived": {
+    "w_ft": 14.25,
+    "d_ft": 14.33,
+    "area_ft2": 204.2,
+    "area_m2": 18.97,
+    "basis": "width drawing + depth owner-verified"
+   }
+  },
+  {
+   "id": "prim_bath",
+   "floor": 2,
+   "name": "Primary Bath",
+   "finish_drawing": "REFER TO SPEC",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "11-1",
+    "4-6.5 / 6-6.5 / 6-1 / 5-0",
+    "tub 4-0",
+    "WC 2-1"
+   ],
+   "openings": [
+    "2040 SH TEMP",
+    "2468"
+   ],
+   "keynotes": [
+    11,
+    15,
+    17,
+    34,
+    68
+   ],
+   "confidence": "high",
+   "note": "Base shows tub (KN 11); contracted shower-in-lieu supersedes"
+  },
+  {
+   "id": "prim_wic",
+   "floor": 2,
+   "name": "Primary WIC",
+   "finish_drawing": "CARPET",
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "9-10 x 5-3.5",
+    "segs 5-0 / 4-10",
+    "6-3 face",
+    "11.5in jamb"
+   ],
+   "openings": [
+    "2468"
+   ],
+   "keynotes": [
+    35
+   ],
+   "derived": {
+    "w_ft": 9.83,
+    "d_ft": 5.29,
+    "area_ft2": 52.0,
+    "area_m2": 4.83,
+    "basis": "clean W x D"
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "hall2",
+   "floor": 2,
+   "name": "Hall (Floor 2)",
+   "finish_drawing": null,
+   "ceiling": "8-0",
+   "dims_as_read": [
+    "7-5 / 1-7.5 / 1-11.5"
+   ],
+   "openings": [],
+   "keynotes": [
+    34,
+    50
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "basement_shell",
+   "floor": 0,
+   "name": "Unfinished Basement (base)",
+   "finish_drawing": null,
+   "ceiling": null,
+   "dims_as_read": [],
+   "openings": [],
+   "keynotes": [
+    49,
+    51,
+    63
+   ],
+   "confidence": "high",
+   "note": "OPT rough-in bath front-left; sump w/ WP-GFI outlet; gas taps x2 at FAU zone; low-volt panel at stair; keyless LEDs"
+  },
+  {
+   "id": "bdrm5_fragment",
+   "floor": 0,
+   "name": "Bedroom 5 (finished-option fragment)",
+   "finish_drawing": null,
+   "ceiling": null,
+   "dims_as_read": [
+    "recessed cans 8-5.25 / 2-6 o.c."
+   ],
+   "openings": [
+    "egress well"
+   ],
+   "keynotes": [
+    63
+   ],
+   "confidence": "medium",
+   "note": "KB nomenclature: basement bedroom = BDRM 5; UNDER PORCH storage; relocated water shutoff"
+  }
+ ],
+ "windows": [
+  {
+   "code": "3050 SH",
+   "w_ftin": "3-0",
+   "h_ftin": "5-0",
+   "type": "single-hung",
+   "locations": [
+    "bdrm2",
+    "bdrm3",
+    "primary x2"
+   ]
+  },
+  {
+   "code": "3050 FX",
+   "w_ftin": "3-0",
+   "h_ftin": "5-0",
+   "type": "fixed",
+   "locations": [
+    "stairwell (KN44 balloon wall)"
+   ]
+  },
+  {
+   "code": "6050 SL",
+   "w_ftin": "6-0",
+   "h_ftin": "5-0",
+   "type": "slider",
+   "locations": [
+    "loft",
+    "primary rear"
+   ]
+  },
+  {
+   "code": "2030 SH TEMP",
+   "w_ftin": "2-0",
+   "h_ftin": "3-0",
+   "type": "single-hung tempered",
+   "locations": [
+    "bath2"
+   ]
+  },
+  {
+   "code": "2040 SH TEMP",
+   "w_ftin": "2-0",
+   "h_ftin": "4-0",
+   "type": "single-hung tempered",
+   "locations": [
+    "prim_bath",
+    "stair sidewall F1"
+   ]
+  },
+  {
+   "code": "2050 SH",
+   "opt_code": "2060 SH @ 9-1 PL",
+   "w_ftin": "2-0",
+   "h_ftin": "5-0 (opt 6-0)",
+   "type": "single-hung",
+   "locations": [
+    "great room right x2",
+    "entry side x1"
+   ]
+  },
+  {
+   "code": "6050 SL",
+   "opt_code": "6060 SL @ 9-1 PL",
+   "w_ftin": "6-0",
+   "h_ftin": "5-0 (opt 6-0)",
+   "type": "slider",
+   "locations": [
+    "porch front / great room front"
+   ]
+  },
+  {
+   "code": "6068 SGD TEMP",
+   "opt_code": "6080 SGD @ 9-1 PLT HGT",
+   "w_ftin": "6-0",
+   "h_ftin": "6-8 (opt 8-0)",
+   "type": "sliding glass door",
+   "locations": [
+    "great room to stoop"
+   ]
+  }
+ ],
+ "doors": [
+  {
+   "code": "3068",
+   "opt_code": "3080 @ 9-1 PLT",
+   "location": "front entry"
+  },
+  {
+   "code": "2868",
+   "location": "garage man door"
+  },
+  {
+   "code": "2668",
+   "location": "bedrooms, laundry, primary"
+  },
+  {
+   "code": "2468",
+   "location": "baths, WICs, pantry, WH closet"
+  },
+  {
+   "code": "16070",
+   "location": "garage sectional, RO 16-4",
+   "keynote": 60
+  }
+ ],
+ "electrical": {
+  "service": [
+   "gas meter",
+   "200A meter w/ emergency main shutoff",
+   "service panel",
+   "CATV service box",
+   "telephone service box",
+   "whole-house surge protector in sub-panel",
+   "irrigation controller receptacle",
+   "AC 220V fused disconnect + GFI"
+  ],
+  "solar_ready": "J-boxes garage + attic w/ conduit and pull-string, labelled",
+  "low_volt_panel": "stair wall (F1 + basement callouts)",
+  "tv_jbox_great_room": "+84in AFF, CATV+phone",
+  "dining_pendants": "2x HD ceiling J-boxes @ 2-6 / 2-6 o.c.",
+  "kitchen": [
+   "2 pendants over island",
+   "AFCI counter ring ~5",
+   "220V + OPT GAS range",
+   "hood above / disposal+DW below"
+  ],
+  "bedrooms": [
+   "HD ceiling J-box fan-ready",
+   "switched half-hot",
+   "CATV/phone",
+   "smoke det each"
+  ],
+  "baths": [
+   "WHF 50CFM",
+   "VP light over tub/shower",
+   "GFI +44in"
+  ],
+  "laundry": [
+   "continuous-running fan (see specs)",
+   "WHF w/ timer",
+   "220V dryer",
+   "recessed washer valves",
+   "GAS OPT"
+  ],
+  "garage_circuits": {
+   "bays": "20A",
+   "gdo": "20A",
+   "other": "15A"
+  },
+  "exterior": [
+   "photo cell",
+   "opt coach lights",
+   "low-volt address illumination",
+   "WP outlets front+rear",
+   "hose bibs front+rear"
+  ],
+  "ev_charging": "NOT in base electrical \u2014 owner add"
+ },
+ "keynotes_floorplan": {
+  "1": "Sink with garbage disposal - verify dims w/ mfr specs",
+  "2": "Dishwasher - provide air gap - verify spacing/dims per mfr",
+  "3": "Slide-in range-oven combo w/ vented hood, 140 CFM, w/ light & fan",
+  "4": "Cooktop - vented hood 140 CFM w/ light & fan (vent to outside)",
+  "5": "Refrigerator space w/ optional cabinets above - 34in clear UNO - icemaker plumbing recessed",
+  "6": "Combination double oven or oven/microwave - verify dims",
+  "7": "Base cabinets - refer to interior elevations",
+  "8": "Upper cabinets - refer to interior elevations",
+  "9": "Pantry with shelves (see specs)",
+  "10": "Island cabinet - refer to interior elevations",
+  "11": "Tub/shower combination w/ wainscot to 72in above drain",
+  "12": "Oval tub - verify dims",
+  "13": "Shower pan w/ wainscot to 72in",
+  "14": "Shatterproof (tempered) glass shower enclosure w/ towel bar, 22in min net clear door opening (P2708.1.1)",
+  "15": "Towel bar - provide 2x solid backing",
+  "16": "Recessed medicine cabinet (mirrored)",
+  "17": "Toilet paper holder",
+  "18": "Extend vanity - refer to interior elevations",
+  "19": "Optional sink",
+  "20": "Water and waste for washer (control valves recessed in wall)",
+  "21": "Dryer vent (M1502 & G2439)",
+  "22": "Smitty pan w/ drain below washer/water heater",
+  "23": "Laundry sink - verify dims w/ mfr specs",
+  "24": "Water heater - pan and drain per P2801.6",
+  "25": "T&P relief valve - drain to exterior at grade",
+  "26": "3in dia concrete-filled pipe bollard 36in high, 24in embedment (M1307.3.1)",
+  "27": "22.5 x 30in crawl space access",
+  "28": "Pre-mfr metal gas appliance fireplace (IRC ch 24 & R1004)",
+  "29": "Non-combustible hearth material (as required)",
+  "30": "Route of fireplace B-vent from below (direct vent)",
+  "31": "+42in guardwall (R312)",
+  "32": "34-38in high handrail (R311.7.8)",
+  "33": "Coats with shelving (see specs)",
+  "34": "Linen with shelving (see specs)",
+  "35": "Wardrobe with shelf & pole (see specs)",
+  "36": "Media niche - refer to interior elevations",
+  "37": "Flat soffit - refer to legend for height",
+  "38": "Arched soffit - refer to plan for height",
+  "39": "Line of ceiling break",
+  "40": "Interior shelf - refer to plan for height",
+  "41": "Low wall - refer to plan for height",
+  "42": "Location of plumbing waste drop from above",
+  "43": "2x6 wall",
+  "44": "2x6 balloon framed wall - refer to structural",
+  "45": "Double 2x4 wall",
+  "46": "Line of floor or wall above",
+  "47": "Line of floor or wall below",
+  "48": "WH sealed unit vent to/from outside air (power direct vent)",
+  "49": "FAU sealed unit vent to/from OSA (power direct vent), sealed combustion air direct from outside",
+  "50": "22.5x30in attic access (R807.1) gasketed for air-tight fit",
+  "51": "FAU location - provide fuel gas - refer to utility plan",
+  "52": "Duct chase - refer to mechanical plan; penetrations sealed air-tight floor-to-floor and ceiling-to-attic",
+  "53": "Bartop/breakfast-bar counter top as specified - refer to plan for width",
+  "54": "1/2in gypsum board on ceiling and walls at useable space under stairs (302.7)",
+  "55": "Garage separated from residence and attic by >= 1/2in gyp on garage side (Table 302.6)",
+  "56": "Garages beneath habitable rooms: >= 5/8in Type X gyp or equivalent; floor-ceiling assembly supports also protected by >= 1/2in gyp",
+  "57": "Line of tray ceiling",
+  "58": "Line of optional volume ceiling",
+  "59": "Provide additional riser(s) at optional plate height",
+  "60": "Sectional garage door per specs",
+  "61": "Direct vent termination at gas fireplace option",
+  "62": "Access panel - see plan for size",
+  "63": "Egress window - see also detail 24/AD2",
+  "64": "+42in open rail",
+  "65": "Masonry veneer - refer to elevations for material",
+  "66": "Shelving (see specs)",
+  "67": "Area for water softener - see mfr specs",
+  "68": "Pre-insulate and thermo-ply",
+  "69": "Block & seal between joists at garage-to-house wall"
+ },
+ "insulation_spec": {
+  "note": "Values as read by owner from labelled crops 2026-07-12; energy-disclosure PDF is image-only so no independent cross-check yet. None of these drive owner decisions (KB performance path).",
+  "attic": "R-60",
+  "ext_wall_2x6": "ILLEGIBLE AT CAPTURE RESOLUTION \u2014 three readers conflict (manual R-2x, owner 5x, OCR 38). Physics caps kraft-faced 2\u00d76 batts at ~R-23, making R-23 the most probable value. Zero decision impact. Definitive resolution: photograph a batt label during the insulation-stage walk.",
+  "rim_band": "R-14 (owner read)",
+  "cantilever": "R-45 (owner read)",
+  "floor_over_garage": "R-48 (owner read)",
+  "basement_wall": "R-19 drapes (owner read)",
+  "crawl_wall": "R-19 drapes (assumed same as basement; original read ambiguous)",
+  "windows_u": "U-0.30",
+  "windows_shgc": "SHGC-0.34 (owner-verified)",
+  "front_door": "R-5",
+  "crawl_vapour_barrier": "Guardian liner 10 mil ASTM E96-B, mechanically fastened, taped seams/penetrations",
+  "whole_house_fan_cfm": "50-110"
+ },
+ "option_deltas": [
+  {
+   "option": "9ft first-floor ceilings (contracted)",
+   "effect": "OPT 9-0 CLG tags; 9-1 plate; windows +1 size (2050>2060 SH, 6050>6060 SL), SGD 6068>6080, door 3068>3080; KN59 extra riser"
+  },
+  {
+   "option": "Finished Basement Option 1 (contracted)",
+   "effect": "Basement bedroom = BDRM 5; rough-in bath front-left; partial can layout 8-5.25/2-6 o.c.; full partition plan still outstanding"
+  },
+  {
+   "option": "Garage Extension (contracted)",
+   "effect": "Not drawn; base block 22-4 deep; capture option sheet"
+  },
+  {
+   "option": "Primary shower-in-lieu-of-tub (contracted)",
+   "effect": "Base shows 4-0 tub (KN11); selected option supersedes"
+  }
+ ],
+ "flags": [
+  "Water heater located Floor 2 closet (KN24/25/48 + floor drain) \u2014 schedule assumed basement; FAU is basement",
+  "Drawing default floors: CARPET in great room/bedrooms/loft \u2014 confirms flooring spec conflict vs LVP manifesto",
+  "Kitchen is galley (7-2 strip + island), not 12x13 \u2014 re-model schedule",
+  "Loft 142 ft2 vs schedule 120",
+  "EV circuit absent from base electrical",
+  "Only 5/53 PDF pages captured \u2014 obtain full set",
+  "FMC door tag: confirmed defined nowhere in the captured set (absent from utility legend per OCR and from all 69 keynotes) \u2014 ask KB rep",
+  "Exterior-wall R-value cell illegible; probable R-23; verify from batt label at insulation stage"
+ ]
+}

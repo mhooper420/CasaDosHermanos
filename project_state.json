@@ -1,17 +1,19 @@
 {
   "north_star": "Family views the tools via one URL. PUBLISH STILL PENDING — now FIVE HTML files.",
   "current_build": {
-    "index": "v2 (+Network card)",
-    "brief": "v24",
-    "plan": "interactive_v8 (rough-in v6 base + all branch deltas; head-end = Bed2 closet; order v2)",
-    "studio": "flooring-ledger + LVP catalogue 12/07 (322 rows / 42 groups; 11 lines / 89 colourways; picker persists cdh_lvp_colour_v1)",
-    "network": "N-1.0 rev 2 ($4,235, tech-closet head-end)",
-    "combos": "Tile Combinations v1 (NEW page; reads ledger v2 read-only; own state cdh_combos_v1)"
+    "index": "8 cards",
+    "brief": "v26 — inventory + cards fully synced to plan v8 dims (incl. owner-verified powder/bath2/entry values; garage/pantry/porch/coats/stair/PWIC rows now dimensioned)",
+    "plan": "interactive_v9 (ROUGHIN = order v2.1)",
+    "studio": "13/07 build — 323 rows/42 groups; kitchen counter+backsplash restructured (Full-Splash combos -> counter group; BSP-INC baseline added); shower ILO tub w/ seat (2009097) set as selection; swatch layer wired (18 rows w/ lightbox composites + 85 LVP picker thumbnails; onerror-safe pre-push) | Finishes-reference tab: +Daltile 29 collections (floor/surround/splash tiers, statement custom-quote flags), +Lake Mabel 4 colourways (hex+swatch), +Bryan Crossing 9 colourways (hex+swatch)",
+    "network": "N-1.0 rev 2.1",
+    "combos": "v2 (+AUTH bath geometry, +ROOMGEOM interactive preview; ✻ tile colour names verified/corrected)",
+    "lighting": "NEW page",
+    "walk": "NEW page W-1.0"
   },
   "merge_note": "plan v7 = plan_roughin_v5 (parallel branch: v4 + rough-in overlay, dims v3) + this branch's deltas (v5 dim-appends, v6 flooring) + dims v3 flags. ROUGHIN layer verified byte-identical through the merge; all non-intended DATA fields proven equal to base.",
   "authoritative_data": {
     "dimensions": "2088_authoritative_dims_v3.json — SUPERSEDES v2 (room values unchanged; +FMC confirmed-undefined flag, +R-23 verify flag, insulation provenance). v2 removed from bundle.",
-    "roughin_order": "cdh_roughin_v2.json — single source. KB order draft $4,235 (data 2,064 / power 1,237 / light 934); 31 'add' + 6 'verify'; head-end = Bed2 tech closet. Supersedes v1 ($4,514, garage head-end)."
+    "roughin_order": "cdh_roughin_v2_1.json — single source. KB order draft $4,235 (data 2,064 / power 1,237 / light 934); 32 'add' + 6 'verify'; head-end = Bed2 tech closet. Supersedes v1 ($4,514, garage head-end). v2.1: great-room drop split into two placed singles (TV panel + console); total unchanged."
   },
   "resolved_or_advanced": [
     "Lighting Layer A (rough-in): DECIDED — drafted KB order covers drops, AP/doorbell points, fan prewires, accent-layer switching, head-end 20A, conduit risers",
@@ -21,6 +23,7 @@
     "Flooring conflict (prev) · Shaw thread (prev) · mobile tables (prev)"
   ],
   "open": [
+    "Upload swatches/ folder to repo (unzip pack, drag folder) + re-upload studio.html",
     "PUBLISH — six files",
     "KB verify list v2 (see kb_verify_list_v2) -> then confirm $4,235 order (pre-drywall clock)",
     "EV outlet: dropped from order — confirm whether electric-ready code covers it or it is deferred",
@@ -71,7 +74,7 @@
       "brief.html": {
         "role": "design brief",
         "bytes": 114161,
-        "build": "v24",
+        "build": "v26",
         "images": 34,
         "links_out": [],
         "ls_keys": []
@@ -159,5 +162,22 @@
     "Exterior CAT6 placement at door frame",
     "Neutral at every switch box + HVAC C-wire",
     "In-ceiling speaker prewire offered? (great/primary/loft)"
+  ],
+  "selections_corrected_2026_07_13": {
+    "kitchen": "Counter and backsplash are now two independent picks. Silestone 'with Full Splash' codes (2022909-12) relocated to the counter group with double-spec guard notes; BSP-INC ($0, default) added so 'included backsplash' is representable.",
+    "primary_bath": "2009097 Shower in lieu of Tub — includes basic surround, solid-surface SEAT and enclosure ($2,129) — now the default/selected; tub/shower combo 2009718 de-defaulted. Tile upgrades ride the Shower Tile Surround groups.",
+    "canterbury_elm": "02093 swatch-verified light-mid warm -> DNA fit (was unverifiable)."
+  },
+  "swatch_pack": {
+    "file": "CDH_swatches_pack.zip",
+    "count": 104,
+    "repo_path": "swatches/ (folder at repo root)",
+    "design": "colourways get singles (LVP picker); style/product rows get order-independent composites; price-tier groups (backsplash/surround/Silestone tiers) intentionally unswatched — a tier is not a colour",
+    "caveat": "20 first-pass extractions were silently black (inverted-CMYK) — caught by luminance audit and re-extracted"
+  },
+  "electrical_confirmation": "files__47_.zip = THIRD byte-identical delivery of the electrical package (after electricalnetwork.zip and files__41_.zip). All six files md5-match the integrated state. plan v8 / network rev 2 / order v2 already carry everything.",
+  "architecture_decision_update_2026_07_18": "Reopen trigger FIRED: active multi-file iteration cadence + recurring parallel-session lineage collisions (2x interactive_v5, 2x v7, stale siblings, 3 identical re-sends). Recommendation: move artifact development to Claude Code against the git repo; chat remains for design thinking and document analysis. Current outputs set = the seed commit.",
+  "resolved": [
+    "✻ tile colour-name verification (7 collections corrected in combos v2; studio pal tab regenerated from source)"
   ]
 }

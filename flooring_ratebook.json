@@ -1,0 +1,52 @@
+{
+ "generated": "2026-07-12",
+ "quote_docs": {
+  "-2": "00857262-2, 26/06/2026",
+  "-5": "00857262-5, 10/07/2026",
+  "-6": "00857262-6, 10/07/2026"
+ },
+ "decisions_2026_07_12": {
+  "lvp": "main floor ($5,288)",
+  "carpet": "Lake Mabel KB322 + 8lb pad, all upstairs zones (price TBD)",
+  "comfort": "plush rug in Primary post-close (Naples Bay retired)",
+  "wet": "Marble Obsession tile ($2,546)",
+  "stairs": "carpet \u2014 2018602 conversion NOT required"
+ },
+ "tier_A": {
+  "lvp_main_504sf": 5288,
+  "lvp_ext_plank": 8469,
+  "stair_conversion_2018602": 3349,
+  "winterhaven_pad_all_upstairs": 2834,
+  "winterhaven_pad_bedrooms": 1786,
+  "tile_181sf": 2546,
+  "pad8lb_component_beds": 600.76,
+  "pad8lb_component_allup": 952.99
+ },
+ "tier_B": {
+  "lvp_delta_per_sf": [
+   9.5,
+   10.5
+  ],
+  "winterhaven_carpet_delta_per_sf": 2.0,
+  "pad_upgrade_per_sf": 1.0,
+  "tile_delta_per_sf": 14.0,
+  "stair_conversion_per_tread": [
+   255,
+   260
+  ],
+  "takeoff_validation": "quote-implied carpet area ratio 1.586 reproduced by room-schedule zones"
+ },
+ "tier_D": {
+  "lake_mabel_all_upstairs_est": [
+   3300,
+   5000
+  ],
+  "note": "uncited band pending quote -7; also request Watson Creek / Lambert Mills at same zones"
+ },
+ "scenarios": {
+  "committed_known_ex_lake_mabel": 7834,
+  "A_quote_minus6": 10668,
+  "B_quote_minus5": 16150,
+  "C_manifesto_estimate": 21900
+ }
+}
