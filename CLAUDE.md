@@ -12,13 +12,13 @@ Eight-page static site + data companions for a KB Home Plan 2088 build (Aurora, 
 - `combos.html` — tile explorer v2. **Reads** the ledger key (read-only); own state `cdh_combos_v1`. Carries `COLLECTIONS` (tile dataset — the SOURCE for studio's two Daltile pal-tab categories: regenerate them from here on any change), `AUTH` (bath geometry from D4/dims v3), `ROOMGEOM`
 - `lighting.html` — lighting studio (self-contained SVG room plans, 2700 K)
 - `walk.html` — pre-drywall Walk Sheet W-1.0 (site-visit checklist)
-- `swatches/` — catalogue-extracted swatches, referenced by absolute raw.githubusercontent URLs with `onerror` hiding
+- Swatch images (catalogue-extracted) live at repo **root**, referenced by absolute `raw.githubusercontent.com/…/main/<file>` URLs with `onerror` hiding
 - Photos live at repo **root** (historical convention — don't move them)
-- `data/` — sources of record (below)
+- Data sources of record — JSON files at repo **root** (below)
 
-## Sources of record (`data/`)
+## Sources of record (repo root)
 - `2088_authoritative_dims_v3.json` — dimensions. Supersedes KB schedule estimates; plan + brief are reconciled to it
-- `cdh_roughin_v2_1.json` — electrical order **$4,235** (data 2,064 / power 1,237 / light 934; 32 add + 6 verify — great-room drop = 2× placed singles as of v2.1). **Head-end = Bedroom 2 walk-in closet** (garage superseded 13/07/26)
+- `cdh_roughin_v2_1.json` — electrical order **$4,235** (data 2,064 / power 1,237 / light 934; 30 add + 8 verify — great-room drop = 2× placed singles as of v2.1). **Head-end = Bedroom 2 walk-in closet** (garage superseded 13/07/26)
 - `flooring_ratebook.json` — provenance-tiered flooring pricing (tiers A quoted … D uncited)
 - `project_state.json` — frozen chat-era state snapshot (historical reference)
 
@@ -48,4 +48,4 @@ Numbers shown on pages must match these files. When a source updates, **grep the
 - When a decision lands, add it to **Locked decisions** above in the same commit
 
 ## Open items (short list)
-Quote -7 Lake Mabel → enter figure in studio rate input · KB verify list = the 6 `"status":"verify"` items in `cdh_roughin_v2_1.json` → then confirm the order (pre-drywall clock) · EV outlet dropped from order — confirm rationale · guest render missing (404 by design in brief) · primarybed image version unconfirmed · day/night image toggle unbuilt (8 pairs) · 48/53 drawing-set pages outstanding · Design Studio: LVP colourway sample test (Wiltshire / Bedford / Bastion / Ravenswood / Canterbury) + carpet 120 vs 200 vs Natural Tan drawdown
+Quote -7 Lake Mabel → enter figure in studio rate input · KB verify list = the 8 `"status":"verify"` items in `cdh_roughin_v2_1.json` → then confirm the order (pre-drywall clock) · EV outlet dropped from order — confirm rationale · guest render missing (404 by design in brief) · primarybed image version unconfirmed · day/night image toggle unbuilt (8 pairs) · 48/53 drawing-set pages outstanding · Design Studio: LVP colourway sample test (Wiltshire / Bedford / Bastion / Ravenswood / Canterbury) + carpet 120 vs 200 vs Natural Tan drawdown
