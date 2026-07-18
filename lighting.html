@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lighting Studio · Casa Dos Hermanos</title>
+<style>
+  :root{
+    --ink:#10151C;            /* night ground (deeper than Naval) */
+    --naval:#2E3B4E;          /* SW 6244 Naval (screen approx) */
+    --naval-soft:#25303F;
+    --shoji:#E8E2D4;          /* SW 7042 Shoji White (screen approx) */
+    --tan:#D9CBB4;            /* SW 7567 Natural Tan (screen approx) */
+    --pewter:#8A9187;         /* SW 6208 Pewter Green (screen approx) */
+    --shade:#4E5B51;          /* SW 6188 Shade-Grown (screen approx) */
+    --brass:#B4905A;          /* aged brass */
+    --glow:#FFC07E;           /* ~2700 K lamp warmth */
+    --line:rgba(138,145,135,.28);
+    --ask:#B4905A; --verify:#8A9187; --mandated:#4E5B51;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink); color:var(--shoji);
+    font:15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:"Iowan Old Style", Georgia, "Times New Roman", serif;}
+  .mono{font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace;}
+
+  header{
+    position:sticky; top:0; z-index:20;
+    background:linear-gradient(180deg, rgba(16,21,28,.97), rgba(16,21,28,.88));
+    border-bottom:1px solid var(--line);
+    padding:14px 20px 0;
+    backdrop-filter:blur(6px);
+  }
+  .masthead{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .masthead h1{font-size:20px; letter-spacing:.02em; font-weight:600;}
+  .masthead h1 .amp{color:var(--brass);}
+  .masthead .ver{color:var(--pewter); font-size:12px;}
+  .masthead .k{margin-left:auto; color:var(--tan); font-size:12px; border:1px solid var(--line); border-radius:999px; padding:2px 10px;}
+  nav{display:flex; gap:4px; margin-top:10px; overflow-x:auto;}
+  nav button{
+    appearance:none; background:none; border:none; border-bottom:2px solid transparent;
+    color:var(--pewter); font:inherit; font-size:13.5px; padding:8px 14px; cursor:pointer; white-space:nowrap;
+  }
+  nav button:hover{color:var(--tan);}
+  nav button[aria-selected="true"]{color:var(--shoji); border-bottom-color:var(--brass);}
+  nav button:focus-visible{outline:2px solid var(--brass); outline-offset:-2px;}
+
+  main{max-width:1180px; margin:0 auto; padding:22px 20px 80px;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .roomhead{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:4px;}
+  .roomhead h2{font-size:26px; font-weight:600;}
+  .roomhead .dims{color:var(--pewter); font-size:13px;}
+  .phase{font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--tan);
+         border:1px solid var(--line); border-radius:999px; padding:2px 10px;}
+  .intent{color:var(--tan); max-width:72ch; margin:6px 0 18px;}
+
+  .roomgrid{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:20px; align-items:start;}
+  @media (max-width:920px){ .roomgrid{grid-template-columns:1fr;} }
+
+  .card{background:var(--naval-soft); border:1px solid var(--line); border-radius:14px; padding:16px 16px 14px;}
+  .card h3{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--pewter); margin-bottom:10px;}
+  .card + .card{margin-top:16px;}
+
+  .plancard{background:#131A23; position:sticky; top:96px;}
+  @media (max-width:920px){ .plancard{position:static;} }
+  .planwrap{background:#0C1118; border:1px solid var(--line); border-radius:10px; padding:8px;}
+  .planwrap svg{display:block; width:100%; height:auto;}
+
+  .controls{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; align-items:center;}
+  .controls .grp{display:flex; gap:6px; flex-wrap:wrap; align-items:center;}
+  .controls .lbl{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--pewter); margin-right:2px;}
+  .scenebtn{
+    appearance:none; font:inherit; font-size:13px; cursor:pointer;
+    background:transparent; color:var(--tan);
+    border:1px solid var(--line); border-radius:999px; padding:4px 12px;
+  }
+  .scenebtn:hover{border-color:var(--pewter);}
+  .scenebtn[aria-pressed="true"]{background:var(--brass); border-color:var(--brass); color:#141210; font-weight:600;}
+  .scenebtn:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .laytog{display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--tan); cursor:pointer;
+          border:1px solid var(--line); border-radius:999px; padding:4px 10px; user-select:none;}
+  .laytog input{accent-color:var(--brass);}
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
+  .dot.ambient{background:var(--glow);}
+  .dot.task{background:var(--brass);}
+  .dot.accent{background:var(--shade); outline:1px solid var(--pewter);}
+  .dot.infra{background:var(--pewter);}
+
+  .legend{margin-top:10px; color:var(--pewter); font-size:12px; display:flex; gap:14px; flex-wrap:wrap;}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+
+  table.spec{width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.spec td{padding:6px 8px 6px 0; vertical-align:top; border-top:1px solid var(--line);}
+  table.spec tr:first-child td{border-top:none;}
+  table.spec td:first-child{color:var(--pewter); width:34%;}
+
+  ul.ri{list-style:none;}
+  ul.ri li{display:flex; gap:10px; padding:9px 0; border-top:1px solid var(--line); align-items:flex-start;}
+  ul.ri li:first-child{border-top:none;}
+  .chip{font-size:10.5px; letter-spacing:.07em; font-weight:700; border-radius:4px; padding:2px 7px; flex:none; margin-top:2px;}
+  .chip.ASK{background:var(--ask); color:#141210;}
+  .chip.VERIFY{background:transparent; color:var(--tan); border:1px solid var(--pewter);}
+  .chip.MANDATED{background:var(--mandated); color:var(--shoji);}
+  .ri .t{font-size:13.5px;}
+  .ri .s{color:var(--pewter); font-size:12.5px; margin-top:2px;}
+
+  .bulb{display:flex; gap:10px; flex-wrap:wrap;}
+  .bulb .b{border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-size:13px; color:var(--tan);}
+  .bulb .b strong{color:var(--shoji); display:block; font-size:15px;}
+
+  /* checklist view */
+  .clhead{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:6px;}
+  .clhead h2{font-size:26px;}
+  .clsub{color:var(--tan); max-width:78ch; margin-bottom:18px;}
+  .clactions{display:flex; gap:10px; margin:0 0 18px; flex-wrap:wrap;}
+  .abtn{appearance:none; font:inherit; font-size:13.5px; cursor:pointer; border-radius:8px; padding:7px 14px;
+        background:var(--brass); color:#141210; border:1px solid var(--brass); font-weight:600;}
+  .abtn.ghost{background:transparent; color:var(--tan); border-color:var(--line);}
+  .abtn:focus-visible{outline:2px solid var(--shoji); outline-offset:2px;}
+  .clgroup{margin-bottom:20px;}
+  .clgroup h3{font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--pewter); margin-bottom:6px;}
+  ul.cl{list-style:none;}
+  ul.cl li{display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border:1px solid var(--line);
+           border-radius:10px; margin-bottom:8px; background:var(--naval-soft);}
+  ul.cl input[type="checkbox"]{width:17px; height:17px; accent-color:var(--brass); margin-top:3px; flex:none;}
+  ul.cl .body{flex:1;}
+  ul.cl .t{font-size:14px;}
+  ul.cl .s{color:var(--pewter); font-size:12.5px; margin-top:2px;}
+  ul.cl li.done .t{color:var(--pewter); text-decoration:line-through;}
+  .counts{color:var(--pewter); font-size:12.5px; margin-top:4px;}
+
+  footer{max-width:1180px; margin:0 auto; padding:0 20px 40px; color:var(--pewter); font-size:12px; line-height:1.6;}
+  footer .rule{border-top:1px solid var(--line); padding-top:14px;}
+
+  .print-only{display:none;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .glow{transition:opacity .55s ease;}
+    .fixmark{transition:opacity .4s ease;}
+  }
+
+  @media print{
+    body{background:#fff; color:#111; font-size:12px;}
+    header, .view, footer, .clactions, nav{display:none !important;}
+    #view-checklist{display:block !important;}
+    #view-checklist .clhead h2, #view-checklist .clsub{color:#111;}
+    .print-only{display:block; margin-bottom:12px;}
+    .print-only h1{font-size:18px;}
+    .print-only p{font-size:11px; color:#444;}
+    ul.cl li{background:#fff; border:1px solid #bbb; break-inside:avoid; color:#111;}
+    ul.cl .t{color:#111;} ul.cl .s{color:#555;}
+    .clgroup h3{color:#333;}
+    .chip.ASK{background:#b4905a; color:#fff;}
+    .chip.VERIFY{background:#fff; color:#333; border:1px solid #888;}
+    .chip.MANDATED{background:#4e5b51; color:#fff;}
+    .counts{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="masthead">
+    <h1 class="serif">Lighting Studio <span class="amp">·</span> Casa Dos Hermanos</h1>
+    <span class="ver mono">v1.0 · Layer A + B · Floor 2</span>
+    <span class="k">2700 K everywhere</span>
+  </div>
+  <nav id="tabs" role="tablist" aria-label="Rooms"></nav>
+</header>
+
+<main id="main"></main>
+
+<footer>
+  <div class="rule">
+    <p><strong>Provenance.</strong> Room sizes: KB room schedule estimates (±1–2 ft, tier C) — replace with stud-to-stud at the framing walk. Openings and drawn furniture: KB marketing plan (Floor 2, page 4/6) — schematic, non-binding; KB places boxes per trusses/HVAC with a ±6 in build tolerance. Lumen targets are rules of thumb, uncited — verify against fixture spec sheets at selection. Screen colours approximate SW codes. Not for construction.</p>
+    <p style="margin-top:8px;">Locked DNA applied: 2700 K throughout · ambient / task / accent in every important room · aged brass reserved for lighting &amp; decorative · organic forms, soft diffusion, nothing industrial · loft expression stays plug-in until the basement transition.</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+/* ============================================================
+   CANONICAL DATASET — one source of truth; all views render from it.
+   Coordinates in feet, origin = top-left of each room, x→right, y→down.
+   "top" of each diagram = as drawn on KB Floor 2 plan (rear of house up).
+   ============================================================ */
+const DATA = {
+  version: "1.0",
+  storageKey: "cdh-lighting-v1",
+  layers: [
+    {id:"ambient", name:"Ambient"},
+    {id:"task",    name:"Task"},
+    {id:"accent",  name:"Accent"},
+    {id:"infra",   name:"Switches & power"}
+  ],
+  rooms: [
+  /* ---------------- PRIMARY BEDROOM ---------------- */
+  {
+    id:"primary", name:"Primary Bedroom", tier:"Tier 1",
+    dims:{w:14, d:16, h:8}, area:"224 ft² · 20.8 m²",
+    phase:"Yours from day one",
+    intent:"Calm, zoned, and deeper-not-darker. The ceiling is capability, not brightness — everything dims. Sconces do the real evening work; the fan box is cheap insurance hung today, chosen later.",
+    lumens:"≈2,500–3,500 lm installed capability across layers; run at a fraction.",
+    geometry:{
+      windows:[ {wall:"top", at:0.25, len:3}, {wall:"top", at:0.75, len:3} ],
+      doors:[ {wall:"bottom", at:0.18, len:2.6, label:"Hall"}, {wall:"left", at:0.25, len:2.4, label:"Bath / WIC"} ],
+      open:[]
+    },
+    furniture:[ {type:"bed", wall:"right", center:8, w:6.6, len:7, label:"King (as drawn by KB)"} ],
+    fixtures:[
+      {id:"p_fan",   layer:"ambient", kind:"fan",    x:7,    y:8,    r:7.5, label:"Fan-rated box + prewire", note:"Fixture deferred; separate fan/light legs if offered"},
+      {id:"p_scL",   layer:"task",    kind:"sconce", x:14,   y:3.8,  r:3.4, wall:"right", label:"Sconce box · switched", note:"Centre ≈1.45 m AFF"},
+      {id:"p_scR",   layer:"task",    kind:"sconce", x:14,   y:12.2, r:3.4, wall:"right", label:"Sconce box · switched", note:"Centre ≈1.45 m AFF"},
+      {id:"p_cove",  layer:"accent",  kind:"cove",   x:12.9, y:8,    r:3.0, label:"Headboard cove (plug-in)", note:"Layer B — no rough-in"},
+      {id:"p_s3a",   layer:"infra",   kind:"switch", x:2.9,  y:15.6, label:"S3 · door"},
+      {id:"p_s3b",   layer:"infra",   kind:"switch", x:13.6, y:4.6,  label:"S3 · bedside"},
+      {id:"p_no1",   layer:"infra",   kind:"outlet", x:13.6, y:3.0,  label:"Nightstand outlet"},
+      {id:"p_no2",   layer:"infra",   kind:"outlet", x:13.6, y:13.0, label:"Nightstand outlet"},
+      {id:"p_tv",    layer:"infra",   kind:"outlet", x:0.4,  y:8,    label:"TV-wall outlet"}
+    ],
+    scenes:{
+      "All on":     {p_fan:1,    p_scL:1,    p_scR:1,    p_cove:0.7},
+      "Evening":    {p_fan:0.22, p_scL:0.55, p_scR:0.55, p_cove:0.85},
+      "Reading":    {p_fan:0.12, p_scL:1,    p_scR:0.15, p_cove:0.4},
+      "Night path": {p_fan:0,    p_scL:0,    p_scR:0,    p_cove:0.12}
+    },
+    defaultScene:"Evening",
+    layerB:[
+      ["Sconces", "Aged brass, plug-free hardwired swing-arm or shaded drum; linen or paper diffusion. One switch leg each (or smart dimmer)."],
+      ["Fan / overhead", "Walnut or white-oak blades, aged-brass or warm-bronze body, integrated 2700 K dim-to-warm light. No cage, no industrial."],
+      ["Accent", "LED cove or backlit headboard, 2700→1800 K dim-to-warm, plug-in — travels with the furniture."],
+      ["Bulbs", "2700 K · CRI ≥ 90 · dim-to-warm preferred · warm-white only, no daylight anywhere."]
+    ],
+    assumptions:"Headboard on the right-hand side wall as KB draws it (A1). Sconce offsets set for a king + nightstands (±1.28 m off bed centreline; ±1.07 m if queen). Verify wall solidity and final door swing at the framing walk."
+  },
+
+  /* ---------------- OFFICE / BED 2 ---------------- */
+  {
+    id:"office", name:"Office · Bedroom 2", tier:"Tier 2",
+    dims:{w:11, d:12, h:8}, area:"132 ft² · 12.3 m²",
+    phase:"Daniel's bedroom first · your office after the transition",
+    intent:"Rough-in for the end state — boxes are invisible, drywall closes once. Naval walls absorb 30–50 % more light than Shoji, so the ceiling wash must be even, not a single centre point. The brass picture light gets its one chance to be wired, not corded.",
+    lumens:"≈4,000–6,000 lm capability + 300–500 lux at the desk plane.",
+    geometry:{
+      windows:[ {wall:"bottom", at:0.3, len:3}, {wall:"bottom", at:0.72, len:3}, {wall:"left", at:0.5, len:2.6, tentative:true} ],
+      doors:[ {wall:"top", at:0.78, len:2.6, label:"Hall"}, {wall:"top", at:0.2, len:2.2, label:"WIC"} ],
+      open:[]
+    },
+    furniture:[ {type:"desk", wall:"bottom", center:5.5, w:5, len:2.3, label:"Desk faces the light"} ],
+    fixtures:[
+      {id:"o_c1",  layer:"ambient", kind:"can",    x:2.75, y:3,   r:4.6, label:"10 cm wafer"},
+      {id:"o_c2",  layer:"ambient", kind:"can",    x:8.25, y:3,   r:4.6, label:"10 cm wafer"},
+      {id:"o_c3",  layer:"ambient", kind:"can",    x:2.75, y:9,   r:4.6, label:"10 cm wafer"},
+      {id:"o_c4",  layer:"ambient", kind:"can",    x:8.25, y:9,   r:4.6, label:"10 cm wafer"},
+      {id:"o_pic", layer:"accent",  kind:"picture",x:11,   y:6,   r:3.2, wall:"right", label:"Picture-light box · switched", note:"≈1.7 m AFF, centred on clear span"},
+      {id:"o_dsk", layer:"task",    kind:"lamp",   x:5.5,  y:10,  r:2.6, label:"Desk lamp (Layer B)"},
+      {id:"o_sw",  layer:"infra",   kind:"switch", x:9.9,  y:0.4, label:"Dimmer · cans"},
+      {id:"o_sw2", layer:"infra",   kind:"switch", x:10.6, y:1.2, label:"Switch · picture light"}
+    ],
+    scenes:{
+      "Work":          {o_c1:0.9, o_c2:0.9, o_c3:0.9, o_c4:0.9, o_pic:0.5,  o_dsk:1},
+      "Video call":    {o_c1:0.7, o_c2:0.7, o_c3:0.7, o_c4:0.7, o_pic:0.85, o_dsk:0.9},
+      "Evening":       {o_c1:0.3, o_c2:0.3, o_c3:0.3, o_c4:0.3, o_pic:1,    o_dsk:0.35},
+      "Bedroom phase": {o_c1:0.6, o_c2:0.6, o_c3:0.6, o_c4:0.6, o_pic:0,    o_dsk:0}
+    },
+    defaultScene:"Evening",
+    layerB:[
+      ["Picture light", "Aged brass, hardwired, over the single curated piece + compass Contributor fragment. Installed post-transition; box sits blanked through the bedroom phase."],
+      ["Cans", "10 cm wafers, 2700 K, CRI ≥ 90, smooth-dim to ≤ 5 %. Quarter-point grid → even wash against Naval."],
+      ["Task", "Desk lamp + monitor light bar; a small key light for calls. All furniture-layer."],
+      ["Video rule", "Face the window light; the accent wall — picture light, books, one earned object — is the background."]
+    ],
+    assumptions:"Accent wall = right-hand interior wall (A2) — the only solid span once the top wall takes both doors and the exterior walls take glass. Left-wall window drawn as tentative — confirm at framing before fixing the desk plan."
+  },
+
+  /* ---------------- LOFT ---------------- */
+  {
+    id:"loft", name:"Loft", tier:"Tier 4",
+    dims:{w:10, d:12, h:8}, area:"120 ft² · 11.1 m²",
+    phase:"Shared flex · plug-in expression only until the transition",
+    intent:"Tier 4 spends nothing it doesn't have to. The included ceiling light stays; the room's character arrives on lamp cords. Two switched half-hot outlets make floor lamps behave like architecture — wall-switched, automatable — with zero visible commitment.",
+    lumens:"≈2,000–3,000 lm, mostly lamp-delivered.",
+    geometry:{
+      windows:[ {wall:"left", at:0.5, len:2.8} ],
+      doors:[],
+      open:[ {wall:"right", from:0.15, to:0.95, label:"Open to stair · rail"} ]
+    },
+    furniture:[ {type:"sofa", wall:"left", center:6.5, w:2.6, len:6.5, label:"Seating (as drawn)"} ],
+    fixtures:[
+      {id:"l_trv",  layer:"ambient", kind:"flush",  x:5,   y:6,    r:5.4, label:"Included Traverse LED", note:"VERIFY per-plan presence + spec"},
+      {id:"l_fl1",  layer:"task",    kind:"lamp",   x:1.6, y:10.2, r:3.2, label:"Floor lamp → switched outlet"},
+      {id:"l_fl2",  layer:"task",    kind:"lamp",   x:7.2, y:10.6, r:3.2, label:"Floor lamp → switched outlet"},
+      {id:"l_tbl",  layer:"accent",  kind:"lamp",   x:3.4, y:6.4,  r:2.2, label:"Brass table lamp (Layer B)"},
+      {id:"l_ho1",  layer:"infra",   kind:"outlet", x:0.4, y:10.8, label:"Switched half-hot"},
+      {id:"l_ho2",  layer:"infra",   kind:"outlet", x:7.2, y:11.6, label:"Switched half-hot"},
+      {id:"l_sw",   layer:"infra",   kind:"switch", x:9.6, y:0.6,  label:"Switch · half-hots"}
+    ],
+    scenes:{
+      "Evening": {l_trv:0.15, l_fl1:0.9, l_fl2:0.9, l_tbl:0.7},
+      "All on":  {l_trv:1,    l_fl1:1,   l_fl2:1,   l_tbl:1},
+      "Reading": {l_trv:0.1,  l_fl1:1,   l_fl2:0.2, l_tbl:0.5}
+    },
+    defaultScene:"Evening",
+    layerB:[
+      ["Floor lamps", "Organic or paper forms — the Dark-Academia note arrives here in brass and shade, not millwork."],
+      ["Table lamp", "Aged brass, low and warm, on the bookshelf or side table."],
+      ["Bulbs", "2700 K · CRI ≥ 90; smart bulbs acceptable here (lamps only, per control philosophy)."],
+      ["Reversibility", "Nothing in this room's lighting survives a furniture van — by design."]
+    ],
+    assumptions:"Right side open to the stair with a rail as drawn; window on the left side wall. Traverse fixture presence in the loft is per-plan — confirm on the KB electrical sheet."
+  }
+  ],
+
+  /* ---------------- DESIGN STUDIO CHECKLIST ---------------- */
+  checklist:[
+    {id:"c01", room:"Primary Bedroom", status:"ASK",
+     item:"Fan-rated ceiling box + ceiling-fan prewire, room centre",
+     spec:"Separate switched legs for fan and light if the menu allows. Fixture deferred to Layer B."},
+    {id:"c02", room:"Primary Bedroom", status:"ASK",
+     item:"Two switched sconce boxes, headboard (right-hand side) wall",
+     spec:"Centres ≈1.45 m AFF, ±1.28 m off bed centreline (king + nightstands; ±1.07 m if queen). Blank-able if lamps win later."},
+    {id:"c03", room:"Primary Bedroom", status:"ASK",
+     item:"3-way switching for the overhead: door + bedside",
+     spec:"Bedside position within reach of the near nightstand."},
+    {id:"c04", room:"Primary Bedroom", status:"MANDATED",
+     item:"Cross-check the v7 electrical mandates while at the desk",
+     spec:"Nightstand outlets ×2 + TV-wall outlet + curtain-pocket / blackout provision — already locked in the manifesto; confirm they're on the order."},
+    {id:"c05", room:"Office · Bed 2", status:"ASK",
+     item:"Recessed wafer package ×4 on a dimmer",
+     spec:"10 cm, quarter-point grid (≈0.84 m / 0.91 m off walls). 2700 K, CRI ≥ 90 if KB supplies trims; otherwise dimmer-ready housings."},
+    {id:"c06", room:"Office · Bed 2", status:"ASK",
+     item:"Switched picture-light box, right-hand (accent) wall",
+     spec:"≈1.7 m AFF, centred on the clear span. Serves the post-transition office; blanked during the bedroom phase."},
+    {id:"c07", room:"Loft", status:"ASK",
+     item:"1–2 switched half-hot outlets for lamp control",
+     spec:"One on the window (left) wall, one on the lower wall near seating. Wall switch at the stair approach."},
+    {id:"c08", room:"Whole floor", status:"VERIFY",
+     item:"Traverse LED spec: colour temperature + dimmability",
+     spec:"Need 2700 K (or CCT-selectable) and smooth dimming. If fixed-cool or non-dimmable, ask about delete / swap options per room."},
+    {id:"c09", room:"Whole floor", status:"VERIFY",
+     item:"Neutral conductor at every switch box",
+     spec:"Required for the smart-dimmer plan (hybrid control: smart dimmers on fixed fixtures, dumb dim-to-warm bulbs). Standard in new builds — confirm anyway."},
+    {id:"c10", room:"Whole floor", status:"VERIFY",
+     item:"Pricing: per box, per can, fan prewire, switched outlet",
+     spec:"Also which dimmer make/model KB installs — check compatibility before committing to a smart-dimmer line."},
+    {id:"c11", room:"Whole floor", status:"VERIFY",
+     item:"Location tolerance + truss-driven relocation risk",
+     spec:"KB places boxes per trusses/HVAC; warranty standard allows ±6 in before correction. Flag the sconce and picture-light positions as the ones that matter."}
+  ]
+};
+
+/* ============================================================
+   STORAGE SHIM — localStorage on GitHub Pages, in-memory fallback
+   (artifact preview and locked-down browsers degrade gracefully).
+   ============================================================ */
+const store = (() => {
+  try{
+    const t="__cdh_t"; localStorage.setItem(t,t); localStorage.removeItem(t);
+    return {
+      get(){ try{ return JSON.parse(localStorage.getItem(DATA.storageKey)||"{}"); }catch(e){ return {}; } },
+      set(o){ try{ localStorage.setItem(DATA.storageKey, JSON.stringify(o)); }catch(e){} }
+    };
+  }catch(e){
+    let mem={};
+    return { get(){ return mem; }, set(o){ mem=o; } };
+  }
+})();
+let state = Object.assign({checked:{}, tab:"primary"}, store.get());
+function saveState(){ store.set(state); }
+
+/* ============================================================
+   SVG RENDERER — everything drawn from DATA (anti-drift).
+   ============================================================ */
+const SVGNS = "http://www.w3.org/2000/svg";
+const SCALE = 28;      /* px per foot */
+const PAD = 34;        /* svg padding px */
+const WALL = 7;        /* wall stroke px */
+
+function el(name, attrs, parent){
+  const n = document.createElementNS(SVGNS, name);
+  for(const k in attrs) n.setAttribute(k, attrs[k]);
+  if(parent) parent.appendChild(n);
+  return n;
+}
+function px(ft){ return PAD + ft*SCALE; }
+
+function wallSegments(len, openings){
+  /* returns [[fromFt,toFt],...] of solid wall pieces given openings on that wall */
+  const cuts = openings.map(o => {
+    const c = o.at*len, half = (o.len||2.5)/2;
+    return [Math.max(0,c-half), Math.min(len,c+half)];
+  }).sort((a,b)=>a[0]-b[0]);
+  const segs=[]; let cur=0;
+  for(const [a,b] of cuts){ if(a>cur) segs.push([cur,a]); cur=Math.max(cur,b); }
+  if(cur<len) segs.push([cur,len]);
+  return segs;
+}
+
+function drawRoomSVG(room){
+  const {w,d} = room.dims;
+  const W = w*SCALE + PAD*2, H = d*SCALE + PAD*2;
+  const svg = el("svg", {viewBox:`0 0 ${W} ${H}`, role:"img",
+    "aria-label":`${room.name} lighting plan, schematic`});
+
+  /* defs: warm glow gradient */
+  const defs = el("defs", {}, svg);
+  const grad = el("radialGradient", {id:`g_${room.id}`}, defs);
+  el("stop", {offset:"0%",  "stop-color":"#FFC07E", "stop-opacity":"0.85"}, grad);
+  el("stop", {offset:"55%", "stop-color":"#F2A65A", "stop-opacity":"0.28"}, grad);
+  el("stop", {offset:"100%","stop-color":"#F2A65A", "stop-opacity":"0"}, grad);
+
+  /* floor */
+  el("rect", {x:px(0), y:px(0), width:w*SCALE, height:d*SCALE, fill:"#161D27", stroke:"none"}, svg);
+
+  /* glow layer (under walls/furniture lines, above floor) */
+  const gGlow = el("g", {"data-role":"glows"}, svg);
+  for(const f of room.fixtures){
+    if(f.layer==="infra") continue;
+    el("circle", {cx:px(f.x), cy:px(f.y), r:(f.r||3)*SCALE, fill:`url(#g_${room.id})`,
+      class:"glow", "data-fix":f.id, opacity:"0"}, gGlow);
+  }
+
+  /* furniture (ghost) */
+  const gFurn = el("g", {stroke:"rgba(138,145,135,.45)", fill:"rgba(138,145,135,.07)", "stroke-width":"1.4"}, svg);
+  for(const fu of (room.furniture||[])){
+    let x,y,wd,ht;
+    if(fu.wall==="right"){ x=px(w-fu.len); y=px(fu.center-fu.w/2); wd=fu.len*SCALE; ht=fu.w*SCALE; }
+    else if(fu.wall==="left"){ x=px(0); y=px(fu.center-fu.w/2); wd=fu.len*SCALE; ht=fu.w*SCALE; }
+    else if(fu.wall==="bottom"){ x=px(fu.center-fu.w/2); y=px(d-fu.len); wd=fu.w*SCALE; ht=fu.len*SCALE; }
+    else { x=px(fu.center-fu.w/2); y=px(0); wd=fu.w*SCALE; ht=fu.len*SCALE; }
+    el("rect", {x, y, width:wd, height:ht, rx:5}, gFurn);
+    const t = el("text", {x:x+wd/2, y:y+ht/2, "text-anchor":"middle", "dominant-baseline":"middle",
+      fill:"rgba(138,145,135,.75)", "font-size":"9.5", stroke:"none"}, gFurn);
+    t.textContent = fu.label;
+  }
+
+  /* walls with openings */
+  const byWall = {top:[],bottom:[],left:[],right:[]};
+  for(const win of room.geometry.windows) byWall[win.wall].push(win);
+  for(const dr of room.geometry.doors)   byWall[dr.wall].push(dr);
+  for(const op of (room.geometry.open||[])) byWall[op.wall].push({at:(op.from+op.to)/2, len:(op.to-op.from)* (op.wall==="left"||op.wall==="right" ? d : w)});
+
+  const gWall = el("g", {stroke:"var(--shoji)", "stroke-width":WALL, "stroke-linecap":"butt"}, svg);
+  const draw = (wall, len, horiz) => {
+    for(const [a,b] of wallSegments(len, byWall[wall])){
+      const attrs = horiz
+        ? {x1:px(a), x2:px(b), y1:px(wall==="top"?0:d), y2:px(wall==="top"?0:d)}
+        : {y1:px(a), y2:px(b), x1:px(wall==="left"?0:w), x2:px(wall==="left"?0:w)};
+      el("line", attrs, gWall);
+    }
+  };
+  draw("top", w, true); draw("bottom", w, true); draw("left", d, false); draw("right", d, false);
+
+  /* windows: double thin lines across the gap */
+  const gWin = el("g", {stroke:"var(--pewter)", "stroke-width":"2"}, svg);
+  for(const win of room.geometry.windows){
+    const horiz = (win.wall==="top"||win.wall==="bottom");
+    const len = horiz ? w : d;
+    const c = win.at*len, half=win.len/2;
+    const fixed = win.wall==="top"?0 : win.wall==="bottom"?d : win.wall==="left"?0:w;
+    const dash = win.tentative ? {"stroke-dasharray":"4 4"} : {};
+    for(const off of [-2.6, 2.6]){
+      const a = horiz
+        ? {x1:px(c-half), x2:px(c+half), y1:px(fixed)+off, y2:px(fixed)+off}
+        : {y1:px(c-half), y2:px(c+half), x1:px(fixed)+off, x2:px(fixed)+off};
+      el("line", Object.assign(a,dash), gWin);
+    }
+  }
+  /* doors: swing arc */
+  const gDoor = el("g", {stroke:"var(--pewter)", "stroke-width":"1.6", fill:"none"}, svg);
+  for(const dr of room.geometry.doors){
+    const horiz = (dr.wall==="top"||dr.wall==="bottom");
+    const len = horiz ? w : d;
+    const c = dr.at*len, half=dr.len/2, r=dr.len*SCALE;
+    if(dr.wall==="bottom"){
+      el("line", {x1:px(c-half), y1:px(d), x2:px(c-half), y2:px(d)-r}, gDoor);
+      el("path", {d:`M ${px(c-half)} ${px(d)-r} A ${r} ${r} 0 0 1 ${px(c+half)} ${px(d)}`}, gDoor);
+    } else if(dr.wall==="top"){
+      el("line", {x1:px(c-half), y1:px(0), x2:px(c-half), y2:px(0)+r}, gDoor);
+      el("path", {d:`M ${px(c-half)} ${px(0)+r} A ${r} ${r} 0 0 0 ${px(c+half)} ${px(0)}`}, gDoor);
+    } else if(dr.wall==="left"){
+      el("line", {x1:px(0), y1:px(c-half), x2:px(0)+r, y2:px(c-half)}, gDoor);
+      el("path", {d:`M ${px(0)+r} ${px(c-half)} A ${r} ${r} 0 0 1 ${px(0)} ${px(c+half)}`}, gDoor);
+    } else {
+      el("line", {x1:px(w), y1:px(c-half), x2:px(w)-r, y2:px(c-half)}, gDoor);
+      el("path", {d:`M ${px(w)-r} ${px(c-half)} A ${r} ${r} 0 0 0 ${px(w)} ${px(c+half)}`}, gDoor);
+    }
+  }
+  /* open edges (rail) */
+  for(const op of (room.geometry.open||[])){
+    const vert = (op.wall==="left"||op.wall==="right");
+    const len = vert ? d : w;
+    const x = op.wall==="right"?px(w):px(0);
+    if(vert){
+      el("line", {x1:x, y1:px(op.from*len), x2:x, y2:px(op.to*len),
+        stroke:"var(--pewter)", "stroke-width":"2.4", "stroke-dasharray":"7 6"}, svg);
+      const t = el("text", {x:x+10, y:px((op.from+op.to)/2*len), fill:"var(--pewter)",
+        "font-size":"9.5", transform:`rotate(90 ${x+10} ${px((op.from+op.to)/2*len)})`, "text-anchor":"middle"}, svg);
+      t.textContent = op.label;
+    }
+  }
+
+  /* fixture marks */
+  const gFix = el("g", {}, svg);
+  for(const f of room.fixtures){
+    const g = el("g", {class:"fixmark", "data-fix":f.id, "data-layer":f.layer}, gFix);
+    const x=px(f.x), y=px(f.y);
+    const stroke = f.layer==="infra" ? "var(--pewter)" : (f.layer==="accent" ? "var(--brass)" : "var(--glow)");
+    if(f.kind==="fan"){
+      el("circle", {cx:x, cy:y, r:11, fill:"none", stroke, "stroke-width":"2"}, g);
+      for(let a=0;a<4;a++){
+        const rad=a*Math.PI/2 + Math.PI/4;
+        el("line", {x1:x+Math.cos(rad)*4, y1:y+Math.sin(rad)*4, x2:x+Math.cos(rad)*10, y2:y+Math.sin(rad)*10, stroke, "stroke-width":"2"}, g);
+      }
+    } else if(f.kind==="can"){
+      el("circle", {cx:x, cy:y, r:7, fill:"none", stroke, "stroke-width":"2"}, g);
+      el("circle", {cx:x, cy:y, r:2.2, fill:stroke}, g);
+    } else if(f.kind==="flush"){
+      el("circle", {cx:x, cy:y, r:9, fill:"none", stroke, "stroke-width":"2"}, g);
+      el("line", {x1:x-5, y1:y, x2:x+5, y2:y, stroke, "stroke-width":"2"}, g);
+    } else if(f.kind==="sconce" || f.kind==="picture"){
+      const onRight = (f.wall==="right");
+      const sweep = onRight ? "0 0 0" : "0 0 1";
+      const bx = onRight ? x-1 : x+1;
+      el("path", {d:`M ${bx} ${y-8} A 8 8 ${sweep} ${bx} ${y+8}`, fill:"none", stroke, "stroke-width":"2"}, g);
+      el("circle", {cx:bx, cy:y, r:2.2, fill:stroke}, g);
+    } else if(f.kind==="lamp"){
+      el("circle", {cx:x, cy:y, r:6, fill:"none", stroke, "stroke-width":"2"}, g);
+      el("line", {x1:x, y1:y+6, x2:x, y2:y+12, stroke, "stroke-width":"2"}, g);
+    } else if(f.kind==="cove"){
+      el("line", {x1:x, y1:y-16, x2:x, y2:y+16, stroke, "stroke-width":"3", "stroke-dasharray":"3 4", "stroke-linecap":"round"}, g);
+    } else if(f.kind==="switch"){
+      const t = el("text", {x, y:y+3, fill:stroke, "font-size":"11", "font-weight":"700", "text-anchor":"middle"}, g);
+      t.textContent = f.label.startsWith("S3") ? "S₃" : "S";
+    } else if(f.kind==="outlet"){
+      el("circle", {cx:x, cy:y, r:4.5, fill:"none", stroke, "stroke-width":"1.8"}, g);
+      el("line", {x1:x-2, y1:y, x2:x+2, y2:y, stroke, "stroke-width":"1.8"}, g);
+    }
+    const title = el("title", {}, g);
+    title.textContent = f.label + (f.note ? " — "+f.note : "");
+  }
+
+  /* scale note */
+  const note = el("text", {x:px(0), y:H-8, fill:"var(--pewter)", "font-size":"9.5"}, svg);
+  note.textContent = `${w} × ${d} ft (est.) · openings approximate · not for construction`;
+  return svg;
+}
+
+/* ============================================================
+   UI RENDER
+   ============================================================ */
+const tabsEl = document.getElementById("tabs");
+const mainEl = document.getElementById("main");
+const roomState = {}; /* per-room: {scene, layers:{}} */
+
+function mkTab(id, label){
+  const b = document.createElement("button");
+  b.role="tab"; b.id=`tab-${id}`; b.textContent=label;
+  b.setAttribute("aria-selected", String(state.tab===id));
+  b.addEventListener("click", ()=>{ setTab(id); });
+  tabsEl.appendChild(b);
+}
+function setTab(id){
+  state.tab=id; saveState();
+  document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-selected", String(b.id===`tab-${id}`)));
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id===`view-${id}`));
+}
+
+function applyScene(room){
+  const rs = roomState[room.id];
+  const svg = document.querySelector(`#view-${room.id} svg`);
+  if(!svg) return;
+  const map = room.scenes[rs.scene] || {};
+  for(const f of room.fixtures){
+    const layerOn = rs.layers[f.layer];
+    const glow = svg.querySelector(`.glow[data-fix="${f.id}"]`);
+    if(glow){
+      const v = layerOn ? (map[f.id] ?? 0) : 0;
+      glow.setAttribute("opacity", String(v*0.95));
+    }
+    const mark = svg.querySelector(`.fixmark[data-fix="${f.id}"]`);
+    if(mark){ mark.setAttribute("opacity", layerOn ? "1" : "0.12"); }
+  }
+  /* pressed states */
+  const wrap = document.querySelector(`#view-${room.id}`);
+  wrap.querySelectorAll(".scenebtn").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.scene===rs.scene)));
+}
+
+function renderRoom(room){
+  roomState[room.id] = {scene:room.defaultScene, layers:{ambient:true, task:true, accent:true, infra:true}};
+  const v = document.createElement("section");
+  v.className="view"; v.id=`view-${room.id}`;
+
+  const head = document.createElement("div");
+  head.innerHTML = `
+    <div class="roomhead">
+      <h2 class="serif">${room.name}</h2>
+      <span class="dims mono">${room.dims.w} × ${room.dims.d} ft · ${room.area} · ${room.dims.h} ft ceiling</span>
+      <span class="phase">${room.tier} · ${room.phase}</span>
+    </div>
+    <p class="intent">${room.intent}</p>`;
+  v.appendChild(head);
+
+  const grid = document.createElement("div"); grid.className="roomgrid"; v.appendChild(grid);
+
+  /* left: plan card */
+  const plan = document.createElement("div"); plan.className="card plancard"; grid.appendChild(plan);
+  plan.innerHTML = `<h3>Scene simulator</h3>`;
+  const pw = document.createElement("div"); pw.className="planwrap"; plan.appendChild(pw);
+  pw.appendChild(drawRoomSVG(room));
+
+  const ctr = document.createElement("div"); ctr.className="controls"; plan.appendChild(ctr);
+  const sg = document.createElement("div"); sg.className="grp"; ctr.appendChild(sg);
+  sg.innerHTML = `<span class="lbl">Scene</span>`;
+  for(const s of Object.keys(room.scenes)){
+    const b=document.createElement("button"); b.className="scenebtn"; b.dataset.scene=s; b.textContent=s;
+    b.setAttribute("aria-pressed", String(s===room.defaultScene));
+    b.addEventListener("click", ()=>{ roomState[room.id].scene=s; applyScene(room); });
+    sg.appendChild(b);
+  }
+  const lg = document.createElement("div"); lg.className="grp"; ctr.appendChild(lg);
+  lg.innerHTML = `<span class="lbl">Layers</span>`;
+  for(const layer of DATA.layers){
+    const lab=document.createElement("label"); lab.className="laytog";
+    lab.innerHTML = `<span class="dot ${layer.id}"></span>${layer.name}`;
+    const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=true;
+    cb.addEventListener("change", ()=>{ roomState[room.id].layers[layer.id]=cb.checked; applyScene(room); });
+    lab.prepend(cb);
+    lg.appendChild(lab);
+  }
+  const leg = document.createElement("div"); leg.className="legend"; plan.appendChild(leg);
+  leg.innerHTML = `<span><span class="dot ambient"></span>ambient</span>
+                   <span><span class="dot task"></span>task</span>
+                   <span><span class="dot accent"></span>accent · brass</span>
+                   <span><span class="dot infra"></span>switch / outlet</span>`;
+
+  /* right: panels */
+  const col = document.createElement("div"); grid.appendChild(col);
+
+  const ri = document.createElement("div"); ri.className="card"; col.appendChild(ri);
+  ri.innerHTML = `<h3>Rough-in — Design Studio asks</h3>`;
+  const ul = document.createElement("ul"); ul.className="ri"; ri.appendChild(ul);
+  for(const c of DATA.checklist.filter(c=>c.room===room.name || (room.id==="office"&&c.room==="Office · Bed 2"))){
+    const li=document.createElement("li");
+    li.innerHTML = `<span class="chip ${c.status}">${c.status}</span>
+      <div><div class="t">${c.item}</div><div class="s">${c.spec}</div></div>`;
+    ul.appendChild(li);
+  }
+
+  const lb = document.createElement("div"); lb.className="card"; col.appendChild(lb);
+  lb.innerHTML = `<h3>Layer B — fixture direction (post-close)</h3>`;
+  const tb = document.createElement("table"); tb.className="spec"; lb.appendChild(tb);
+  for(const [k,vv] of room.layerB){
+    const tr=document.createElement("tr");
+    tr.innerHTML = `<td>${k}</td><td>${vv}</td>`;
+    tb.appendChild(tr);
+  }
+
+  const bl = document.createElement("div"); bl.className="card"; col.appendChild(bl);
+  bl.innerHTML = `<h3>Light budget & bulbs</h3>
+    <div class="bulb">
+      <div class="b"><strong>2700 K</strong>colour temperature, everywhere</div>
+      <div class="b"><strong>CRI ≥ 90</strong>skin, walnut, Naval all depend on it</div>
+      <div class="b"><strong>${room.lumens.split(";")[0].split(" installed")[0].replace("≈","≈ ")}</strong>capability target (rule of thumb)</div>
+    </div>
+    <p style="color:var(--pewter); font-size:12.5px; margin-top:10px;">${room.lumens}</p>`;
+
+  const as = document.createElement("div"); as.className="card"; col.appendChild(as);
+  as.innerHTML = `<h3>Assumptions on this drawing</h3>
+    <p style="font-size:13px; color:var(--tan);">${room.assumptions}</p>`;
+
+  mainEl.appendChild(v);
+  applyScene(room);
+}
+
+function renderChecklist(){
+  const v = document.createElement("section");
+  v.className="view"; v.id="view-checklist";
+  v.innerHTML = `
+    <div class="print-only">
+      <h1>Casa Dos Hermanos — Lighting rough-in checklist (Floor 2)</h1>
+      <p>Plan 2088 · Windler Wildflower · Primary Bedroom, Office/Bed 2, Loft · lighting.html v${DATA.version} · take to the KB Design Studio appointment. ASK = order it · VERIFY = get the answer in writing · MANDATED = already locked in Manifesto v7, cross-check it's on the order.</p>
+    </div>
+    <div class="clhead"><h2 class="serif">Design Studio checklist</h2></div>
+    <p class="clsub">Everything below is Layer A — it lives behind drywall and gets one chance. <strong>ASK</strong> items go on the order; <strong>VERIFY</strong> items need an answer in writing before the order is final; <strong>MANDATED</strong> items are already locked in Manifesto v7 — confirm they're captured. Ticks persist on this device.</p>
+    <div class="clactions">
+      <button class="abtn" id="btnPrint">Print / save as PDF</button>
+      <button class="abtn ghost" id="btnExport">Export JSON</button>
+      <button class="abtn ghost" id="btnReset">Clear ticks</button>
+    </div>
+    <div id="clbody"></div>
+    <p class="counts" id="clcount"></p>`;
+  mainEl.appendChild(v);
+
+  const body = v.querySelector("#clbody");
+  const groups = [...new Set(DATA.checklist.map(c=>c.room))];
+  for(const g of groups){
+    const wrap=document.createElement("div"); wrap.className="clgroup"; body.appendChild(wrap);
+    wrap.innerHTML = `<h3>${g}</h3>`;
+    const ul=document.createElement("ul"); ul.className="cl"; wrap.appendChild(ul);
+    for(const c of DATA.checklist.filter(c=>c.room===g)){
+      const li=document.createElement("li"); li.dataset.id=c.id;
+      if(state.checked[c.id]) li.classList.add("done");
+      const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=!!state.checked[c.id];
+      cb.setAttribute("aria-label", c.item);
+      cb.addEventListener("change", ()=>{
+        state.checked[c.id]=cb.checked; li.classList.toggle("done", cb.checked); saveState(); updateCount();
+      });
+      li.appendChild(cb);
+      const bd=document.createElement("div"); bd.className="body";
+      bd.innerHTML = `<div class="t">${c.item}</div><div class="s">${c.spec}</div>`;
+      li.appendChild(bd);
+      const chip=document.createElement("span"); chip.className=`chip ${c.status}`; chip.textContent=c.status;
+      li.appendChild(chip);
+      ul.appendChild(li);
+    }
+  }
+  function updateCount(){
+    const done=Object.values(state.checked).filter(Boolean).length;
+    v.querySelector("#clcount").textContent = `${done} / ${DATA.checklist.length} captured`;
+  }
+  updateCount();
+
+  v.querySelector("#btnPrint").addEventListener("click", ()=>window.print());
+  v.querySelector("#btnReset").addEventListener("click", ()=>{
+    state.checked={}; saveState();
+    v.querySelectorAll("ul.cl li").forEach(li=>{ li.classList.remove("done"); li.querySelector("input").checked=false; });
+    updateCount();
+  });
+  v.querySelector("#btnExport").addEventListener("click", ()=>{
+    const out = {tool:"lighting.html", version:DATA.version, exported:new Date().toISOString(),
+                 rooms:DATA.rooms.map(r=>({id:r.id, name:r.name, dims:r.dims, fixtures:r.fixtures, scenes:r.scenes, assumptions:r.assumptions})),
+                 checklist:DATA.checklist.map(c=>Object.assign({}, c, {checked:!!state.checked[c.id]}))};
+    const blob = new Blob([JSON.stringify(out,null,2)], {type:"application/json"});
+    const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download=`cdh-lighting-v${DATA.version}.json`; a.click(); URL.revokeObjectURL(a.href);
+  });
+}
+
+/* boot */
+for(const r of DATA.rooms) mkTab(r.id, r.name);
+mkTab("checklist", "☑ Design Studio checklist");
+for(const r of DATA.rooms) renderRoom(r);
+renderChecklist();
+if(!document.getElementById(`view-${state.tab}`)) state.tab="primary";
+setTab(state.tab);
+</script>
+</body>
+</html>
